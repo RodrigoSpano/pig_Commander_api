@@ -1,10 +1,14 @@
 const express = require('express');
-const loginUser = require('../../controllers/auth/loginControllers');
+const passport = require('passport');
+const loginUser = require('../../controllers/auth/loginController');
 const signupUser = require('../../controllers/auth/signupController');
+const logoutUser = require('../../controllers/auth/logoutController');
+const deleteUser = require('../../controllers/auth/deleteUserController');
+const { userExistsDeleteMiddleware, userAlreadyExistsMiddleware } = require('../../utils/middlewares/authMiddleware');
 
 const router = express.Router();
 /**
- * Get expenses
+ * POST login
  * @openapi
  * /api/auth/login:
  *    post:
@@ -26,6 +30,8 @@ const router = express.Router();
  *                items:
  *                  type: object
  *                  properties:
+ *                    success:
+ *                      type: boolean
  *                    token:
  *                      type: string
  *                    user: 
@@ -41,7 +47,7 @@ const router = express.Router();
  */
 router.post('/login', loginUser);
 /**
- * Get expenses
+ * Post signup
  * @openapi
  * /api/auth/signup:
  *    post:
@@ -64,6 +70,67 @@ router.post('/login', loginUser);
 
  *
  */
-router.post('/signup', signupUser);
+router.post('/signup', userAlreadyExistsMiddleware, signupUser);
+/**
+ * GET secret
+ * @openapi
+ * /api/auth/secret:
+ *    get:
+ *      tags:
+ *        - auth
+ *      summary: 'auth secret'
+ *      description: Este endpoint es para autorizar al usuario(auth)
+ *      parameters:
+ *        - name: Authorization
+ *          in: header
+ *          description: Bearer ${token}
+ *          required: true
+ *      responses:
+ *        '200':
+ *          description: el token es valido, por lo que tenes acceso a las rutas
 
+ */
+router.get('/secret', passport.authenticate('jwt', { session: true, failureMessage: 'Invalid token' }), (req, res) => {
+  res.status(200).json('solo podes ver esto con un token');
+});
+
+/**
+ * DELETE logout
+ * @openapi
+ * /api/auth/logout:
+ *    delete:
+ *      tags:
+ *        - auth
+ *      summary: 'auth logout'
+ *      description: Este endpoint es para cerrar session, se destruye la misma
+ *      responses:
+ *        '200':
+ *          description: la session se destruye correctamente
+ *        '400':
+ *          description: la session no se pudo destruir correctamente
+ *        '500':
+*            description: internal sv error, puede ser un error de conexon, Network error
+
+ */
+router.delete('/logout', logoutUser);
+
+/**
+ * DELETE user
+ * @openapi
+ * /api/auth/user/:id:
+ *    delete:
+ *      tags:
+ *        - auth
+ *      summary: 'delete user'
+ *      description: Este endpoint es para eliminar un usuario
+ *      responses:
+ *        '200':
+ *          description: el usuario se elimina correctamente
+ *        '404':
+ *          description: el usuario no existe
+ *        '500':
+*            description: internal sv error, puede ser un error de conexon, Network error
+
+ */
+router.delete('/user/:id', userExistsDeleteMiddleware, deleteUser);
 module.exports = router;

@@ -6,8 +6,10 @@ const passport = require('passport');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const session = require('express-session');
+
 const swaggerSetup = require('./utils/docs/swagger');
 const indexRouter = require('./routes/index.routes');
+const JWTstrategy = require('./services/passport/passportJwt');
 
 const app = express();
 
@@ -27,6 +29,7 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.use(passport.session());
 app.use(passport.initialize());
+passport.use(JWTstrategy);
 
 app.use('/api', indexRouter);
 module.exports = app;
