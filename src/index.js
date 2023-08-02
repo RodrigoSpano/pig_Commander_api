@@ -17,5 +17,5 @@ app.use(helmet());
 app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSetup));
 app.use(cors({ origin: 'http://localhost:3000' }));
 
-app.use(indexRouter);
+app.use('/api',indexRouter);
 module.exports = app;
