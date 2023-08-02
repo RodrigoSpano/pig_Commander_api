@@ -61,7 +61,7 @@ const swaggerDefinition = {
 };
 const swaggerOptions = {
   swaggerDefinition,
-  apis: ['./src/routes/subRoutes/*.ts'], //! todos los archivos que terminan en ts
+  apis: ['./src/routes/subRoutes/*.js'], //! todos los archivos que terminan en ts
 };
 
 module.exports = swaggerJSDoc(swaggerOptions);
