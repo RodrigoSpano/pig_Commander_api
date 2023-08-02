@@ -37,6 +37,17 @@ const swaggerDefinition = {
           },
         },
       },
+      methods: {
+        type: 'object',
+        required: ['id', 'name'],
+        properties: {
+          id: {
+            type: 'number',
+          },
+          name: {
+            type: 'string',
+        },
+      },},
       example: {
         type: 'object',
         required: ['id', 'mount', 'automatized', 'auto_date'],
