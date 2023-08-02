@@ -1,5 +1,6 @@
 const { method } = require('../../db');
 
+// ! Default methods that are stored in the database
 const methodsDefault = [
   {
     name: 'Cash',
@@ -15,20 +16,17 @@ const methodsDefault = [
   },
 ];
 
+// * Handler that verifies if the methods are already there and if they are not, it creates them
+// * This function handler is for the controller methods
 const methodsHandler = async () => {
-  try {
-    const methodsAux = await method.findAll();
+  const methodsAux = await method.findAll();
 
-    if (methodsAux.length === 0) {
-      await method.bulkCreate(methodsDefault);
-    }
-
-    const allMethods = await method.findAll();
-    return allMethods;
-  } catch (error) {
-    console.error('Error al manejar los métodos:', error);
-    throw error;
+  if (methodsAux.length === 0) {
+    await method.bulkCreate(methodsDefault);
   }
+
+  const allMethods = await method.findAll();
+  return allMethods;
 };
 
 module.exports = methodsHandler;
