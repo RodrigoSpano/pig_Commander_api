@@ -1,5 +1,4 @@
 const { comparePassword, createJwtToken } = require('../../utils/helpers/authHelpers');
-
 const { user } = require('../../db');
 
 const loginUser = async (req, res) => {

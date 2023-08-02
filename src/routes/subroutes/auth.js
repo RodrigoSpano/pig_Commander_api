@@ -5,7 +5,7 @@ const router = express.Router();
 /**
  * Get expenses
  * @openapi
- * /example:
+ * /api/auth/login:
  *    post:
  *      tags:
  *        - auth
