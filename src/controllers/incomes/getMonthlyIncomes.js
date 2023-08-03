@@ -2,8 +2,8 @@ const getMonthlyHandler = require('../../handlers/incomes/getMonthlyHandler');
 
 const getMonthlyIncomes = async (req, res) => {
     try {
-        const userId = req.params;
-        const monthlyIncomes = await getMonthlyHandler(userId);
+        const {id} = req.user.dataValues;
+        const monthlyIncomes = await getMonthlyHandler(id);
 
         return res.status(200).json(monthlyIncomes);
     } catch (error) {

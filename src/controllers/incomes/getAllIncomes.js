@@ -4,8 +4,8 @@ const incomesHandler = require('../../handlers/incomes/incomesHandler');
 // todos de todos los meses
 const getAllIncomes = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const allIncomes = await incomesHandler(userId);
+        const { id } = req.user.dataValues;
+        const allIncomes = await incomesHandler(id);
 
         return res.status(200).json(allIncomes);
     } catch (error) {
