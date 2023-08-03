@@ -1,5 +1,7 @@
 const getAllIncomes  = require("../../controllers/incomes/getAllIncomes");
-const createIncome = require("../../controllers/incomes/createIncome")
+const createIncome = require("../../controllers/incomes/createIncome");
+const deleteIncome = require("../../controllers/incomes/deleteIncome");
+const updateIncome = require("../../controllers/incomes/updateIncome")
 const { Router } = require('express');
 const router = Router();
 
@@ -30,8 +32,10 @@ y otra para todas */
  *
  */
 
-router.get('/:userId',getAllIncomes) // ?
+router.get('/',getAllIncomes) // ?
 router.post('/',createIncome)
+router.delete('/:idIncome',deleteIncome)
+router.put('/:idIncome',updateIncome)
 
 module.exports = router
 

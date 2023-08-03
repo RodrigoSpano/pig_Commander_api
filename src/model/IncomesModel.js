@@ -18,7 +18,9 @@ module.exports = (sequelize) => {
         defaultValue: false
       },
       auto_date: {
-        type : DataTypes.DATE
+        type : DataTypes.DATE,
+        defaultValue: null,
+        allowNull: true
       }
     },
     

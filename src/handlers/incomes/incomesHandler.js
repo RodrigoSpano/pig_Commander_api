@@ -3,26 +3,21 @@ const {incomes} = require('../../db')
 
 const incomesExample =[
     {
-        name: 'pepe',
-    },
-    {
-        name: 'pipo',
-    }
+        "user_id": "d41865d3-7835-4a5f-b4b3-207b4e3f9021",
+        "mount": 1500,
+        "automatized": true,
+        "auto_date" : "2023-07-25T15:30:00Z",
+        "category_id": 3,
+        "method_id": 2
+      }
 ]
 
 const incomesHandler = async(userId) => {
     try {
-        const incomesAux = await incomes.findAll({
-            where: {user_id : userId}
-        });
-
-        if(incomesAux.length == 0){
-            console.log('no encontre nada')
-            await incomes.bulkCreate(incomesExample) // 
-        }else{
-            throw Error("")
-        }
-
+        
+        /* const allIncomes = await incomes.findAll(
+            where: {user_id: user_id}
+        ); */
         const allIncomes = await incomes.findAll();
 
         return allIncomes;
@@ -32,4 +27,8 @@ const incomesHandler = async(userId) => {
     }
 }
 
+
+/* Falta descomentar lineas 18-20 para cuando esten todas las tablas andando */
+
 module.exports =  incomesHandler;
+
