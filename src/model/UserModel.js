@@ -9,6 +9,10 @@ module.exports = (sequelize) => {
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
     },
+    googleId: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -24,6 +28,11 @@ module.exports = (sequelize) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    image: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      defaultValue: 'https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/MESSI.jpg'
     },
     premium: {
       type: DataTypes.BOOLEAN,
