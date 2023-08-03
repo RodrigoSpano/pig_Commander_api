@@ -6,14 +6,16 @@ const updateIncome = async (req, res) => {
     const { mount, automatized, auto_date } = req.body;
 
     // Actualizar el ingreso
-    await incomes.update({
-      mount,
-      automatized,
-      auto_date
-    },
+    await incomes.update(
       {
-        where: { id: idIncome }
-      });
+        mount,
+        automatized,
+        auto_date,
+      },
+      {
+        where: { id: idIncome },
+      }
+    );
 
     const incomeUpdated = await incomes.findByPk(idIncome);
 

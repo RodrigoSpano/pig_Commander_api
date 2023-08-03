@@ -1,8 +1,8 @@
-const getCategoriesHandler = require('../../handlers/category/getCategoriesHandler');
+const { categories } = require('../../db');
 
 const getAllCategories = async (req, res) => {
   try {
-    const allCategories = await getCategoriesHandler();
+    const allCategories = await categories.findAll();
 
     return res.status(200).json(allCategories);
   } catch (error) {

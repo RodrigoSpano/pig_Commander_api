@@ -11,18 +11,16 @@ async function categoryExist(req, res, next) {
   return next();
 }
 
-async function postCategoriesMiddleware (req, res, next){
-  const { name } =
-    req.body;
+async function postCategoriesMiddleware(req, res, next) {
+  const { name } = req.body;
   if (!name) {
     return res.status(400).json({ message: 'category name is required' });
   }
-  
-  return next();
-};
 
+  return next();
+}
 
 module.exports = {
   categoryExist,
-  postCategoriesMiddleware
+  postCategoriesMiddleware,
 };
