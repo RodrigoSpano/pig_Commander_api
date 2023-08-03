@@ -4,12 +4,7 @@ const updateExpenses = async (req, res) => {
   try {
     const { id } = req.params;
     const { mount, automatized, auto_date } = req.body;
-
-    const existingExpense = await expenses.findByPk(id);
-    if (!existingExpense) {
-      return res.status(400).json({ error: 'Expense not found' });
-    }
-    await expenses.update(
+    await expenses.updateOne(
       {
         mount,
         automatized,
