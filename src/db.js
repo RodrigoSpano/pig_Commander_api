@@ -15,7 +15,7 @@ const sequelize = new Sequelize({
   dialect: 'postgres',
   host: 'localhost',
   logging: false,
-  native: false
+  native: false,
 });
 
 UserModel(sequelize);
@@ -27,7 +27,16 @@ ExpensesModel(sequelize);
 MaxSpendModel(sequelize);
 SavingModel(sequelize);
 
-const { user, maxSpend, method, categories, incomes, inversion, expenses, saving } = sequelize.models;
+const {
+  user,
+  maxSpend,
+  method,
+  categories,
+  incomes,
+  inversion,
+  expenses,
+  saving,
+} = sequelize.models;
 
 // relation user to maxSpend
 user.hasOne(maxSpend, { foreignKey: 'user_id' });
