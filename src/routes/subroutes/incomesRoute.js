@@ -1,10 +1,10 @@
-const getAllIncomes  = require("../../controllers/incomes/getAllIncomes");
-const createIncome = require("../../controllers/incomes/createIncome");
-const deleteIncome = require("../../controllers/incomes/deleteIncome");
-const updateIncome = require("../../controllers/incomes/updateIncome")
+const getAllIncomes = require('../../controllers/incomes/getAllIncomes');
+const createIncome = require('../../controllers/incomes/createIncome');
+const deleteIncome = require('../../controllers/incomes/deleteIncome');
+const updateIncome = require('../../controllers/incomes/updateIncome');
 const { Router } = require('express');
+const getMonthlyIncomes = require('../../controllers/incomes/getMonthlyIncomes');
 const router = Router();
-
 
 /* dos rutas get
 una para un Mes especifico de un usuario en especifico
@@ -32,11 +32,13 @@ y otra para todas */
  *
  */
 
-router.get('/',getAllIncomes) // ?
-router.post('/',createIncome)
-router.delete('/:idIncome',deleteIncome)
-router.put('/:idIncome',updateIncome)
+router.get('/', getAllIncomes); // ?
+router.post('/', createIncome);
+router.delete('/:idIncome', deleteIncome);
+router.put('/:idIncome', updateIncome);
 
-module.exports = router
+router.get('/monthly/:idUser',getMonthlyIncomes);
+
+module.exports = router;
 
 /* si automatize false => auto_date null */
