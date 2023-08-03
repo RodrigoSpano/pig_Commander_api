@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use('/auth', authRoutes);
 router.use('/methods', isAuth, methodRoutes);
-router.use('/incomes',incomesRoute)
+router.use('/incomes', incomesRoute)
 
 
 module.exports = router;

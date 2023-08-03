@@ -8,7 +8,6 @@ const createIncome = async (req,res) => {
         
         //if(!user_id || !mount || !automatized || !auto_date || !category_id || !method_id) throw Error('Faltan datos');
         
-        console.log('entre',{user_id,mount,automatized,auto_date,category_id,method_id})
         //Creacion o busqueda
         const newIncome = await incomes.create({
             //user_id,
@@ -18,7 +17,7 @@ const createIncome = async (req,res) => {
             //category_id,
             //method_id
         })
-        console.log('createIncomes:',newIncome)
+        
         return res.status(200).json(newIncome)
     } catch (error) {
         return res.status(500).json({ error: error.message })

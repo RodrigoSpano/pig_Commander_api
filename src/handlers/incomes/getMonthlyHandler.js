@@ -20,3 +20,5 @@ const getMonthlyHandler = async (userId) => {
 
   return monthlyIncomes;
 };
+
+module.exports = getMonthlyHandler

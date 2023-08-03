@@ -1,3 +1,4 @@
+const getMonthlyHandler = require("../../handlers/incomes/getMonthlyHandler");
 
 const getMonthlyIncomes = async (req,res) => {
     try {
@@ -9,6 +10,5 @@ const getMonthlyIncomes = async (req,res) => {
         return res.status(500).json({error: error.message})
     }
 }
-
 
 module.exports = getMonthlyIncomes
