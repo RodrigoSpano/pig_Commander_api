@@ -7,6 +7,6 @@ const router = Router();
 
 router.get('/', getAllCategories);
 router.post('/', createCategory);
-router.delete('/:idCategory', deleteCategory);
+router.delete('/:idCategory', categoryExist, deleteCategory);
 
 module.exports = router;

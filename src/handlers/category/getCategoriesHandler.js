@@ -2,9 +2,6 @@ const { categories } = require('../../db');
 
 const getCategoriesHandler = async () => {
   try {
-    /* const allcategories = await categories.findAll(
-            where: {user_id: user_id}
-        ); */
     const allcategories = await categories.findAll();
 
     return allcategories;
