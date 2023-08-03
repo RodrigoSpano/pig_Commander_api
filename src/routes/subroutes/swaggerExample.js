@@ -1,9 +1,9 @@
-const { Router } = require('express');
+//const { Router } = require('express');
 
-const router = Router();
+//const router = Router();
 /**
  * Get expenses
- * @openapi
+ * //@openapi
  * /example:
  *    get:
  *      tags:
@@ -22,12 +22,12 @@ const router = Router();
  *          description: No encuentra los gastos totales
  *
  */
-router.get('/example', (req, res) => {
+/* router.get('/example', (req, res) => {
   res.status(200).send('ok');
-});
+}); */
 /**
  * Delete all expenses
- * @openapi
+ * //@openapi
  * /example:
  *    delete:
  *      tags:
@@ -47,8 +47,8 @@ router.get('/example', (req, res) => {
  *
  */
 
-router.delete('/example/:id', (req, res) => {
+/* router.delete('/example/:id', (req, res) => {
   res.status(201).send('ok');
 });
 
-module.exports = router;
+module.exports = router; */
