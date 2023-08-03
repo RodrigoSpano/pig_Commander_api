@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 const { expenses } = require('../../db');
 
-const getMonthlyHandler = async () => {
+const getMonthlyHandler = async (user_id) => {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1; // +1 porque los meses son en base 0
   const currentYear = currentDate.getFullYear();
@@ -13,6 +13,7 @@ const getMonthlyHandler = async () => {
       createdAt: {
         [Op.between]: [firstDayOfMonth, lastDayOfMonth],
       },
+      user_id,
     },
   });
   return monthlyExpenses;
