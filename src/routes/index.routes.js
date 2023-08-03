@@ -1,13 +1,14 @@
 const express = require('express');
-const authRoutes = require('./subroutes/auth');
+const authRoutes = require('./subroutes/authRoutes');
 const methodRoutes = require('./subroutes/methodRoutes');
-const savingsRoutes = require('./subroutes/savingsRoutes');
+const { isAuth } = require('../utils/middlewares/authMiddleware');
 // const expensesRoute = require('./subroutes/auth');
+const savingsRoutes = require('./subroutes/savingsRoutes');
 
 const router = express.Router();
 
 router.use('/auth', authRoutes);
-router.use('/methods', methodRoutes);
-router.use('/savings', savingsRoutes);
+router.use('/methods', isAuth, methodRoutes);
+router.use('/savings', isAuth, savingsRoutes);
 
 module.exports = router;
