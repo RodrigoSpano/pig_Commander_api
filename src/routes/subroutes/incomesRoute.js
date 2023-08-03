@@ -7,7 +7,6 @@ const getMonthlyIncomes = require('../../controllers/incomes/getMonthlyIncomes')
 const { incomeExist } = require('../../utils/middlewares/incomesMiddleware');
 const router = Router();
 
-
 /**
  * Get incomes
  * @openapi
@@ -32,11 +31,9 @@ const router = Router();
 
 router.get('/', getAllIncomes); // ?
 router.post('/', createIncome);
-router.delete('/:idIncome', incomeExist , deleteIncome);
-router.put('/:idIncome', incomeExist ,updateIncome);
+router.delete('/:idIncome', incomeExist, deleteIncome);
+router.put('/:idIncome', incomeExist, updateIncome);
 
-router.get('/monthly/:idUser',getMonthlyIncomes);
+router.get('/monthly/:idUser', getMonthlyIncomes);
 
 module.exports = router;
-
-
