@@ -55,6 +55,57 @@ const swaggerDefinition = {
           },
         },
       },
+      savings: {
+        type: 'object',
+        required: ['id', 'name', 'mount', 'goal', 'createdAt', 'updatedAt'],
+        properties: {
+          id: {
+            type: 'number',
+          },
+          name: {
+            type: 'string',
+          },
+          mount: {
+            type: 'number',
+          },
+          goal: {
+            type: 'number',
+          },
+          createdAt: {
+            type: 'string',
+          },
+          updatedAt: {
+            type: 'string',
+          },
+        },
+      },
+      savingPost: {
+        type: 'object',
+        required: ['name', 'mount', 'goal'],
+        properties: {
+          name: {
+            type: 'string',
+          },
+          mount: {
+            type: 'number',
+          },
+          goal: {
+            type: 'number',
+          },
+        },
+      },
+      savingPut: {
+        type: 'object',
+        required: ['mount', 'goal'],
+        properties: {
+          mount: {
+            type: 'number',
+          },
+          goal: {
+            type: 'number',
+          },
+        },
+      },
       expenses: {
         type: 'object',
         required: ['id', 'mount', 'automatized', 'auto_date'],

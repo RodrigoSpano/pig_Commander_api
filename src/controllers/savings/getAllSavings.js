@@ -2,8 +2,15 @@ const { saving } = require('../../db');
 
 const getAllSavings = async (req, res) => {
   try {
+    // * Id of the user
+   /*  const { id } = req.user.dataValues; */
+
     // * I look up all the savings in the database
-    const allSavings = await saving.findAll();
+    const allSavings = await saving.findAll(/* {
+      where: {
+        user_id: id,
+      },
+    } */);
 
     // * If there are no savings I respond with a 404 error
     if (allSavings.length === 0) {
