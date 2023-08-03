@@ -30,17 +30,17 @@ const swaggerDefinition = {
         required: ['password', 'email', 'name', 'lastname', 'email'],
         properties: {
           name: {
-            type: 'string'
+            type: 'string',
           },
           lastname: {
-            type: 'string'
+            type: 'string',
           },
           email: {
-            type: 'string'
+            type: 'string',
           },
           password: {
             type: 'string',
-          }
+          },
         },
       },
       methods: {
@@ -52,8 +52,28 @@ const swaggerDefinition = {
           },
           name: {
             type: 'string',
+          },
         },
-      },},
+      },
+      expenses: {
+        type: 'object',
+        required: ['id', 'mount', 'automatized', 'auto_date'],
+        properties: {
+          id: {
+            type: 'string',
+          },
+          mount: {
+            type: 'number',
+          },
+          automatized: {
+            type: 'boolean',
+          },
+          auto_date: {
+            type: 'string',
+            format: 'date',
+          },
+        },
+      },
       example: {
         type: 'object',
         required: ['id', 'mount', 'automatized', 'auto_date'],
