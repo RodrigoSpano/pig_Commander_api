@@ -11,6 +11,7 @@
     "quotes": [2, "single", {"avoidEscape": true}],
     "semi":["error", "always"],
     "import/prefer-default-export": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "dot-notation": "off"
   }
 }

@@ -13,30 +13,47 @@ const swaggerDefinition = {
   ],
   components: {
     schemas: {
-      user: {
+      userLogin: {
         type: 'object',
-        required: ['id', 'name', 'lastname', 'password', 'email', 'premium'],
+        required: ['password', 'email'],
         properties: {
-          id: {
-            type: 'string',
-          },
-          name: {
-            type: 'string',
-          },
-          lastname: {
-            type: 'string',
-          },
           password: {
             type: 'string',
           },
           email: {
             type: 'string',
           },
-          premium: {
-            type: 'boolean',
-          },
         },
       },
+      userSignup: {
+        type: 'object',
+        required: ['password', 'email', 'name', 'lastname', 'email'],
+        properties: {
+          name: {
+            type: 'string'
+          },
+          lastname: {
+            type: 'string'
+          },
+          email: {
+            type: 'string'
+          },
+          password: {
+            type: 'string',
+          }
+        },
+      },
+      methods: {
+        type: 'object',
+        required: ['id', 'name'],
+        properties: {
+          id: {
+            type: 'number',
+          },
+          name: {
+            type: 'string',
+        },
+      },},
       example: {
         type: 'object',
         required: ['id', 'mount', 'automatized', 'auto_date'],
