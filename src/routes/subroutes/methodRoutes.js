@@ -5,7 +5,7 @@ const router = Router();
 /**
  * Get methods
  * @openapi
- * /methods:
+ * /api/methods:
  *   get:
  *     tags:
  *       - Methods

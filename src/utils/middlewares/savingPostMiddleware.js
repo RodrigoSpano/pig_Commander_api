@@ -16,6 +16,10 @@ const savingPostMiddleware = async (req, res, next) => {
     return;
   }
 
+  if(mount <= 0 || goal <= 0){
+    res.status(400).json({ error: 'Mount and Goal must be greater than 0' });
+    return;
+  }
   // * I search if it already exists in the database
   const existingSaving = await saving.findOne({
     where: { name: name.toLowerCase() },
