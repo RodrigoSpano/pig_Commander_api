@@ -20,6 +20,5 @@ const createCategory = async (req, res) => {
 /* 
 9- [newCategory] : Here, I am staying with the first element of the array that
 returns .findOrCreate() , and I assign it to the variable 'newCategory'.
-Then, to the second value of the array, I assign it to the boolean variable 'alreadyExist'
 */
 module.exports = createCategory;

@@ -13,18 +13,12 @@ const incomesExample = [
 
 const incomesHandler = async (userId) => {
   try {
-    /* const allIncomes = await incomes.findAll(
-            where: {user_id: user_id}
-        ); */
-    const allIncomes = await incomes.findAll();
+    const allIncomes = await incomes.findAll({ where: { user_id: userId } });
 
     return allIncomes;
   } catch (error) {
-    throw Error('incomesHandler:', error);
-    // esto despues lo saco pero es para ver de donde viene error
+    throw Error(error);
   }
 };
-
-/* Falta descomentar lineas 18-20 para cuando esten todas las tablas andando */
 
 module.exports = incomesHandler;

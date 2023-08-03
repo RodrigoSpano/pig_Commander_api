@@ -6,8 +6,7 @@ const getCategoriesHandler = async () => {
 
     return allcategories;
   } catch (error) {
-    throw Error('categoriesHandler:', error);
-    // esto despues lo saco pero es para ver de donde viene error
+    throw Error(error);
   }
 };
 
