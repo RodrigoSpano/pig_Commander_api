@@ -1,17 +1,17 @@
 const { incomes } = require('../../db');
 
-async function incomeExist (req,res,next) {
-    
-        const { idIncome } = req.params;
-        const incomeToUpdate = await incomes.findByPk(idIncome);
+async function incomeExist(req, res, next) {
 
-        if (!incomeToUpdate) {
-            return res.status(404).json({ message: 'Income not found' });
-        }
+    const { idIncome } = req.params;
+    const incomeToUpdate = await incomes.findByPk(idIncome);
 
-        return next();
+    if (!incomeToUpdate) {
+        return res.status(404).json({ message: 'Income not found' });
+    }
+
+    return next();
 }
 
 module.exports = {
     incomeExist
-}
+};
