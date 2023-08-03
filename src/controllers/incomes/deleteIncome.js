@@ -17,5 +17,4 @@ const deleteIncome = async (req, res) => {
 
 module.exports = deleteIncome;
 
-// linea 12 - eso es porque .destroy() devuelve la cantindad de filas que elimino 
-
+// linea 12 - eso es porque .destroy() devuelve la cantindad de filas que elimino

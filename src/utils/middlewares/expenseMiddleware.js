@@ -20,7 +20,7 @@ const postExpensesMiddleware = async (req, res, next) => {
 };
 
 const getExpensesMiddleware = async (req, res, next) => {
-  const { user_id } = req.params;
+  const { user_id } = req.params; 
   if (!user_id) return res.status(400).json({ error: 'User id not recieved' });
   const allExepenses = await expenses.findAll({
     where: { user_id },
@@ -52,6 +52,11 @@ const updateExpensesMiddleware = async (req, res, next) => {
   }
   return next();
 };
+
+//! getExpensesMiddleware()
+/* 
+ Cambiar req.params por req.user.id
+*/
 
 module.exports = {
   postExpensesMiddleware,
