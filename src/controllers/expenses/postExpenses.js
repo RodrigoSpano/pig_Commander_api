@@ -5,9 +5,6 @@ const postExpenses = async (req, res) => {
     //* Recieving the body properties
     const { user_id, category_id, method_id, mount, automatized, auto_date } =
       req.body;
-    if (mount < 1) {
-      return res.status(400).json({ error: 'Mount cannot be less than 1' });
-    }
     const newExpense = await expenses.create({
       mount,
       automatized,
