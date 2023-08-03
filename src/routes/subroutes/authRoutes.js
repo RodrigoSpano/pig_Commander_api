@@ -91,7 +91,7 @@ router.post('/signup', userAlreadyExistsMiddleware, signupUser);
 
  */
 router.get('/secret', passport.authenticate('jwt', { session: true, failureMessage: 'Invalid token' }), (req, res) => {
-  res.status(200).json('solo podes ver esto con un token');
+  res.status(200).json({ logged: true });
 });
 
 /**

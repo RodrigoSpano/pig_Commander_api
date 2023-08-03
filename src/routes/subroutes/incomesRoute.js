@@ -1,10 +1,11 @@
+const { Router } = require('express');
 const getAllIncomes = require('../../controllers/incomes/getAllIncomes');
 const createIncome = require('../../controllers/incomes/createIncome');
 const deleteIncome = require('../../controllers/incomes/deleteIncome');
 const updateIncome = require('../../controllers/incomes/updateIncome');
-const { Router } = require('express');
 const getMonthlyIncomes = require('../../controllers/incomes/getMonthlyIncomes');
 const { incomeExist } = require('../../utils/middlewares/incomesMiddleware');
+
 const router = Router();
 
 /**
