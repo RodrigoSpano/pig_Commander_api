@@ -133,4 +133,26 @@ router.delete('/logout', logoutUser);
 
  */
 router.delete('/user/:id', userExistsDeleteMiddleware, deleteUser);
+
+/**
+ * GET login google
+ * @openapi
+ * /api/auth/google:
+ *    get:
+ *      tags:
+ *        - auth
+ *      summary: 'login with google'
+ *      description: Este endpoint es para logearse con google
+
+ */
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email'],
+}));
+router.get('/google/callback', passport.authenticate('google', {
+  successRedirect: 'http://localhost:8080/api/google/success',
+  failureRedirect: 'http://localhost:8080/api/auth/login',
+}));
+
+
+
 module.exports = router;
