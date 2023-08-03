@@ -5,7 +5,7 @@ const getAllSavings = async (req, res) => {
     // * Id of the user
     const { id } = req.user.dataValues;
 
-    // * I look up all the inverisons in the database
+    // * I look up all the inversions in the database
     const allInversions = await inversion.findAll({
       where: {
         user_id: id,
