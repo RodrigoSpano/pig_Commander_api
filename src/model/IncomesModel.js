@@ -6,15 +6,25 @@ module.exports = (sequelize) => {
     'incomes',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         primaryKey: true,
-        autoIncrement: true,
+        defaultValue: DataTypes.UUIDV4,
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      mount :{
+        type : DataTypes.FLOAT,
       },
+      automatized:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      },
+      auto_date: {
+        type : DataTypes.DATE,
+        defaultValue: null,
+        allowNull: true
+      }
     },
-    { timestamps: false }
+    
   );
 };
+
+/* auto_date, es la fecha en la que por ejemplo recibo mi sueldo todos los dias  */
