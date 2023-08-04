@@ -14,7 +14,7 @@ async function incomeExist(req, res, next) {
 async function mountValidate(req, res, next) {
   const { mount } = req.body;
 
-  if (mount < 1) {
+  if (mount < 1 || !mount) {
     return res.status(400).json({ message: 'mount cannot be less than 1' });
   }
 

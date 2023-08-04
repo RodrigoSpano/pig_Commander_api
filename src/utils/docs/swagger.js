@@ -205,18 +205,96 @@ const swaggerDefinition = {
           },
         },
       },
-      maxSpend: {
+      incomes: {
         type: 'object',
-        required: [' mount'],
+        required: [
+          'id',
+          'mount',
+          'createdAt',
+          'updatedAt',
+          'method_id',
+          'category_id',
+        ],
         properties: {
+          id: {
+            type: 'string',
+          },
           mount: {
             type: 'number',
+          },
+          automatized: {
+            type: 'boolean',
+          },
+          auto_date: {
+            type: 'string',
+            format: 'date',
+          },
+          createdAt: {
+            type: 'string',
+          },
+          updatedAt: {
+            type: 'string',
+          },
+          method_id: {
+            type: 'number',
+          },
+          category_id: {
+            type: 'number',
+          },
+        },
+      },
+      incomesPost: {
+        type: 'object',
+        required: [
+          'automatized',
+          'mount',
+          'auto_date',
+          'category_id',
+          'method_id',
+        ],
+        maxSpend: {
+          type: 'object',
+          required: [' mount'],
+          properties: {
+            mount: {
+              type: 'number',
+            },
+            automatized: {
+              type: 'boolean',
+            },
+            auto_date: {
+              type: 'string',
+              format: 'date',
+            },
+            method_id: {
+              type: 'number',
+            },
+            category_id: {
+              type: 'number',
+            },
+          },
+        },
+        incomesPut: {
+          type: 'object',
+          required: ['mount', 'automatized', 'auto_date'],
+          properties: {
+            mount: {
+              type: 'number',
+            },
+            automatized: {
+              type: 'boolean',
+            },
+            auto_date: {
+              type: 'string',
+              format: 'date',
+            },
           },
         },
       },
     },
   },
 };
+
 const swaggerOptions = {
   swaggerDefinition,
   apis: ['./src/routes/subRoutes/*.js'], //! todos los archivos que terminan en ts
