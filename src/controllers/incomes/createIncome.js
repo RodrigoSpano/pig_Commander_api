@@ -3,26 +3,27 @@ const { incomes } = require('../../db');
 
 // esto crea un ingreso
 const createIncome = async (req, res) => {
+  try {
+    const { id } = req.user.dataValues;
+    const { mount, automatized, auto_date, category_id, method_id } = req.body;
 
-    try {
-        const { user_id, mount, automatized, auto_date, category_id, method_id } = req.body;
+    if (!mount || !automatized || !auto_date || !category_id || !method_id)
+      throw Error('Missing data..');
 
-        // if(!user_id || !mount || !automatized || !auto_date || !category_id || !method_id) throw Error('Faltan datos');
+    // Creacion o busqueda
+    const newIncome = await incomes.create({
+      user_id: id,
+      mount,
+      automatized,
+      auto_date: automatized ? auto_date : null, // Establecer auto_date si automatized es true, de lo contrario, establecer en null
+      category_id,
+      method_id,
+    });
 
-        // Creacion o busqueda
-        const newIncome = await incomes.create({
-            // user_id,
-            mount,
-            automatized,
-            auto_date: automatized ? auto_date : null, // Establecer auto_date si automatized es true, de lo contrario, establecer en null
-            // category_id,
-            // method_id
-        });
-
-        return res.status(200).json(newIncome);
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
+    return res.status(200).json(newIncome);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 };
 
 module.exports = createIncome;

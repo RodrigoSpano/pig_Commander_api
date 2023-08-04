@@ -44,6 +44,11 @@ const updateExpensesMiddleware = async (req, res, next) => {
   return next();
 };
 
+//! getExpensesMiddleware()
+/* 
+ Cambiar req.params por req.user.id
+*/
+
 module.exports = {
   postExpensesMiddleware,
   getExpensesMiddleware,

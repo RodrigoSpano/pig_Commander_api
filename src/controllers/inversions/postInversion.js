@@ -1,34 +1,35 @@
-const { saving, user } = require('../../db');
+const { inversion, user } = require('../../db');
 
-const postSaving = async (req, res) => {
+const postInversion = async (req, res) => {
   try {
     // * I receive the property by body
-    const { name, mount, goal } = req.body;
+    const { mount, earning, started_on, finish_at } = req.body;
 
     // * Id of the user
     const { id } = req.user.dataValues;
-    
-    // * Check if the user exists before creating the saving
+
+    // * Check if the user exists before creating the inversion
     const userFind = await user.findByPk(id);
     if (!userFind) {
       res.status(404).json({ error: 'User not found' });
       return;
     }
 
-    // * Saving are created
-    const newSaving = await saving.create({
-      name: name.toLowerCase(),
+    // * Inversion are created
+    const newInversion = await inversion.create({
       mount,
-      goal,
+      earning,
+      started_on,
+      finish_at,
       user_id: id,
     });
 
     // * Response that is sent if everything goes ok
-    res.status(200).json(newSaving);
+    res.status(200).json(newInversion);
   } catch (error) {
     // ! Error internal server
     res.status(500).json({ error: error.message });
   }
 };
 
-module.exports = postSaving;
+module.exports = postInversion;
