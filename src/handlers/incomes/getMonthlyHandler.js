@@ -14,6 +14,7 @@ const getMonthlyHandler = async (userId) => {
         [Op.between]: [firstDayOfMonth, lastDayOfMonth],
       },
       userId,
+      automatized: false,
     },
   });
 

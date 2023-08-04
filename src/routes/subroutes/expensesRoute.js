@@ -4,6 +4,8 @@ const postExpenses = require('../../controllers/expenses/postExpenses');
 const deleteExpenses = require('../../controllers/expenses/deleteExpenses');
 const updateExpenses = require('../../controllers/expenses/updateExpenses');
 const getMonthlyExpenses = require('../../controllers/expenses/getMonthlyExpenses');
+const getAutomatizedExpenses = require('../../controllers/expenses/getAutomatizedExpenses');
+
 const {
   postExpensesMiddleware,
   deleteExpensesMiddleware,
@@ -13,6 +15,7 @@ const {
 
 const router = express.Router();
 
+router.get('/automatized', getAutomatizedExpenses);
 /**
  * Get Monthly expenses
  * @openapi

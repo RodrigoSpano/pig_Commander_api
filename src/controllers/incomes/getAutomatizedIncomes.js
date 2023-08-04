@@ -1,9 +1,13 @@
 const { incomes } = require('../../db');
-// * De un usuario, todos los ingresos de todos los meses
-const getAllIncomes = async (req, res) => {
+
+const getAutomatizedIncomes = async (req, res) => {
   try {
     const { id } = req.user.dataValues;
-    const allIncomes = await incomes.findAll({ where: { user_id: id, automatized: false } });
+
+    // * Buscar Ingreso según si está automatizado o no
+    const allIncomes = await incomes.findAll({
+      where: { user_id: id, automatized: true },
+    });
 
     if (allIncomes.length === 0) throw Error('Incomes not found..');
 
@@ -13,4 +17,4 @@ const getAllIncomes = async (req, res) => {
   }
 };
 
-module.exports = getAllIncomes;
+module.exports = getAutomatizedIncomes;
