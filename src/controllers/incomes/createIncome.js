@@ -16,7 +16,7 @@ const createIncome = async (req, res) => {
       user_id: id,
       name,
       mount,
-      automatized,
+      automatized: automatized && automatized,
       auto_date: automatized ? auto_date : null, // Establecer auto_date si automatized es true, de lo contrario, establecer en null
       category_id,
       method_id,
