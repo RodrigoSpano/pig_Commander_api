@@ -7,7 +7,7 @@ const createCategory = async (req, res) => {
     if (!name) throw Error('Missing data..');
     const [newCategory] = await categories.findOrCreate({
       where: {
-        name: name,
+        name,
       },
     });
 

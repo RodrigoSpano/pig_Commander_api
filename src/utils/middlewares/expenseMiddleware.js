@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 const { expenses } = require('../../db');
 
 const postExpensesMiddleware = async (req, res, next) => {
   const { category_id, method_id, mount, automatized, auto_date } = req.body;
-  if (!category_id || !method_id || !mount || !auto_date || !automatized) {
+  if (!category_id || !method_id || !mount) {
     return res.status(400).json({ error: 'All fields are required' });
   }
   if (mount < 1) {
@@ -21,6 +22,7 @@ const getExpensesMiddleware = async (req, res, next) => {
   }
   return next();
 };
+
 const deleteExpensesMiddleware = async (req, res, next) => {
   const { id } = req.params;
   if (!id) return res.status(400).json({ error: 'Id not recieved' });
