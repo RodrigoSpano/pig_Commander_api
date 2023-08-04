@@ -2,6 +2,8 @@ const { incomes } = require('../../db');
 
 async function incomeExist(req, res, next) {
   const { idIncome } = req.params;
+  if (req.body.mount <= 1) return res.status(400).json({ message: 'mount should not be less than $1' });
+
   const incomeAlreadyExist = await incomes.findByPk(idIncome);
 
   if (!incomeAlreadyExist) {
@@ -11,15 +13,15 @@ async function incomeExist(req, res, next) {
   return next();
 }
 
-async function mountValidate(req, res, next) {
-  const { mount } = req.body;
+// async function mountValidate(req, res, next) {
+//   const { mount } = req.body;
 
-  if (mount < 1 || !mount) {
-    return res.status(400).json({ message: 'mount cannot be less than 1' });
-  }
+//   if (mount < 1 || !mount) {
+//     return res.status(400).json({ message: 'mount cannot be less than 1' });
+//   }
 
-  return next();
-}
+//   return next();
+// }
 
 async function getIncomesMiddleware(req, res, next) {
   const { id } = req.user.dataValues;
@@ -31,6 +33,5 @@ async function getIncomesMiddleware(req, res, next) {
 
 module.exports = {
   incomeExist,
-  mountValidate,
   getIncomesMiddleware,
 };

@@ -9,7 +9,7 @@ const getAutomatizedIncomes = require('../../controllers/incomes/getAutomatizedI
 const {
   incomeExist,
   getIncomesMiddleware,
-  mountValidate,
+
 } = require('../../utils/middlewares/incomesMiddleware');
 
 const router = Router();
@@ -235,7 +235,7 @@ router.get('/monthly', getMonthlyIncomes);
  *                   example: Message of error
  *
  */
-router.post('/', mountValidate, createIncome);
+router.post('/', createIncome);
 
 /**
  * Delete income
@@ -382,6 +382,6 @@ router.delete('/:idIncome', incomeExist, deleteIncome);
  *                   example: Message of error!
  *
  */
-router.put('/:idIncome', incomeExist, mountValidate, updateIncome);
+router.put('/:idIncome', incomeExist, updateIncome);
 
 module.exports = router;

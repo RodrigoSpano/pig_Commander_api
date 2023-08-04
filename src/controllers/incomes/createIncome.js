@@ -7,8 +7,8 @@ const createIncome = async (req, res) => {
     const { id } = req.user.dataValues;
     const { mount, automatized, auto_date, category_id, method_id, name } = req.body;
 
-    if (!mount || !automatized || !auto_date || !category_id || !method_id || !name) {
-      res.status(404).json({ error: 'Missing data..' });
+    if (!mount || mount < 1 || !category_id || !method_id || !name) {
+      return res.status(404).json({ error: 'Missing data..' });
     }
 
     // Creacion o busqueda

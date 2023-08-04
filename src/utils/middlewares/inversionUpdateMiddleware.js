@@ -1,7 +1,8 @@
 const { inversion } = require('../../db');
 
 const inversionUpdateMiddleware = async (req, res, next) => {
-  const { mount, earning, id } = req.body;
+  const { id } = req.params;
+  const { mount, earning } = req.body;
 
   // *  I look for the id in the database
   const findIdInversion = await inversion.findByPk(id);
