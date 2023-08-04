@@ -14,7 +14,7 @@ const {
 
 const router = Router();
 
-router.get('/:automatized', getAutomatizedIncomes);
+router.get('/automatized', getAutomatizedIncomes);
 /**
  * Get incomes
  * @openapi

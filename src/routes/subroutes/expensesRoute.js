@@ -15,7 +15,7 @@ const {
 
 const router = express.Router();
 
-router.get('/:automatized', getAutomatizedExpenses);
+router.get('/automatized', getAutomatizedExpenses);
 /**
  * Get Monthly expenses
  * @openapi
