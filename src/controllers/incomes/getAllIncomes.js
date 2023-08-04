@@ -5,7 +5,7 @@ const getAllIncomes = async (req, res) => {
     const { id } = req.user.dataValues;
     const allIncomes = await incomes.findAll({ where: { user_id: id } });
 
-    if (allIncomes.length == 0) throw Error('Incomes not found..');
+    if (allIncomes.length === 0) throw Error('Incomes not found..');
 
     return res.status(200).json(allIncomes);
   } catch (error) {

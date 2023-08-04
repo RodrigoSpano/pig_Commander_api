@@ -5,15 +5,16 @@ const { incomes } = require('../../db');
 const createIncome = async (req, res) => {
   try {
     const { id } = req.user.dataValues;
-    const { mount, automatized, auto_date, category_id, method_id } = req.body;
+    const { mount, automatized, auto_date, category_id, method_id, name } = req.body;
 
-    if (!mount || !automatized || !auto_date || !category_id || !method_id) {
+    if (!mount || !automatized || !auto_date || !category_id || !method_id || !name) {
       res.status(404).json({ error: 'Missing data..' });
     }
 
     // Creacion o busqueda
     const newIncome = await incomes.create({
       user_id: id,
+      name,
       mount,
       automatized,
       auto_date: automatized ? auto_date : null, // Establecer auto_date si automatized es true, de lo contrario, establecer en null

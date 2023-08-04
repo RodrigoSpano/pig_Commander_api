@@ -3,8 +3,9 @@ const { expenses } = require('../../db');
 const postExpenses = async (req, res) => {
   try {
     const { id: user_id } = req.user.dataValues;
-    const { category_id, method_id, mount, automatized, auto_date } = req.body;
+    const { category_id, method_id, mount, automatized, auto_date, name } = req.body;
     const newExpense = await expenses.create({
+      name,
       mount,
       automatized: automatized && automatized,
       auto_date: automatized && auto_date,
