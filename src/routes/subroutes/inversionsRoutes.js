@@ -1,62 +1,62 @@
 const { Router } = require('express');
-const getAllSavings = require('../../controllers/savings/getAllSavings');
-const postSaving = require('../../controllers/savings/postSaving');
-const deleteSaving = require('../../controllers/savings/deleteSaving');
-const updateSaving = require('../../controllers/savings/updateSaving');
-const savingMiddleware = require('../../utils/middlewares/savingMiddlewares');
-const savingPostMiddleware = require('../../utils/middlewares/savingPostMiddleware');
-const savingUpdateMiddleware = require('../../utils/middlewares/savingUpdateMiddleware');
+const getAllInversions = require('../../controllers/inversions/getAllInversions');
+const postInversion = require('../../controllers/inversions/postInversion');
+const updateInversion = require('../../controllers/inversions/updateInversion');
+const deleteInversion = require('../../controllers/inversions/deleteInversion');
+const inversionPostMiddleware = require('../../utils/middlewares/inversionPostMiddleware');
+const inversionDeleteMiddleware = require('../../utils/middlewares/inversionDeleteMiddleware');
+const inversionUpdateMiddleware = require('../../utils/middlewares/inversionUpdateMiddleware');
 
 const router = Router();
 
 /**
- * Get savings
+ * Get inversions
  * @openapi
- * /api/savings:
+ * /api/inversions:
  *   get:
  *     tags:
- *       - Savings
- *     summary: "Get all savings"
+ *       - Inversions
+ *     summary: "Get all Inversions"
  *     description: |
- *       Este endpoint es para traer todos los ahorros(Savings) de la base de datos
+ *       Este endpoint es para traer todos las inversiones (Inversions) de la base de datos
  *     responses:
  *       '200':
- *         description: Encuentra todos los ahorros(Savings).
+ *         description: Encuentra las inversiones (Inversions).
  *         content:
  *           application/json:
  *             schema:
- *               $ref: "#/components/schemas/savings"
+ *               $ref: "#/components/schemas/inversions"
  *               items:
  *                 type: object
  *                 properties:
  *                   id:
  *                     type: integer
- *                   name:
+ *                   started_on:
+ *                     type: string
+ *                   finish_at:
  *                     type: string
  *                   mount:
  *                     type: integer
- *                   goal:
+ *                   earning:
  *                     type: integer
- *                   createdAt:
- *                     type: string
- *                   updatedAt:
+ *                   user_id:
  *                     type: string
  *             example:
  *               - id: 1
- *                 name: Ahorrar para moto
- *                 mount: 200
- *                 goal: 1000
- *                 createdAt: "2023-08-03T17:54:38.428Z"
- *                 updatedAt: "2023-08-03T17:54:38.428Z"
+ *                 started_on: 2023-08-04
+ *                 finish_at: 2024-08-04
+ *                 mount: 1000
+ *                 earning: 25
+ *                 user_id: 4e26e88c-79b5-4d0c-b609-92555cfc2266
  *               - id: 2
- *                 name: Ahorrar para auto
- *                 mount: 2000
- *                 goal: 100000
- *                 createdAt: "2023-08-03T17:54:38.428Z"
- *                 updatedAt: "2023-08-03T17:54:38.428Z"
+ *                 started_on: 2023-08-04
+ *                 finish_at: 2024-08-04
+ *                 mount: 10000
+ *                 earning: 250
+ *                 user_id: 4e26e88c-79b5-4d0c-b609-92555cfc2266
  *
  *       '404':
- *         description: No se encontraron los ahorros.
+ *         description: No se encontraron las inversiones.
  *         content:
  *           application/json:
  *             schema:
@@ -64,59 +64,68 @@ const router = Router();
  *               properties:
  *                 error:
  *                   type: string
- *                   example: Savings not found!
+ *                   example: Inversions not found!
+ *       '500':
+ *         description: Error interno del server.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Mensaje del error! 
  *
  */
-router.get('/', getAllSavings);
+router.get('/', getAllInversions);
 
 /**
- * Post saving
+ * Post inversion
  * @openapi
- * /api/savings:
+ * /api/inversions:
  *    post:
  *      tags:
- *        - Savings
- *      summary: "Post one saving"
- *      description: Este endpoint es para crear un nuevo ahorro ( Saving ), recuerda que el ID se crea automaticamente con Sequelize,
- *       al igual que las fechas!
+ *        - Inversions
+ *      summary: "Post one inversion"
+ *      description: Este endpoint es para crear una nueva inversion (Inversions), recuerda que el ID se crea automaticamente con Sequelize,
  *      requestBody:
  *        required: true
  *        content:
  *          application/json:
  *            schema:
- *              $ref: "#/components/schemas/savingPost"
+ *              $ref: "#/components/schemas/inversionPost"
  *      responses:
  *       '200':
- *         description: Si lo creo, devuelve al ahorro ( Saving ) creado con sus propiedades
+ *         description: Si lo creo, devuelve a la inversion ( Inversion ) creado con sus propiedades
  *         content:
  *           application/json:
  *             schema:
- *               $ref: "#/components/schemas/savings"
+ *               $ref: "#/components/schemas/inversions"
  *               items:
  *                 type: object
  *                 properties:
  *                   id:
  *                     type: integer
- *                   name:
+ *                   started_on:
+ *                     type: string
+ *                   finish_at:
  *                     type: string
  *                   mount:
  *                     type: integer
- *                   goal:
+ *                   earning:
  *                     type: integer
- *                   createdAt:
- *                     type: string
- *                   updatedAt:
+ *                   user_id:
  *                     type: string
  *             example:
  *                 id: 1
- *                 name: Ahorrar para moto
- *                 mount: 200
- *                 goal: 1000
- *                 createdAt: "2023-08-03T17:54:38.428Z"
- *                 updatedAt: "2023-08-03T17:54:38.428Z"
+ *                 started_on: 2023-08-04
+ *                 finish_at: 2024-08-04
+ *                 mount: 1000
+ *                 earning: 25
+ *                 user_id: 4e26e88c-79b5-4d0c-b609-92555cfc2266
  *
  *       '400':
- *         description: Si no envian el NAME-MOUNT-GOAL por body (EL PARAMETRO EN EL ERROR CAMBIA SEGUN EL PARAMETRO QUE FALTA)
+ *         description: Si no envian el MOUNT-EARNING-FECHAS por body (EL PARAMETRO EN EL ERROR CAMBIA SEGUN EL PARAMETRO QUE FALTA)
  *         content:
  *           application/json:
  *             schema:
@@ -124,7 +133,7 @@ router.get('/', getAllSavings);
  *               properties:
  *                 error:
  *                   type: string
- *                   example: Parameter NAME is not defined
+ *                   example: Parameter MOUNT is not defined
  *       '404':
  *         description: Si el usuario no se encuentra logueado
  *         content:
@@ -135,16 +144,6 @@ router.get('/', getAllSavings);
  *                 error:
  *                   type: string
  *                   example: User not found
- *       '409':
- *         description: Si el ahorro ya existe
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: This saving already exists!
  *       '500':
  *         description: Errores internos de la base de dato
  *         content:
@@ -157,40 +156,40 @@ router.get('/', getAllSavings);
  *                   example: Message of error
  *
  */
-router.post('/', savingPostMiddleware, postSaving);
+router.post('/', inversionPostMiddleware, postInversion);
 
 /**
- * Delete saving
+ * Delete inversion
  * @openapi
- * /api/savings/:id:
+ * /api/inversion/:id:
  *    delete:
  *      tags:
- *        - Savings
- *      summary: "Delete one Saving"
- *      description: Endpoint para eliminar un Saving
+ *        - Inversions
+ *      summary: "Delete one Inversion"
+ *      description: Endpoint para eliminar una Inversion
  *      parameters:
  *        - in: path
  *          name: id
  *          schema:
  *            type: string
  *          required: true
- *          description: "ID of the Saving to delete."
+ *          description: "ID of the Inversion to delete."
  *      responses:
  *       '200':
  *         description: Si lo deletea
  *         content:
  *           application/json:
  *             schema:
- *               $ref: "#/components/schemas/savings"
+ *               $ref: "#/components/schemas/inversions"
  *               items:
  *                 type: object
  *                 properties:
  *                   deleted:
  *                     type: string
  *             example:
- *                 delete: Saving deleted!
+ *                 delete: Inversion deleted!
  *       '404':
- *         description: Si el saving no se encuentra
+ *         description: Si la inversion no se encuentra
  *         content:
  *           application/json:
  *             schema:
@@ -198,7 +197,7 @@ router.post('/', savingPostMiddleware, postSaving);
  *               properties:
  *                 error:
  *                   type: string
- *                   example: Saving not found!
+ *                   example: Inversion not found!
  *
  *       '500':
  *         description: Error de la base de datos
@@ -212,62 +211,62 @@ router.post('/', savingPostMiddleware, postSaving);
  *                   example: Message of error!
  *
  */
-router.delete('/:id', savingMiddleware, deleteSaving);
+router.delete('/:id', inversionDeleteMiddleware, deleteInversion);
 
 /**
- * Put saving
+ * Put inversion
  * @openapi
- * /api/savings/:id:
+ * /api/inversions/:id:
  *    put:
  *      tags:
- *        - Savings
- *      summary: "Update one saving"
- *      description: Este endpoint es para updatear las propiedades MOUNT y GOAL de los ahorros, solo envias Mount y Goal.
+ *        - Inversions
+ *      summary: "Update one inversion"
+ *      description: Este endpoint es para updatear las propiedades MOUNT y EARNING de los ahorros, solo envias EARNING y MOUNT.
  *      parameters:
  *        - in: path
  *          name: id
  *          schema:
  *            type: string
  *          required: true
- *          description: "ID of the saving to update."
+ *          description: "ID of the inversion to update."
  *      requestBody:
  *        required: true
  *        content:
  *          application/json:
  *            schema:
- *              $ref: "#/components/schemas/savingPut"
+ *              $ref: "#/components/schemas/inversionPut"
  *      responses:
  *       '200':
- *         description: Si lo updatea, devuelve al ahorro ( Saving ) updateado
+ *         description: Si lo updatea, devuelve la inversion ( Inversion ) updateado
  *         content:
  *           application/json:
  *             schema:
- *               $ref: "#/components/schemas/savings"
+ *               $ref: "#/components/schemas/inversions"
  *               items:
  *                 type: object
  *                 properties:
  *                   id:
  *                     type: integer
- *                   name:
+ *                   started_on:
+ *                     type: string
+ *                   finish_at:
  *                     type: string
  *                   mount:
  *                     type: integer
- *                   goal:
+ *                   earning:
  *                     type: integer
- *                   createdAt:
- *                     type: string
- *                   updatedAt:
+ *                   user_id:
  *                     type: string
  *             example:
  *                 id: 1
- *                 name: Ahorrar para moto
- *                 mount: 300
- *                 goal: 400
- *                 createdAt: "2023-08-03T17:54:38.428Z"
- *                 updatedAt: "2023-08-03T17:54:38.428Z"
+ *                 started_on: 2023-08-04
+ *                 finish_at: 2024-08-04
+ *                 mount: 1000
+ *                 earning: 25
+ *                 user_id: 4e26e88c-79b5-4d0c-b609-92555cfc2266
  *
  *       '404':
- *         description: Si el saving no se encuentra
+ *         description: Si la inversion no se encuentra
  *         content:
  *           application/json:
  *             schema:
@@ -275,9 +274,9 @@ router.delete('/:id', savingMiddleware, deleteSaving);
  *               properties:
  *                 error:
  *                   type: string
- *                   example: Saving not found!
+ *                   example: Inversion not found!
  *       '400':
- *         description: Si no recibe los parametros Mount  y Goals, el parametro del msj cambia segun el que falta
+ *         description: Si no recibe los parametros Mount  y Earnings, el parametro del msj cambia segun el que falta
  *         content:
  *           application/json:
  *             schema:
@@ -299,5 +298,6 @@ router.delete('/:id', savingMiddleware, deleteSaving);
  *                   example: Message of error!
  *
  */
-router.put('/:id', savingUpdateMiddleware, updateSaving);
+router.put('/:id', inversionUpdateMiddleware, updateInversion);
+
 module.exports = router;

@@ -2,7 +2,7 @@ const { incomes } = require('../../db');
 
 const updateIncome = async (req, res) => {
   try {
-    const { idIncome } = req.params;
+    const { id } = req.user.dataValues;
     const { mount, automatized, auto_date } = req.body;
 
     // Actualizar el ingreso
@@ -13,7 +13,7 @@ const updateIncome = async (req, res) => {
         auto_date,
       },
       {
-        where: { id: idIncome },
+        where: { user_id: id },
       }
     );
 

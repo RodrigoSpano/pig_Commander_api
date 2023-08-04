@@ -43,6 +43,29 @@ const swaggerDefinition = {
           },
         },
       },
+      user: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+          name: {
+            type: 'string',
+          },
+          lastname: {
+            type: 'string',
+          },
+          email: {
+            type: 'string',
+          },
+          image: {
+            type: 'string',
+          },
+          premium: {
+            type: 'boolean',
+          },
+        },
+      },
       methods: {
         type: 'object',
         required: ['id', 'name'],
@@ -79,6 +102,30 @@ const swaggerDefinition = {
           },
         },
       },
+      inversions: {
+        type: 'object',
+        required: ['id','mount', 'earning', 'started_on', 'finish_at'],
+        properties: {
+          id: {
+            type: 'number',
+          },
+          started_on: {
+            type: 'string',
+          },
+          finish_at: {
+            type: 'string',
+          },
+          mount: {
+            type: 'number',
+          },
+          earning: {
+            type: 'number',
+          },
+          user_id: {
+            type: 'string',
+          },
+        },
+      },
       savingPost: {
         type: 'object',
         required: ['name', 'mount', 'goal'],
@@ -94,6 +141,28 @@ const swaggerDefinition = {
           },
         },
       },
+      inversionPost: {
+        type: 'object',
+        required: ['mount', 'earning','started_on', 'finish_at', 'user_id'],
+        properties: {
+          mount: {
+            type: 'number',
+          },
+          earning: {
+            type: 'number',
+          },
+          started_on: {
+            type: 'string',
+          },
+          finish_at: {
+            type: 'string',
+          },
+          user_id: {
+            type: 'string',
+          },
+
+        },
+      },
       savingPut: {
         type: 'object',
         required: ['mount', 'goal'],
@@ -102,6 +171,18 @@ const swaggerDefinition = {
             type: 'number',
           },
           goal: {
+            type: 'number',
+          },
+        },
+      },
+     inversionPut: {
+        type: 'object',
+        required: ['mount', 'earning'],
+        properties: {
+          mount: {
+            type: 'number',
+          },
+          earning: {
             type: 'number',
           },
         },

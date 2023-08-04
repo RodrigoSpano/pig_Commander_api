@@ -2,10 +2,10 @@ const { incomes } = require('../../db');
 
 const deleteIncome = async (req, res) => {
   try {
-    const { idIncome } = req.params;
+    const { id } = req.user.dataValues;
     await incomes.destroy({
       where: {
-        id: idIncome,
+        user_id: id,
       },
     });
 
