@@ -104,7 +104,7 @@ const swaggerDefinition = {
       },
       inversions: {
         type: 'object',
-        required: ['id','mount', 'earning', 'started_on', 'finish_at'],
+        required: ['id', 'mount', 'earning', 'started_on', 'finish_at'],
         properties: {
           id: {
             type: 'number',
@@ -143,7 +143,7 @@ const swaggerDefinition = {
       },
       inversionPost: {
         type: 'object',
-        required: ['mount', 'earning','started_on', 'finish_at', 'user_id'],
+        required: ['mount', 'earning', 'started_on', 'finish_at', 'user_id'],
         properties: {
           mount: {
             type: 'number',
@@ -160,7 +160,6 @@ const swaggerDefinition = {
           user_id: {
             type: 'string',
           },
-
         },
       },
       savingPut: {
@@ -175,7 +174,7 @@ const swaggerDefinition = {
           },
         },
       },
-     inversionPut: {
+      inversionPut: {
         type: 'object',
         required: ['mount', 'earning'],
         properties: {
@@ -206,28 +205,16 @@ const swaggerDefinition = {
           },
         },
       },
-      example: {
-        type: 'object',
-        required: ['id', 'mount', 'automatized', 'auto_date'],
-        properties: {
-          id: {
-            type: 'string',
-          },
-          mount: {
-            type: 'string',
-          },
-          automatized: {
-            type: 'boolean',
-          },
-          auto_date: {
-            type: 'string',
-            format: 'date',
-          },
-        },
-      },
       incomes: {
         type: 'object',
-        required: ['id','mount', 'createdAt', 'updatedAt','method_id','category_id'],
+        required: [
+          'id',
+          'mount',
+          'createdAt',
+          'updatedAt',
+          'method_id',
+          'category_id',
+        ],
         properties: {
           id: {
             type: 'string',
@@ -236,7 +223,7 @@ const swaggerDefinition = {
             type: 'number',
           },
           automatized: {
-            type: 'boolean'
+            type: 'boolean',
           },
           auto_date: {
             type: 'string',
@@ -249,54 +236,65 @@ const swaggerDefinition = {
             type: 'string',
           },
           method_id: {
-            type: 'number'
+            type: 'number',
           },
           category_id: {
-            type: 'number'
-          }
+            type: 'number',
+          },
         },
       },
       incomesPost: {
         type: 'object',
-        required: ['automatized', 'mount', 'auto_date','category_id','method_id'],
-        properties: {
-          mount: {
-            type: 'number',
+        required: [
+          'automatized',
+          'mount',
+          'auto_date',
+          'category_id',
+          'method_id',
+        ],
+        maxSpend: {
+          type: 'object',
+          required: [' mount'],
+          properties: {
+            mount: {
+              type: 'number',
+            },
+            automatized: {
+              type: 'boolean',
+            },
+            auto_date: {
+              type: 'string',
+              format: 'date',
+            },
+            method_id: {
+              type: 'number',
+            },
+            category_id: {
+              type: 'number',
+            },
           },
-          automatized: {
-            type: 'boolean'
+        },
+        incomesPut: {
+          type: 'object',
+          required: ['mount', 'automatized', 'auto_date'],
+          properties: {
+            mount: {
+              type: 'number',
+            },
+            automatized: {
+              type: 'boolean',
+            },
+            auto_date: {
+              type: 'string',
+              format: 'date',
+            },
           },
-          auto_date: {
-            type: 'string',
-            format: 'date',
-          },
-          method_id: {
-            type: 'number'
-          },
-          category_id: {
-            type: 'number'
-          }
         },
       },
-      incomesPut: {
-        type: 'object',
-        required: ['mount', 'automatized','auto_date'],
-        properties: {
-          mount: {
-            type: 'number',
-          },
-          automatized: {
-            type: 'boolean'
-          },
-          auto_date: {
-            type: 'string',
-            format: 'date',
-          }
-        },
-      }
     },
   },
 };
+
 const swaggerOptions = {
   swaggerDefinition,
   apis: ['./src/routes/subRoutes/*.js'], //! todos los archivos que terminan en ts
