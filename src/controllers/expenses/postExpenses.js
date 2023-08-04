@@ -6,7 +6,7 @@ const postExpenses = async (req, res) => {
     const { category_id, method_id, mount, automatized, auto_date } = req.body;
     const newExpense = await expenses.create({
       mount,
-      automatized,
+      automatized: automatized && automatized,
       auto_date: automatized && auto_date,
       method_id,
       category_id,

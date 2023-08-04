@@ -10,20 +10,20 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      mount :{
-        type : DataTypes.FLOAT,
+      mount: {
+        type: DataTypes.FLOAT,
       },
-      automatized:{
+      automatized: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
       },
       auto_date: {
-        type : DataTypes.DATE,
+        type: DataTypes.DATE,
         defaultValue: null,
         allowNull: true
       }
     },
-    
+
   );
 };
 

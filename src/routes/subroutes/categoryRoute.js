@@ -6,9 +6,12 @@ const {
   categoryExist,
   postCategoriesMiddleware,
 } = require('../../utils/middlewares/categoryMiddleware');
+const getDefaultCategories = require('../../controllers/category/getDefaultsCategory');
+
 const router = Router();
 
 router.get('/', getAllCategories);
+router.get('/defaults', getDefaultCategories);
 router.post('/', postCategoriesMiddleware, createCategory);
 router.delete('/:idCategory', categoryExist, deleteCategory);
 
