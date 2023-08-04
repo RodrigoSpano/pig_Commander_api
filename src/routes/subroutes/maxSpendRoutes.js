@@ -16,7 +16,7 @@ const router = express.Router();
  * @swagger
  * /api/maxspend:
  *   get:
- *     summary: Obtener el gasto máximo del usuario actual
+ *     summary: Get maxSpend
  *     tags:
  *       - MaxSpend
  *     security:
@@ -41,7 +41,7 @@ router.get('/', getMaxSpendMiddleware, getMaxSpend);
  * @swagger
  * /api/maxspend:
  *   post:
- *     summary: Crear un nuevo gasto máximo
+ *     summary: Post maxSpend
  *     tags:
  *       - MaxSpend
  *     security:
@@ -76,7 +76,7 @@ router.post('/', postMaxSpendMiddleware, postMaxSpend);
 
 /**
  * @swagger
- * /api/maxspend/{id}:
+ * /api/maxspend/:id:
  *   put:
  *     summary: Actualizar un gasto máximo existente
  *     tags:
@@ -127,7 +127,7 @@ router.put('/:id', updateMaxSpendMiddleware, updateMaxSpend);
 
 /**
  * @swagger
- * /api/maxspend/{id}:
+ * /api/maxspend/:id:
  *   delete:
  *     summary: Eliminar un gasto máximo existente
  *     tags:

@@ -21,7 +21,7 @@ const router = express.Router();
  *      tags:
  *        - Expenses
  *      summary: "Get monthly expenses"
- *      description: "Endpoint to retrieve all expenses for the current month for a specific user."
+ *      description: "Endpoint para devolver todos los gastos del usuario del mes actual."
  *      parameters:
  *        - in: path
  *          name: user_id
@@ -47,7 +47,7 @@ router.get('/monthly', getMonthlyExpenses);
  *      tags:
  *        - Expenses
  *      summary: "Update one expense"
- *      description: "Endpoint to update an existing expense."
+ *      description: "Endpoint para actualizar un gasto existente."
  *      parameters:
  *        - in: path
  *          name: id
@@ -80,7 +80,7 @@ router.put('/:id', updateExpensesMiddleware, updateExpenses);
  *      tags:
  *        - Expenses
  *      summary: "Delete one expense"
- *      description: "Endpoint to delete an existing expense."
+ *      description: "Endpoint para borrar un gasto existente."
  *      parameters:
  *        - in: path
  *          name: id
@@ -106,7 +106,7 @@ router.delete('/:id', deleteExpensesMiddleware, deleteExpenses);
  *      tags:
  *        - Expenses
  *      summary: "Post expense"
- *      description: "Endpoint to create a new expense."
+ *      description: "Endpoint para crear un gasto."
  *      requestBody:
  *        required: true
  *        content:
@@ -129,7 +129,7 @@ router.post('/', postExpensesMiddleware, postExpenses);
  *      tags:
  *        - Expenses
  *      summary: "Get all expenses"
- *      description: "Endpoint to retrieve all expenses for a specific user."
+ *      description: "Endpoint para recibir todos los gastos de un usuario."
  *      parameters:
  *        - in: path
  *          name: id

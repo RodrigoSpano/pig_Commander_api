@@ -104,7 +104,7 @@ const swaggerDefinition = {
       },
       inversions: {
         type: 'object',
-        required: ['id','mount', 'earning', 'started_on', 'finish_at'],
+        required: ['id', 'mount', 'earning', 'started_on', 'finish_at'],
         properties: {
           id: {
             type: 'number',
@@ -143,7 +143,7 @@ const swaggerDefinition = {
       },
       inversionPost: {
         type: 'object',
-        required: ['mount', 'earning','started_on', 'finish_at', 'user_id'],
+        required: ['mount', 'earning', 'started_on', 'finish_at', 'user_id'],
         properties: {
           mount: {
             type: 'number',
@@ -160,7 +160,6 @@ const swaggerDefinition = {
           user_id: {
             type: 'string',
           },
-
         },
       },
       savingPut: {
@@ -175,7 +174,7 @@ const swaggerDefinition = {
           },
         },
       },
-     inversionPut: {
+      inversionPut: {
         type: 'object',
         required: ['mount', 'earning'],
         properties: {
@@ -203,6 +202,15 @@ const swaggerDefinition = {
           auto_date: {
             type: 'string',
             format: 'date',
+          },
+        },
+      },
+      maxSpend: {
+        type: 'object',
+        required: [' mount'],
+        properties: {
+          mount: {
+            type: 'number',
           },
         },
       },
