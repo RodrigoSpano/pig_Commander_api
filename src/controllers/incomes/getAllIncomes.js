@@ -1,14 +1,15 @@
 const { incomes } = require('../../db');
-// todos de todos los meses
+// * De un usuario, todos los ingresos de todos los meses
 const getAllIncomes = async (req, res) => {
   try {
     const { id } = req.user.dataValues;
     const allIncomes = await incomes.findAll({ where: { user_id: id } });
 
+    if (allIncomes.length == 0) throw Error('Incomes not found..');
+
     return res.status(200).json(allIncomes);
   } catch (error) {
-    return res.status(400).json({ error: error.message });
-    // esto despues lo saco pero es para ver de donde viene error
+    return res.status(500).json({ error: error.message });
   }
 };
 
