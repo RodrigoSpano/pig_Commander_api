@@ -1,9 +1,9 @@
 const { expenses } = require('../../db');
 
-const getAllExpensesHandler = async (user_id) => {
+const getAllExpensesHandler = async (id) => {
   try {
     const expensesAux = await expenses.findAll({
-      where: { user_id },
+      where: { user_id: id },
     });
     return expensesAux;
   } catch (error) {
