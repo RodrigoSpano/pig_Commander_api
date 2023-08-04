@@ -15,7 +15,7 @@ const router = express.Router();
  *      tags:
  *        - auth
  *      summary: "auth login"
- *      description: Este endpoint es para logearse con un usuario existente en al db
+ *      description: Este endpoint es para logearse con un usuario existente en la db
  *      requestBody:
  *          content:
  *            application/json:
@@ -27,23 +27,20 @@ const router = express.Router();
  *          content:
  *            application/json:
  *              schema:
- *                items:
- *                  type: object
- *                  properties:
- *                    success:
- *                      type: boolean
- *                    token:
- *                      type: string
- *                    user: 
- *                      type: object
+ *                type: object
+ *                properties:
+ *                  success:
+ *                    type: boolean
+ *                  token:
+ *                    type: string
+ *                  user: 
+ *                    $ref: "#/components/schemas/user"
  *        '404':
  *          description: No encuentra el usuario
  *        '400':
  *          description: invalid credentials, es decir, no coincide la password 
  *        '500':
  *          description: internal sv error, puede ser un error de conexon, Network error
-
- *
  */
 router.post('/login', loginUser);
 /**

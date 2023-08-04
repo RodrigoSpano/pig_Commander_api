@@ -177,7 +177,7 @@ router.post('/', savingPostMiddleware, postSaving);
  *          description: "ID of the Saving to delete."
  *      responses:
  *       '200':
- *         description: Si lo updatea, devuelve al ahorro ( Saving ) updateado
+ *         description: Si lo deletea
  *         content:
  *           application/json:
  *             schema:
