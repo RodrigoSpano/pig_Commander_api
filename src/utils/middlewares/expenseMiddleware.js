@@ -1,16 +1,8 @@
 const { expenses } = require('../../db');
 
 const postExpensesMiddleware = async (req, res, next) => {
-  const { user_id, category_id, method_id, mount, automatized, auto_date } =
-    req.body;
-  if (
-    !user_id ||
-    !category_id ||
-    !method_id ||
-    !mount ||
-    !auto_date ||
-    !automatized
-  ) {
+  const { category_id, method_id, mount, automatized, auto_date } = req.body;
+  if (!category_id || !method_id || !mount || !auto_date || !automatized) {
     return res.status(400).json({ error: 'All fields are required' });
   }
   if (mount < 1) {
@@ -20,8 +12,7 @@ const postExpensesMiddleware = async (req, res, next) => {
 };
 
 const getExpensesMiddleware = async (req, res, next) => {
-  const { user_id } = req.params;
-  if (!user_id) return res.status(400).json({ error: 'User id not recieved' });
+  const { id: user_id } = req.user.dataValues;
   const allExepenses = await expenses.findAll({
     where: { user_id },
   });

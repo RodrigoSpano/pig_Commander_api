@@ -6,9 +6,9 @@ const updateExpenses = require('../../controllers/expenses/updateExpenses');
 const getMonthlyExpenses = require('../../controllers/expenses/getMonthlyExpenses');
 const {
   postExpensesMiddleware,
-  getExpensesMiddleware,
   deleteExpensesMiddleware,
   updateExpensesMiddleware,
+  getExpensesMiddleware,
 } = require('../../utils/middlewares/expenseMiddleware');
 
 const router = express.Router();
@@ -16,7 +16,7 @@ const router = express.Router();
 /**
  * Get Monthly expenses
  * @openapi
- * /api/expenses/monthly/{user_id}:
+ * /api/expenses/monthly:
  *    get:
  *      tags:
  *        - Expenses
@@ -37,12 +37,12 @@ const router = express.Router();
  *        '500':
  *          description: "Internal server error, could be a connection error or network error."
  */
-router.get('/monthly/:user_id', getMonthlyExpenses);
+router.get('/monthly', getMonthlyExpenses);
 
 /**
  * Update expense
  * @openapi
- * /api/expenses/{id}:
+ * /api/expenses/:id:
  *    put:
  *      tags:
  *        - Expenses
@@ -69,12 +69,13 @@ router.get('/monthly/:user_id', getMonthlyExpenses);
  *        '500':
  *          description: "Internal server error, could be a connection error or network error."
  */
+
 router.put('/:id', updateExpensesMiddleware, updateExpenses);
 
 /**
  * Delete expenses
  * @openapi
- * /api/expenses/{id}:
+ * /api/expenses/:id:
  *    delete:
  *      tags:
  *        - Expenses
@@ -123,7 +124,7 @@ router.post('/', postExpensesMiddleware, postExpenses);
 /**
  * Get all expenses
  * @openapi
- * /api/expenses/{id}:
+ * /api/expenses/:id:
  *    get:
  *      tags:
  *        - Expenses
@@ -142,6 +143,6 @@ router.post('/', postExpensesMiddleware, postExpenses);
  *        '500':
  *          description: "Internal server error, could be a connection error or network error."
  */
-router.get('/:id', getExpensesMiddleware, getAllExpenses);
+router.get('/', getExpensesMiddleware, getAllExpenses);
 
 module.exports = router;
