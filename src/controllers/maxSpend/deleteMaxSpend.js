@@ -2,10 +2,10 @@ const { maxSpend } = require('../../db');
 
 const deleteMaxSpend = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id: user_id } = req.user.dataValues;
     await maxSpend.destroy({
       where: {
-        id,
+        user_id,
       },
     });
     return res.status(200).json({ deleted: 'Max Spend deleted' });

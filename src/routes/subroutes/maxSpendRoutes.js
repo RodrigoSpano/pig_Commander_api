@@ -123,7 +123,7 @@ router.post('/', postMaxSpendMiddleware, postMaxSpend);
  *               $ref: '#/components/schemas/Error'
  */
 
-router.put('/:id', updateMaxSpendMiddleware, updateMaxSpend);
+router.put('/', updateMaxSpendMiddleware, updateMaxSpend);
 
 /**
  * @swagger
@@ -162,6 +162,6 @@ router.put('/:id', updateMaxSpendMiddleware, updateMaxSpend);
  *               $ref: '#/components/schemas/Error'
  */
 
-router.delete('/:id', deleteMaxSpendMiddleware, deleteMaxSpend);
+router.delete('/', deleteMaxSpendMiddleware, deleteMaxSpend);
 
 module.exports = router;
