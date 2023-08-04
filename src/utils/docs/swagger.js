@@ -206,25 +206,6 @@ const swaggerDefinition = {
           },
         },
       },
-      example: {
-        type: 'object',
-        required: ['id', 'mount', 'automatized', 'auto_date'],
-        properties: {
-          id: {
-            type: 'string',
-          },
-          mount: {
-            type: 'string',
-          },
-          automatized: {
-            type: 'boolean',
-          },
-          auto_date: {
-            type: 'string',
-            format: 'date',
-          },
-        },
-      },
     },
   },
 };
