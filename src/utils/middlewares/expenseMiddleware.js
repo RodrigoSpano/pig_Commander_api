@@ -2,8 +2,8 @@
 const { expenses } = require('../../db');
 
 const postExpensesMiddleware = async (req, res, next) => {
-  const { category_id, method_id, mount, automatized, auto_date } = req.body;
-  if (!category_id || !method_id || !mount) {
+  const { category_id, method_id, mount, name} = req.body;
+  if (!category_id || !method_id || !mount || !name) {
     return res.status(400).json({ error: 'All fields are required' });
   }
   if (mount < 1) {
@@ -30,10 +30,10 @@ const deleteExpensesMiddleware = async (req, res, next) => {
 };
 
 const updateExpensesMiddleware = async (req, res, next) => {
-  const { mount, automatized, auto_date } = req.body;
+  const { mount, automatized, auto_date, name} = req.body;
   const { id } = req.params;
 
-  if (!mount || !auto_date || !automatized) {
+  if (!mount || !auto_date || !automatized || !name) {
     return res.status(400).json({ error: 'All fields are required' });
   }
   if (mount < 1) {

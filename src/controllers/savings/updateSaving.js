@@ -5,19 +5,10 @@ const updateSaving = async (req, res) => {
     // * I receive the id by body
     const { id } = req.params;
 
-    // * I receive the property by body
-    const { mount, goal } = req.body;
-
     // * I update the saving with the same id
-    await saving.update(
-      {
-        mount,
-        goal,
-      },
-      {
-        where: { id },
-      }
-    );
+    await saving.update(req.body, {
+      where: { id },
+    });
 
     // * Search the saving with the same id and updated
     const savingUpdate = await saving.findByPk(id);
