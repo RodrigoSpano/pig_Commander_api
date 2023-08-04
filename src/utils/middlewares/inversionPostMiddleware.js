@@ -1,7 +1,7 @@
 const inversionPostMiddleware = async (req, res, next) => {
-  const { mount, earnings, started_on, finish_at } = req.body;
+  const { mount, earning, started_on, finish_at } = req.body;
 
-  if (typeof earnings === 'undefined') {
+  if (typeof earning === 'undefined') {
     res.status(400).json({ error: 'Parameter EARNINGS is not defined' });
     return;
   }
@@ -18,7 +18,7 @@ const inversionPostMiddleware = async (req, res, next) => {
     return;
   }
 
-  if (mount <= 0 || earnings <= 0) {
+  if (mount <= 0 || earning <= 0) {
     res.status(400).json({ error: 'Mount and Earnings must be greater than 0' });
     return;
   }

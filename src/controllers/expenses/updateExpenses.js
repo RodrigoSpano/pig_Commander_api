@@ -3,7 +3,7 @@ const { expenses } = require('../../db');
 const updateExpenses = async (req, res) => {
   try {
     const { id } = req.params;
-    await expenses.updateOne(req.body, {
+    await expenses.update(req.body, {
       where: { id },
     });
     const updatedExpense = await expenses.findByPk(id);

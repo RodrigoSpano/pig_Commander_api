@@ -1,7 +1,8 @@
 const { saving } = require('../../db');
 
 const savingUpdateMiddleware = async (req, res, next) => {
-  const { mount, goal, id } = req.body;
+  const { id } = req.params;
+  const { mount, goal } = req.body;
 
   // *  I look for the id in the database
   const findIdSaving = await saving.findByPk(id);
@@ -12,12 +13,8 @@ const savingUpdateMiddleware = async (req, res, next) => {
     res.status(404).json({ error: 'Saving not found!' });
     return;
   }
-  if (typeof mount === 'undefined') {
-    res.status(400).json({ error: 'Parameter MOUNT is not defined' });
-    return;
-  }
-  if (typeof goal === 'undefined') {
-    res.status(400).json({ error: 'Parameter GOAL is not defined' });
+  if (typeof mount === 'undefined' && typeof goal === 'undefined') {
+    res.status(400).json({ error: 'Parameter MOUNT and GOAL are not defined' });
     return;
   }
 

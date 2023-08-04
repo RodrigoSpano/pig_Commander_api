@@ -10,7 +10,6 @@ const {
   postExpensesMiddleware,
   deleteExpensesMiddleware,
   updateExpensesMiddleware,
-  getExpensesMiddleware,
 } = require('../../utils/middlewares/expenseMiddleware');
 
 const router = express.Router();
@@ -146,6 +145,6 @@ router.post('/', postExpensesMiddleware, postExpenses);
  *        '500':
  *          description: "Internal server error, could be a connection error or network error."
  */
-router.get('/', getExpensesMiddleware, getAllExpenses);
+router.get('/', getAllExpenses);
 
 module.exports = router;
