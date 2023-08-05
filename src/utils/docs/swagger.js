@@ -252,45 +252,83 @@ const swaggerDefinition = {
           'category_id',
           'method_id',
         ],
-        maxSpend: {
-          type: 'object',
-          required: [' mount'],
-          properties: {
-            mount: {
-              type: 'number',
-            },
-            automatized: {
-              type: 'boolean',
-            },
-            auto_date: {
-              type: 'string',
-              format: 'date',
-            },
-            method_id: {
-              type: 'number',
-            },
-            category_id: {
-              type: 'number',
-            },
+        properties: {
+          mount: {
+            type: 'number',
           },
-        },
-        incomesPut: {
-          type: 'object',
-          required: ['mount', 'automatized', 'auto_date'],
-          properties: {
-            mount: {
-              type: 'number',
-            },
-            automatized: {
-              type: 'boolean',
-            },
-            auto_date: {
-              type: 'string',
-              format: 'date',
-            },
+          automatized:{
+            type: 'boolean'
+          },
+          auto_date:{
+            type: 'string'
+          },
+          category_id:{
+            type: 'number'
+          },
+          method_id:{
+            type: 'number'
+          }
+        }
+      },
+      maxSpend: {
+        type: 'object',
+        required: [' mount'],
+        properties: {
+          mount: {
+            type: 'number',
+          },
+          automatized: {
+            type: 'boolean',
+          },
+          auto_date: {
+            type: 'string',
+            format: 'date',
+          },
+          method_id: {
+            type: 'number',
+          },
+          category_id: {
+            type: 'number',
           },
         },
       },
+      incomesPut: {
+        type: 'object',
+        required: ['mount', 'automatized', 'auto_date'],
+        properties: {
+          mount: {
+            type: 'number',
+          },
+          automatized: {
+            type: 'boolean',
+          },
+          auto_date: {
+            type: 'string',
+            format: 'date',
+          },
+        },
+      },
+      categories: {
+        type: 'object',
+        required: ['id', 'name'],
+        properties: {
+          id: {
+            type: 'number',
+          },
+          name: {
+            type: 'string',
+          },
+        },
+      },
+      categoriesPost: {
+        type: 'object',
+        required: ['name'],
+        properties: {
+          name: {
+            type: 'string',
+          },
+        }
+      }
     },
   },
 };

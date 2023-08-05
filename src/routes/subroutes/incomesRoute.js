@@ -4,17 +4,14 @@ const createIncome = require('../../controllers/incomes/createIncome');
 const deleteIncome = require('../../controllers/incomes/deleteIncome');
 const updateIncome = require('../../controllers/incomes/updateIncome');
 const getMonthlyIncomes = require('../../controllers/incomes/getMonthlyIncomes');
-const getAutomatizedIncomes = require('../../controllers/incomes/getAutomatizedIncomes');
-
 const {
   incomeExist,
   getIncomesMiddleware,
-
+  mountValidate,
 } = require('../../utils/middlewares/incomesMiddleware');
 
 const router = Router();
 
-router.get('/automatized', getAutomatizedIncomes);
 /**
  * Get incomes
  * @openapi
@@ -68,8 +65,17 @@ router.get('/automatized', getAutomatizedIncomes);
  *                 updatedAt: "2023-08-03T17:54:38.428Z"
  *                 category_id: 2
  *                 method_id: 1
- *
- *       '500':
+ *       '400':
+ *         description: El usuario no ha iniciado sesion.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: User not logged in
+ *       '404':
  *         description: No se encontraron los ingresos.
  *         content:
  *           application/json:
@@ -78,7 +84,8 @@ router.get('/automatized', getAutomatizedIncomes);
  *               properties:
  *                 error:
  *                   type: string
- *                   example: Incomes not found..!
+ *                   example: Message of error
+ 
  *
  */
 router.get('/', getIncomesMiddleware, getAllIncomes);
@@ -91,8 +98,7 @@ router.get('/', getIncomesMiddleware, getAllIncomes);
  *       - Incomes
  *     summary: "This endpoint retrieves the income records (Incomes) for the current month of a user from the database."
  *     description: |
- *       Este endpoint se utiliza para obtener todos los ingresos (Incomes) correspondientes al mes actual de un usuario
- *       desde la base de datos.
+ *       Este endpoint se utiliza para obtener todos los ingresos (Incomes) correspondientes al mes actual de un usuario desde la base de datos.
  *     responses:
  *       '200':
  *         description: Encuentra todos los ingresos(incomes) correspondientes al mes actual.
@@ -146,7 +152,7 @@ router.get('/', getIncomesMiddleware, getAllIncomes);
  *               properties:
  *                 error:
  *                   type: string
- *                   example: Incomes not found..!
+ *                   example: Message of error
  *
  */
 router.get('/monthly', getMonthlyIncomes);
@@ -224,7 +230,7 @@ router.get('/monthly', getMonthlyIncomes);
  *                   type: string
  *                   example: mount cannot be less than 1
  *       '500':
- *         description: Errores internos de la base de dato
+ *         description: Errores internos de la base de datos
  *         content:
  *           application/json:
  *             schema:
@@ -235,7 +241,7 @@ router.get('/monthly', getMonthlyIncomes);
  *                   example: Message of error
  *
  */
-router.post('/', createIncome);
+router.post('/',  createIncome);
 
 /**
  * Delete income
@@ -265,6 +271,16 @@ router.post('/', createIncome);
  *                     type: string
  *             example:
  *                 delete: income deleted!
+ *       '400':
+ *         description: El monto deberia ser mayor que 1
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: mount should not be less than $1
  *       '404':
  *         description: Si el income no se encuentra
  *         content:
@@ -298,8 +314,7 @@ router.delete('/:idIncome', incomeExist, deleteIncome);
  *      tags:
  *        - Incomes
  *      summary: "Update one income"
- *      description: Este endpoint es para actualizar las propiedades MOUNT, AUTOMATIZED Y AUTO_DATE, del income,
- *       solo envias Mount,automatized y auto_date.
+ *      description: Este endpoint es para actualizar las propiedades MOUNT, AUTOMATIZED Y AUTO_DATE, del income, solo envias Mount,automatized y auto_date.
  *      parameters:
  *        - in: path
  *          name: id
@@ -383,5 +398,6 @@ router.delete('/:idIncome', incomeExist, deleteIncome);
  *
  */
 router.put('/:idIncome', incomeExist, updateIncome);
+
 
 module.exports = router;

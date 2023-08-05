@@ -14,8 +14,8 @@ const router = express.Router();
  *    post:
  *      tags:
  *        - auth
- *      summary: "auth login"
- *      description: Este endpoint es para logearse con un usuario existente en la db
+ *      summary: "Auth login"
+ *      description: Este endpoint es para logearse con un usuario existente en la base de datos
  *      requestBody:
  *          content:
  *            application/json:
@@ -35,13 +35,53 @@ const router = express.Router();
  *                    type: string
  *                  user: 
  *                    $ref: "#/components/schemas/user"
+ *              example:
+ *                 success: true
+ *                 token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lc3NpQG1lc3NpLmNvbSIsImlkIjoiYTU2OTMxZGYtYWRiOS00MzIyLWFiNmYtMjI4MTUwMTg5YjVkIiwiaWF0IjoxNjkxMjYwNDU1fQ.h8MFbq3r8m7e5yvNgEmVPWIoOfHg1Mrml21u2MJwQUY"
+ *                 user:
+ *                   id: "a56931df-adb9-4322-ab6f-228150189b5d"
+ *                   name: "exam"
+ *                   lastname: "ple"
+ *                   email: "exam@ple.com"
+ *                   image: "https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/MESSI.jpg"
+ *                   premium: false  
  *        '404':
  *          description: No encuentra el usuario
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: user not found
  *        '400':
  *          description: invalid credentials, es decir, no coincide la password 
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: invalid credentials
  *        '500':
- *          description: internal sv error, puede ser un error de conexon, Network error
- */
+ *          description: internal server error! Puede ser un error de conexon, Network error
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error
+*/
 router.post('/login', loginUser);
 /**
  * Post signup
@@ -59,13 +99,38 @@ router.post('/login', loginUser);
  *                $ref: "#/components/schemas/userSignup"
  *      responses:
  *        '201':
- *          description: se pudo crear el usuario, retorna success de tipo booleano
+ *          description: Se ha creado el usuario, retorna success de tipo booleano
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
  *        '400':
- *          description: fields are require, faltan campos requeridos o error inesperado al crear user
+ *          description: Faltan campos requeridos o Error inesperado al crear usuario
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: fields are required
+ *                 error:
+ *                   type: string
+ *                   example: user already exists or cant create user
  *        '500':
- *          description: internal sv error, puede ser un error de conexon, Network error
-
- *
+ *          description: internal server error, puede ser un error de conexon, Network error
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error
  */
 router.post('/signup', userAlreadyExistsMiddleware, signupUser);
 /**
@@ -84,8 +149,15 @@ router.post('/signup', userAlreadyExistsMiddleware, signupUser);
  *          required: true
  *      responses:
  *        '200':
- *          description: el token es valido, por lo que tenes acceso a las rutas
-
+ *          description: El token es valido, por lo que tendras acceso a las rutas
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 logged:
+ *                   type: boolean
+ *                   example: true
  */
 router.get('/secret', passport.authenticate('jwt', { session: true, failureMessage: 'Invalid token' }), (req, res) => {
   res.status(200).json({ logged: true });
@@ -102,12 +174,35 @@ router.get('/secret', passport.authenticate('jwt', { session: true, failureMessa
  *      description: Este endpoint es para cerrar session, se destruye la misma
  *      responses:
  *        '200':
- *          description: la session se destruye correctamente
+ *          description: La session se destruye correctamente
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
  *        '400':
- *          description: la session no se pudo destruir correctamente
+ *          description: La session no se pudo destruir correctamente
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error
  *        '500':
-*            description: internal sv error, puede ser un error de conexon, Network error
-
+ *          description: Internal server error, puede ser un error de conexon, Network error
+ *          content:
+ *           application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                error:
+ *                  type: string
+ *                  example: Message of error
  */
 router.delete('/logout', logoutUser);
 
@@ -122,12 +217,35 @@ router.delete('/logout', logoutUser);
  *      description: Este endpoint es para eliminar un usuario
  *      responses:
  *        '200':
- *          description: el usuario se elimina correctamente
+ *          description: El usuario se ha eliminado correctamente
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
  *        '404':
- *          description: el usuario no existe
+ *          description: El usuario no existe
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: user not found
  *        '500':
-*            description: internal sv error, puede ser un error de conexon, Network error
-
+ *          description: Internal server error, puede ser un error de conexon, Network error
+ *          content:
+ *           application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                error:
+ *                  type: string
+ *                  example: Message of error
  */
 router.delete('/user/:id', userExistsDeleteMiddleware, deleteUser);
 
