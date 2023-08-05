@@ -1,8 +1,20 @@
+/* eslint-disable no-console */
+const jwt = require('jsonwebtoken');
 const { user } = require('../../db');
 
 const isAuth = (req, res, next) => {
-  if (!req.isAuthenticated()) return res.redirect('/api/auth/login');
-  return next();
+  const token = req.headers['authorization'];
+  const replacedToken = token.replace('token=', '');
+  jwt.verify(replacedToken, `${process.env.JWT_SECRET}`, async (err, userData) => {
+    if (err) {
+      return res.status(401).json({ error: 'invalid token' });
+    }
+    const findUser = await user.findByPk(userData.id);
+    if (!findUser) {
+      return res.status(401).json({ error: 'invalid token' });
+    }
+    return next();
+  });
 };
 
 const userExistsDeleteMiddleware = async (req, res, next) => {
