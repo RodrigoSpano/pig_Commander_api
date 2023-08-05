@@ -10,7 +10,7 @@ function comparePassword(OriginPassword, entryPassword) {
 }
 
 function createJwtToken(id, email) {
-  return jwt.sign({ email, id }, `${process.env.JWT_SECRET}`);
+  return jwt.sign({ email, id }, `${process.env.JWT_SECRET}`, { expiresIn: '1d' });
 }
 
 function getTokenPayload(token) {
