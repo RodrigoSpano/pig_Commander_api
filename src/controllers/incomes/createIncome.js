@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 const { incomes } = require('../../db');
+const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 // esto crea un ingreso
 const createIncome = async (req, res) => {
   try {
-    const { id } = req.user.dataValues;
+    const user_id = getTokenPayload(req.headers['authorization']);
     const { mount, automatized, auto_date, category_id, method_id, name } = req.body;
 
     if (!mount || mount < 1 || !category_id || !method_id || !name) {
@@ -13,7 +14,7 @@ const createIncome = async (req, res) => {
 
     // Creacion o busqueda
     const newIncome = await incomes.create({
-      user_id: id,
+      user_id,
       name,
       mount,
       automatized: automatized && automatized,

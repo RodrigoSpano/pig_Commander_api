@@ -1,8 +1,9 @@
 const { maxSpend } = require('../../db');
+const { getTokenPayload } = require('../helpers/authHelpers');
 
 const postMaxSpendMiddleware = async (req, res, next) => {
   const { mount } = req.body;
-  const { id: user_id } = req.user.dataValues;
+  const user_id = getTokenPayload(req.headers['authorization']);
 
   if (!mount) return res.status(400).json({ error: 'All fields are required' });
   if (mount < 1) {
@@ -18,7 +19,7 @@ const postMaxSpendMiddleware = async (req, res, next) => {
 };
 
 const getMaxSpendMiddleware = async (req, res, next) => {
-  const { id: user_id } = req.user.dataValues;
+  const user_id = getTokenPayload(req.headers['authorization']);
   const maxSpendsUser = await maxSpend.findOne({
     where: { user_id },
   });
@@ -28,9 +29,9 @@ const getMaxSpendMiddleware = async (req, res, next) => {
   return next();
 };
 const deleteMaxSpendMiddleware = async (req, res, next) => {
-  const { id } = req.user.dataValues;
+  const user_id = getTokenPayload(req.headers['authorization']);
   const foundedMaxSpend = await maxSpend.findOne({
-    where: { user_id: id },
+    where: { user_id },
   });
   if (!foundedMaxSpend)
     return res.status(404).json({ error: 'Max Spend not founded' });
@@ -39,13 +40,13 @@ const deleteMaxSpendMiddleware = async (req, res, next) => {
 
 const updateMaxSpendMiddleware = async (req, res, next) => {
   const { mount } = req.body;
-  const { id } = req.user.dataValues;
+  const user_id = getTokenPayload(req.headers['authorization']);
   if (!mount) return res.status(400).json({ error: 'Mount field is required' });
   if (mount < 1)
     return res.status(400).json({ error: 'mount cannot be less than 1' });
 
   const existing = await maxSpend.findOne({
-    where: { user_id: id },
+    where: { user_id },
   });
   if (!existing) return res.status(400).json({ error: 'Max Spend not found' });
   return next();

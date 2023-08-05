@@ -1,14 +1,15 @@
 const { inversion } = require('../../db');
+const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const getAllSavings = async (req, res) => {
   try {
     // * Id of the user
-    const { id } = req.user.dataValues;
+    const user_id = getTokenPayload(req.headers['authorization']);
 
     // * I look up all the inversions in the database
     const allInversions = await inversion.findAll({
       where: {
-        user_id: id,
+        user_id,
       },
     });
 

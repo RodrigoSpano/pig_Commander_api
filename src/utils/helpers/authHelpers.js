@@ -13,4 +13,17 @@ function createJwtToken(id, email) {
   return jwt.sign({ email, id }, `${process.env.JWT_SECRET}`);
 }
 
-module.exports = { hashPassword, comparePassword, createJwtToken };
+function getTokenPayload(token) {
+  const replacedToken = token.replace('token=', '');
+  let payload;
+  jwt.verify(replacedToken, `${process.env.JWT_SECRET}`, async (err, user) => {
+    if (err) {
+      throw new Error('invalid token');
+    } else {
+      payload = user.id;
+    }
+  });
+  return payload;
+}
+
+module.exports = { hashPassword, comparePassword, createJwtToken, getTokenPayload };

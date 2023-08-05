@@ -1,9 +1,10 @@
 const { incomes } = require('../../db');
+const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 // * De un usuario, todos los ingresos de todos los meses
 const getAllIncomes = async (req, res) => {
   try {
-    const { id } = req.user.dataValues;
-    const allIncomes = await incomes.findAll({ where: { user_id: id, automatized: false } });
+    const user_id = getTokenPayload(req.headers['authorization']);
+    const allIncomes = await incomes.findAll({ where: { user_id, automatized: false } });
 
     if (allIncomes.length === 0) throw Error('Incomes not found..');
 

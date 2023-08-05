@@ -1,12 +1,13 @@
 const { incomes } = require('../../db');
+const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const getAutomatizedIncomes = async (req, res) => {
   try {
-    const { id } = req.user.dataValues;
+    const user_id = getTokenPayload(req.headers['authorization']);
 
     // * Buscar Ingreso según si está automatizado o no
     const allIncomes = await incomes.findAll({
-      where: { user_id: id, automatized: true },
+      where: { user_id, automatized: true },
     });
 
     if (allIncomes.length === 0) throw Error('Incomes not found..');

@@ -1,4 +1,5 @@
 const { inversion, user } = require('../../db');
+const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const postInversion = async (req, res) => {
   try {
@@ -6,10 +7,10 @@ const postInversion = async (req, res) => {
     const { mount, earning, started_on, finish_at } = req.body;
 
     // * Id of the user
-    const { id } = req.user.dataValues;
+    const user_id = getTokenPayload(req.headers['authorization']);
 
     // * Check if the user exists before creating the inversion
-    const userFind = await user.findByPk(id);
+    const userFind = await user.findByPk(user_id);
     if (!userFind) {
       res.status(404).json({ error: 'User not found' });
       return;
@@ -21,7 +22,7 @@ const postInversion = async (req, res) => {
       earning,
       started_on,
       finish_at,
-      user_id: id,
+      user_id,
     });
 
     // * Response that is sent if everything goes ok
