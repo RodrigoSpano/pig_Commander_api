@@ -5,6 +5,8 @@ const swaggerDefinition = {
   info: {
     title: 'Back-end Documentation',
     version: '1.0.0', // version nuestra (se puede ir modificando a gusto)
+    description:
+      'En todas las rutas se envia el token mediante la propiedad "Authorization" en el header',
   },
   servers: [
     {
@@ -205,6 +207,31 @@ const swaggerDefinition = {
           },
         },
       },
+      Postexpenses: {
+        type: 'object',
+        required: ['id', 'mount', 'automatized', 'auto_date'],
+        properties: {
+          name: {
+            type: 'string',
+          },
+          category_id: {
+            type: 'number',
+          },
+          method_id: {
+            type: 'number',
+          },
+          mount: {
+            type: 'number',
+          },
+          automatized: {
+            type: 'boolean',
+          },
+          auto_date: {
+            type: 'string',
+            format: 'date',
+          },
+        },
+      },
       incomes: {
         type: 'object',
         required: [
@@ -252,42 +279,80 @@ const swaggerDefinition = {
           'category_id',
           'method_id',
         ],
-        maxSpend: {
-          type: 'object',
-          required: [' mount'],
-          properties: {
-            mount: {
-              type: 'number',
-            },
-            automatized: {
-              type: 'boolean',
-            },
-            auto_date: {
-              type: 'string',
-              format: 'date',
-            },
-            method_id: {
-              type: 'number',
-            },
-            category_id: {
-              type: 'number',
-            },
+        properties: {
+          mount: {
+            type: 'number',
+          },
+          automatized: {
+            type: 'boolean',
+          },
+          auto_date: {
+            type: 'string',
+          },
+          category_id: {
+            type: 'number',
+          },
+          method_id: {
+            type: 'number',
           },
         },
-        incomesPut: {
-          type: 'object',
-          required: ['mount', 'automatized', 'auto_date'],
-          properties: {
-            mount: {
-              type: 'number',
-            },
-            automatized: {
-              type: 'boolean',
-            },
-            auto_date: {
-              type: 'string',
-              format: 'date',
-            },
+      },
+      maxSpend: {
+        type: 'object',
+        required: [' mount'],
+        properties: {
+          mount: {
+            type: 'number',
+          },
+          automatized: {
+            type: 'boolean',
+          },
+          auto_date: {
+            type: 'string',
+            format: 'date',
+          },
+          method_id: {
+            type: 'number',
+          },
+          category_id: {
+            type: 'number',
+          },
+        },
+      },
+      incomesPut: {
+        type: 'object',
+        required: ['mount', 'automatized', 'auto_date'],
+        properties: {
+          mount: {
+            type: 'number',
+          },
+          automatized: {
+            type: 'boolean',
+          },
+          auto_date: {
+            type: 'string',
+            format: 'date',
+          },
+        },
+      },
+      categories: {
+        type: 'object',
+        required: ['id', 'name'],
+        properties: {
+          id: {
+            type: 'number',
+          },
+          name: {
+            type: 'string',
+          },
+        },
+      },
+      categoriesPost: {
+        type: 'object',
+        required: ['name'],
+        properties: {
+          name: {
+            type: 'string',
           },
         },
       },

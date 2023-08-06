@@ -11,8 +11,11 @@ const getDefaultCategories = require('../../controllers/category/getDefaultsCate
 const router = Router();
 
 router.get('/', getAllCategories);
+
 router.get('/defaults', getDefaultCategories);
+
 router.post('/', postCategoriesMiddleware, createCategory);
+
 router.delete('/:idCategory', categoryExist, deleteCategory);
 
 module.exports = router;
