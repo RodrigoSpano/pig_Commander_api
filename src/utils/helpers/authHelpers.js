@@ -14,9 +14,8 @@ function createJwtToken(id, email) {
 }
 
 function getTokenPayload(token) {
-  const replacedToken = token.replace('token=', '');
   let payload;
-  jwt.verify(replacedToken, `${process.env.JWT_SECRET}`, async (err, user) => {
+  jwt.verify(token, `${process.env.JWT_SECRET}`, async (err, user) => {
     if (err) {
       throw new Error('invalid token');
     } else {
