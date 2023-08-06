@@ -8,8 +8,8 @@ const postExpenses = async (req, res) => {
     const newExpense = await expenses.create({
       name,
       mount,
-      automatized: automatized && automatized,
-      auto_date: automatized && auto_date,
+      automatized: automatized || false,
+      auto_date: automatized ? auto_date : null,
       method_id,
       category_id,
       user_id,
