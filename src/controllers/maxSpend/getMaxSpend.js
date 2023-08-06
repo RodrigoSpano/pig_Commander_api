@@ -1,8 +1,9 @@
 const { maxSpend } = require('../../db');
+const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const getMaxSpend = async (req, res) => {
   try {
-    const { id: user_id } = req.user.dataValues;
+    const user_id = getTokenPayload(req.headers['authorization']);
     const allExepenses = await maxSpend.findAll({
       where: {
         user_id,

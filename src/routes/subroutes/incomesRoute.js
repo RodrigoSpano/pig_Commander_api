@@ -88,7 +88,7 @@ const router = Router();
  
  *
  */
-router.get('/', getIncomesMiddleware, getAllIncomes);
+router.get('/', getAllIncomes);
 /**
  * Get monthly incomes
  * @openapi

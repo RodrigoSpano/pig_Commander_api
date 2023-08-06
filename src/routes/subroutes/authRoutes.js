@@ -159,9 +159,9 @@ router.post('/signup', userAlreadyExistsMiddleware, signupUser);
  *                   type: boolean
  *                   example: true
  */
-router.get('/secret', passport.authenticate('jwt', { session: true, failureMessage: 'Invalid token' }), (req, res) => {
-  res.status(200).json({ logged: true });
-});
+// router.get('/secret', passport.authenticate('jwt', { session: true, failureMessage: 'Invalid token' }), (req, res) => {
+//   res.status(200).json({ logged: true });
+// });
 
 /**
  * DELETE logout
