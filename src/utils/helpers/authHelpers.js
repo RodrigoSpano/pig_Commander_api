@@ -10,7 +10,19 @@ function comparePassword(OriginPassword, entryPassword) {
 }
 
 function createJwtToken(id, email) {
-  return jwt.sign({ email, id }, `${process.env.JWT_SECRET}`);
+  return jwt.sign({ email, id }, `${process.env.JWT_SECRET}`, { expiresIn: '1d' });
 }
 
-module.exports = { hashPassword, comparePassword, createJwtToken };
+function getTokenPayload(token) {
+  let payload;
+  jwt.verify(token, `${process.env.JWT_SECRET}`, async (err, user) => {
+    if (err) {
+      throw new Error('invalid token');
+    } else {
+      payload = user.id;
+    }
+  });
+  return payload;
+}
+
+module.exports = { hashPassword, comparePassword, createJwtToken, getTokenPayload };

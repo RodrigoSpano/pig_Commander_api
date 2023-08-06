@@ -1,14 +1,15 @@
 const { saving } = require('../../db');
+const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const getAllSavings = async (req, res) => {
   try {
     // * Id of the user
-    const { id } = req.user.dataValues;
+    const user_id = getTokenPayload(req.headers['authorization']);
 
     // * I look up all the savings in the database
     const allSavings = await saving.findAll({
       where: {
-        user_id: id,
+        user_id,
       },
     });
 

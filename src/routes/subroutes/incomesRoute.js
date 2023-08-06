@@ -8,7 +8,6 @@ const getAutomatizedIncomes = require('../../controllers/incomes/getAutomatizedI
 
 const {
   incomeExist,
-  getIncomesMiddleware,
 
 } = require('../../utils/middlewares/incomesMiddleware');
 
@@ -81,7 +80,7 @@ router.get('/automatized', getAutomatizedIncomes);
  *                   example: Incomes not found..!
  *
  */
-router.get('/', getIncomesMiddleware, getAllIncomes);
+router.get('/', getAllIncomes);
 /**
  * Get monthly incomes
  * @openapi
