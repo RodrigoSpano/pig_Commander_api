@@ -24,7 +24,7 @@ const getMaxSpendMiddleware = async (req, res, next) => {
     where: { user_id },
   });
   if (!maxSpendsUser) {
-    res.status(404).json({ error: 'Max Spend not found' });
+    return res.status(404).json({ error: 'Max Spend not found' });
   }
   return next();
 };

@@ -9,9 +9,9 @@ const getMaxSpend = async (req, res) => {
         user_id,
       },
     });
-    res.status(200).json(allExepenses);
+    return res.status(200).json(allExepenses);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 module.exports = getMaxSpend;
