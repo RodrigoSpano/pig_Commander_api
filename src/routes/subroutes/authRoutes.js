@@ -133,35 +133,7 @@ router.post('/login', loginUser);
  *                   example: Message of error
  */
 router.post('/signup', userAlreadyExistsMiddleware, signupUser);
-/**
- * GET secret
- * @openapi
- * /api/auth/secret:
- *    get:
- *      tags:
- *        - auth
- *      summary: 'auth secret'
- *      description: Este endpoint es para autorizar al usuario(auth)
- *      parameters:
- *        - name: Authorization
- *          in: header
- *          description: Bearer ${token}
- *          required: true
- *      responses:
- *        '200':
- *          description: El token es valido, por lo que tendras acceso a las rutas
- *          content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 logged:
- *                   type: boolean
- *                   example: true
- */
-// router.get('/secret', passport.authenticate('jwt', { session: true, failureMessage: 'Invalid token' }), (req, res) => {
-//   res.status(200).json({ logged: true });
-// });
+
 
 /**
  * DELETE logout

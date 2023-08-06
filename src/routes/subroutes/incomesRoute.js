@@ -5,9 +5,7 @@ const deleteIncome = require('../../controllers/incomes/deleteIncome');
 const updateIncome = require('../../controllers/incomes/updateIncome');
 const getMonthlyIncomes = require('../../controllers/incomes/getMonthlyIncomes');
 const {
-  incomeExist,
-  getIncomesMiddleware,
-  mountValidate,
+  incomeExist
 } = require('../../utils/middlewares/incomesMiddleware');
 
 const router = Router();
