@@ -29,7 +29,7 @@
  *                    $ref: "#/components/schemas/user"
  *              example:
  *                 success: true
- *                 token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ *                 token: "User token"
  *                 user:
  *                   id: "a56931df-adb9-4322-ab6f-228150189b5d"
  *                   name: "exam"
