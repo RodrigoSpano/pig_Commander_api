@@ -9,9 +9,13 @@ const { incomeExist } = require('../../utils/middlewares/incomesMiddleware');
 const router = Router();
 
 router.get('/', getAllIncomes);
+
 router.get('/monthly', getMonthlyIncomes);
+
 router.post('/', createIncome);
+
 router.delete('/:idIncome', incomeExist, deleteIncome);
+
 router.put('/:idIncome', incomeExist, updateIncome);
 
 module.exports = router;
