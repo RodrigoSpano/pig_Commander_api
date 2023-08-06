@@ -5,6 +5,8 @@ const swaggerDefinition = {
   info: {
     title: 'Back-end Documentation',
     version: '1.0.0', // version nuestra (se puede ir modificando a gusto)
+    description:
+      'En todas las rutas se envia el token mediante la propiedad "Authorization" en el header',
   },
   servers: [
     {
@@ -205,6 +207,31 @@ const swaggerDefinition = {
           },
         },
       },
+      Postexpenses: {
+        type: 'object',
+        required: ['id', 'mount', 'automatized', 'auto_date'],
+        properties: {
+          name: {
+            type: 'string',
+          },
+          category_id: {
+            type: 'number',
+          },
+          method_id: {
+            type: 'number',
+          },
+          mount: {
+            type: 'number',
+          },
+          automatized: {
+            type: 'boolean',
+          },
+          auto_date: {
+            type: 'string',
+            format: 'date',
+          },
+        },
+      },
       incomes: {
         type: 'object',
         required: [
@@ -256,19 +283,19 @@ const swaggerDefinition = {
           mount: {
             type: 'number',
           },
-          automatized:{
-            type: 'boolean'
+          automatized: {
+            type: 'boolean',
           },
-          auto_date:{
-            type: 'string'
+          auto_date: {
+            type: 'string',
           },
-          category_id:{
-            type: 'number'
+          category_id: {
+            type: 'number',
           },
-          method_id:{
-            type: 'number'
-          }
-        }
+          method_id: {
+            type: 'number',
+          },
+        },
       },
       maxSpend: {
         type: 'object',
@@ -327,8 +354,8 @@ const swaggerDefinition = {
           name: {
             type: 'string',
           },
-        }
-      }
+        },
+      },
     },
   },
 };
