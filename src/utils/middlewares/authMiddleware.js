@@ -4,7 +4,6 @@ const { user } = require('../../db');
 
 const isAuth = (req, res, next) => {
   const token = req.headers['authorization'];
-  console.log(token);
   jwt.verify(token, `${process.env.JWT_SECRET}`, async (err, userData) => {
     if (err) {
       return res.status(401).json({ error: 'invalid token' });
