@@ -619,7 +619,7 @@
  *                 error:
  *                   type: string
  *                   example: Message of error
- 
+
  *
  */
 /**
@@ -844,7 +844,7 @@
  *      tags:
  *        - Incomes
  *      summary: "Update one income"
- *      description:Endpoint para actualizar propiedades MOUNT, AUTOMATIZED, AUTO_DATE, solo envias Mount,automatized y auto_date.
+ *      description: Endpoint para actualizar propiedades MOUNT, AUTOMATIZED, AUTO_DATE, solo envias Mount,automatized y auto_date.
  *      parameters:
  *        - in: path
  *          name: id
