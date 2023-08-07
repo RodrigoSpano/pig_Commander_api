@@ -20,6 +20,6 @@ router.use('/incomes', isAuth, incomesRoute);
 router.use('/category', isAuth, categoryRoute);
 router.use('/inversions', isAuth, inversionsRoutes);
 router.use('/maxSpend', isAuth, maxSpendRoutes);
-router.use('/profile', profileRoutes);
+router.use('/profile', isAuth, profileRoutes);
 
 module.exports = router;
