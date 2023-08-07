@@ -3,7 +3,7 @@ const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const getUserData = async (req, res) => {
   try {
-    const token = req.headers['Authorization'];
+    const token = req.headers['authorization'];
     const user_id = getTokenPayload(token);
     const findUser = await user.findByPk(user_id);
     if (!findUser) return res.status(404).json({ error: 'user not found' });

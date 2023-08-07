@@ -11,7 +11,7 @@ const router = Router();
 
 router.post('/', postProfilePic);
 router.delete('/:id', userExistsDeleteMiddleware, deleteUser);
-router.get('/:id', getUserData);
+router.get('/', getUserData);
 // router.get('/picture', getProfilePic);
 // router.delete('/', deleteProfilePic);
 // router.put('/', editProfilePic);
