@@ -1,15 +1,14 @@
-const createSubscription = require('../../handlers/payment/paymentHandler');
+const createPayment = require('../../handlers/payment/paymentHandler');
 
 const paymentMercadoPago = async (req, res) => {
   try {
-    const subscriptionData = await createSubscription();
+    const subscriptionData = await createPayment();
     const subscription = {
-      payer_id: subscriptionData.payer_id,
-      reason: subscriptionData.reason,
-      link: subscriptionData.init_point,
-      info: subscriptionData.auto_recurring,
-      date: subscriptionData.date_created,
-      status: subscriptionData.status,
+      id: subscriptionData.body.id,
+      user_id: subscriptionData.body.collector_id,
+      link: subscriptionData.body.init_point,
+      items: subscriptionData.body.items,
+      date_created: subscriptionData.body.date_created,
     };
     res.status(200).json(subscription);
   } catch (error) {

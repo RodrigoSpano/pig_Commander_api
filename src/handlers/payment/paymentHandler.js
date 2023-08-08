@@ -1,30 +1,38 @@
-const axios = require('axios');
+const mercadopago = require('mercadopago');
 
-const createSubscription = async () => {
-  const url = 'https://api.mercadopago.com/preapproval';
-
-  const body = {
-    reason: 'PigCommander Premium',
-    auto_recurring: {
-      frequency: 1,
-      frequency_type: 'months',
-      transaction_amount: 250,
-      currency_id: 'ARS',
-    },
-    back_url: 'https://google.com.ar',
-    payer_email: 'test_user_565691737@testuser.com',
-    notification_url:
-      'https://a9ed-186-130-95-20.ngrok-free.app/api/subscription/webhook',
-  };
-
-  const subscription = await axios.post(url, body, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-    },
+const createPayment = async () => {
+  mercadopago.configure({
+    access_token: `${process.env.ACCESS_TOKEN}`,
   });
 
-  return subscription.data;
+  const payment = await mercadopago.preferences.create({
+    payer_email: 'test_user_46945293@testuser.com',
+    items: [
+      {
+        title: 'Pig Commander',
+        description: 'Premium',
+        picture_url: 'http://www.myapp.com/myimage.jpg',
+        category_id: 'pigPremium',
+        quantity: 1,
+        unit_price: 10000,
+      },
+    ],
+    payer: {
+      email: 'test_user_46945293@testuser.com',
+    },
+    back_urls: {
+      failure: '/failure',
+      pending: '/pending',
+      success: '/success',
+    },
+    payment_methods: {
+      installments: 12,
+    },
+    notification_url:
+      'https://aadb-2802-8010-4949-f100-c5d3-e28a-8ffb-60bb.ngrok-free.app/api/subscription/webhook',
+  });
+
+  return payment;
 };
 
-module.exports = createSubscription;
+module.exports = createPayment;
