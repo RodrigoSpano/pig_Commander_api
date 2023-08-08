@@ -6,6 +6,7 @@ const logoutUser = require('../../controllers/auth/logoutController');
 const {
   userAlreadyExistsMiddleware,
 } = require('../../utils/middlewares/authMiddleware');
+const { createJwtToken } = require('../../utils/helpers/authHelpers');
 
 const router = express.Router();
 
@@ -25,9 +26,11 @@ router.get(
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: 'http://localhost:8080/api/google/success',
     failureRedirect: 'http://localhost:8080/api/auth/login',
-  })
+  }), (req, res) => {
+    const token = createJwtToken(req.user.id, req.user.email);
+    return res.status(202).json({ success: true, token });
+  }
 );
 
 module.exports = router;
