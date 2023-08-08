@@ -3,7 +3,7 @@ const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const getMonthlyIncomes = async (req, res) => {
   try {
-    const id = getTokenPayload(req.headers['authorization']);
+    const { id } = getTokenPayload(req.headers['authorization']);
     const monthlyIncomes = await getMonthlyHandler(id);
 
     return res.status(200).json(monthlyIncomes);
