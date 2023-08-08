@@ -19,7 +19,7 @@ function getTokenPayload(token) {
     if (err) {
       throw new Error('invalid token');
     } else {
-      payload = user.id;
+      payload = { id: user.id, email: user.email };
     }
   });
   return payload;

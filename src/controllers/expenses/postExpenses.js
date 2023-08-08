@@ -3,7 +3,7 @@ const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const postExpenses = async (req, res) => {
   try {
-    const user_id = getTokenPayload(req.headers['authorization']);
+    const { id: user_id } = getTokenPayload(req.headers['authorization']);
     const { category_id, method_id, mount, automatized, auto_date, name } = req.body;
     const newExpense = await expenses.create({
       name,

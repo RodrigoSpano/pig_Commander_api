@@ -3,7 +3,7 @@ const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const getAutomatizedIncomes = async (req, res) => {
   try {
-    const id = getTokenPayload(req.headers['authorization']);
+    const { id } = getTokenPayload(req.headers['authorization']);
     // * Buscar Expenses si esta automatizado
     const allExpenses = await expenses.findAll({
       where: { user_id: id, automatized: true },
