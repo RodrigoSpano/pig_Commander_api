@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const { incomes } = require('../../db');
 const { getTokenPayload } = require('../../utils/helpers/authHelpers');
+const { sendIncomesNotification } = require('../../utils/helpers/sendMailHelper');
 
 // esto crea un ingreso
 const createIncome = async (req, res) => {
@@ -23,6 +24,7 @@ const createIncome = async (req, res) => {
       method_id,
     });
 
+    //xsendIncomesNotification(user_id,mount)
     return res.status(200).json(newIncome);
   } catch (error) {
     return res.status(500).json({ error: error.message });
