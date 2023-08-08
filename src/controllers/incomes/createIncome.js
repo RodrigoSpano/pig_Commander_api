@@ -6,7 +6,7 @@ const { sendIncomesNotification } = require('../../utils/helpers/sendMailHelper'
 // esto crea un ingreso
 const createIncome = async (req, res) => {
   try {
-    const { id: user_id } = getTokenPayload(req.headers['authorization']);
+    const { id: user_id  } = getTokenPayload(req.headers['authorization']);
     const { mount, automatized, auto_date, category_id, method_id, name } = req.body;
 
     if (!mount || mount < 1 || !category_id || !method_id || !name) {
@@ -24,7 +24,7 @@ const createIncome = async (req, res) => {
       method_id,
     });
 
-    //xsendIncomesNotification(user_id,mount)
+    sendIncomesNotification(user_id,mount,name)
     return res.status(200).json(newIncome);
   } catch (error) {
     return res.status(500).json({ error: error.message });
