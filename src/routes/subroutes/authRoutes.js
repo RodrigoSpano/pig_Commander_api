@@ -16,7 +16,6 @@ router.post('/signup', userAlreadyExistsMiddleware, signupUser);
 
 router.delete('/logout', logoutUser);
 
-
 router.get(
   '/google',
   passport.authenticate('google', {
@@ -27,7 +26,8 @@ router.get(
   '/google/callback',
   passport.authenticate('google', {
     failureRedirect: 'http://localhost:8080/api/auth/login',
-  }), (req, res) => {
+  }),
+  (req, res) => {
     const token = createJwtToken(req.user.id, req.user.email);
     return res.status(202).json({ success: true, token });
   }

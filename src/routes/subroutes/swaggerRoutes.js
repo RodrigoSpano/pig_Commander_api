@@ -1,3 +1,50 @@
+//! PROFILE
+/**
+ * Get user data
+ * @openapi
+ * /api/profile:
+ *   get:
+ *     tags:
+ *       - Profile
+ *     summary: "Get user data"
+ *     description: |
+ *       Este endpoint es para traer la informacion del usuario.
+ *     responses:
+ *       '200':
+ *         description: Encuentra la informacion.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/categories"
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   name:
+ *                     type: string
+ *             example:
+ *               - id: 1
+ *                 name: Food
+ *               - id: 2
+ *                 name: Entertainment
+ *               - id: 3
+ *                 name: Health
+ *       '404':
+ *         description: No se encontraron las categorias.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message error.
+ *
+ */
+
+
+
 //! AUTH
 /**
  * POST login
@@ -218,7 +265,7 @@
  */
 //! CATEGORY
 /**
- * Get methods
+ * Get categories
  * @openapi
  * /api/category:
  *   get:
@@ -260,60 +307,7 @@
  *                   example: Message error.
  *
  */
-/**
- * Get methods
- * @openapi
- * /api/category/default:
- *   get:
- *     tags:
- *       - Category
- *     summary: "Get all categories by default"
- *     description: |
- *       Este endpoint verifica que ciertas categorias predeterminadas ya esten presentes en la base de datos, en caso de que no, las crea.
- *        Las categorias predeterminadas son: entertainment, health, education, transport, food.
- *     responses:
- *       '201':
- *         description: Las categorias predeterminadas fueron agregadas.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: "#/components/schemas/categories"
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                   name:
- *                     type: string
- *             example:
- *               - id: 1
- *                 name: Food
- *               - id: 2
- *                 name: Entertainment
- *               - id: 3
- *                 name: Health
- *       '302':
- *         description: La categorias predeterminadas ya existen en la base de datos.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: that categories already exists
- *       '500':
- *         description: No se encontraron las categorias.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: Message of error.
- *
- */
+
 /**
  * Post category
  * @openapi
