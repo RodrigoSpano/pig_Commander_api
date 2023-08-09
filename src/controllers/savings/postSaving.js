@@ -7,7 +7,7 @@ const postSaving = async (req, res) => {
     const { name, mount, goal } = req.body;
 
     // * Id of the user
-    const user_id = getTokenPayload(req.headers['authorization']);
+    const { id: user_id } = getTokenPayload(req.headers['authorization']);
 
     // * Check if the user exists before creating the saving
     const userFind = await user.findByPk(user_id);

@@ -3,11 +3,10 @@ const passport = require('passport');
 const loginUser = require('../../controllers/auth/loginController');
 const signupUser = require('../../controllers/auth/signupController');
 const logoutUser = require('../../controllers/auth/logoutController');
-const deleteUser = require('../../controllers/auth/deleteUserController');
 const {
-  userExistsDeleteMiddleware,
   userAlreadyExistsMiddleware,
 } = require('../../utils/middlewares/authMiddleware');
+const { createJwtToken } = require('../../utils/helpers/authHelpers');
 
 const router = express.Router();
 
@@ -17,7 +16,6 @@ router.post('/signup', userAlreadyExistsMiddleware, signupUser);
 
 router.delete('/logout', logoutUser);
 
-router.delete('/user/:id', userExistsDeleteMiddleware, deleteUser);
 
 router.get(
   '/google',
@@ -28,9 +26,11 @@ router.get(
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: 'http://localhost:8080/api/google/success',
     failureRedirect: 'http://localhost:8080/api/auth/login',
-  })
+  }), (req, res) => {
+    const token = createJwtToken(req.user.id, req.user.email);
+    return res.status(202).json({ success: true, token });
+  }
 );
 
 module.exports = router;

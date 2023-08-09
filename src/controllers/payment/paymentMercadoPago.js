@@ -1,8 +1,12 @@
 const createPayment = require('../../handlers/payment/paymentHandler');
+const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const paymentMercadoPago = async (req, res) => {
+  const { id } = getTokenPayload(req.headers['authorization']);
+  const { mount } = req.params;
+
   try {
-    const subscriptionData = await createPayment();
+    const subscriptionData = await createPayment(mount, id);
     const subscription = {
       id: subscriptionData.body.id,
       user_id: subscriptionData.body.collector_id,

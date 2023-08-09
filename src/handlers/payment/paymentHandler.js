@@ -1,12 +1,11 @@
 const mercadopago = require('mercadopago');
 
-const createPayment = async () => {
+const createPayment = async ( mount, idUser) => {
   mercadopago.configure({
     access_token: `${process.env.ACCESS_TOKEN}`,
   });
 
   const payment = await mercadopago.preferences.create({
-    payer_email: 'test_user_46945293@testuser.com',
     items: [
       {
         title: 'Pig Commander',
@@ -14,12 +13,10 @@ const createPayment = async () => {
         picture_url: 'http://www.myapp.com/myimage.jpg',
         category_id: 'pigPremium',
         quantity: 1,
-        unit_price: 10000,
+        unit_price: Number(mount),
+        id: `${idUser}`,
       },
     ],
-    payer: {
-      email: 'test_user_46945293@testuser.com',
-    },
     back_urls: {
       failure: '/failure',
       pending: '/pending',
@@ -29,7 +26,7 @@ const createPayment = async () => {
       installments: 12,
     },
     notification_url:
-      'https://aadb-2802-8010-4949-f100-c5d3-e28a-8ffb-60bb.ngrok-free.app/api/subscription/webhook',
+      'https://7186-186-130-95-20.ngrok-free.app/api/subscription/webhook',
   });
 
   return payment;

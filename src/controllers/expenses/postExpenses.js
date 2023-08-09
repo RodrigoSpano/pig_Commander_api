@@ -1,9 +1,10 @@
 const { expenses } = require('../../db');
 const { getTokenPayload } = require('../../utils/helpers/authHelpers');
+const { sendExpensesNotification } = require('../../utils/helpers/sendMailHelper');
 
 const postExpenses = async (req, res) => {
   try {
-    const user_id = getTokenPayload(req.headers['authorization']);
+    const { id: user_id } = getTokenPayload(req.headers['authorization']);
     const { category_id, method_id, mount, automatized, auto_date, name } = req.body;
     const newExpense = await expenses.create({
       name,
@@ -14,6 +15,8 @@ const postExpenses = async (req, res) => {
       category_id,
       user_id,
     });
+
+    sendExpensesNotification(user_id,mount,name)
     return res.status(201).json(newExpense);
   } catch (error) {
     return res.status(500).json({ error: error.message });

@@ -7,7 +7,7 @@ const postInversion = async (req, res) => {
     const { mount, earning, started_on, finish_at } = req.body;
 
     // * Id of the user
-    const user_id = getTokenPayload(req.headers['authorization']);
+    const { id: user_id } = getTokenPayload(req.headers['authorization']);
 
     // * Check if the user exists before creating the inversion
     const userFind = await user.findByPk(user_id);

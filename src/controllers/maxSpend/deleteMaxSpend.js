@@ -3,7 +3,7 @@ const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const deleteMaxSpend = async (req, res) => {
   try {
-    const user_id = getTokenPayload(req.headers['authorization']);
+    const { id: user_id } = getTokenPayload(req.headers['authorization']);
     await maxSpend.destroy({
       where: {
         user_id,
