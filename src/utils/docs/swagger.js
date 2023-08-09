@@ -51,11 +51,17 @@ const swaggerDefinition = {
           id: {
             type: 'string',
           },
+          googleId: {
+            type: 'string',
+          },
           name: {
             type: 'string',
           },
           lastname: {
             type: 'string',
+          },
+          password : {
+            type: 'string'
           },
           email: {
             type: 'string',

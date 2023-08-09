@@ -5,7 +5,7 @@
  * /api/profile:
  *   get:
  *     tags:
- *       - Profile
+ *       - profile
  *     summary: "Get user data"
  *     description: |
  *       Este endpoint es para traer la informacion del usuario.
@@ -15,23 +15,37 @@
  *         content:
  *           application/json:
  *             schema:
- *               $ref: "#/components/schemas/categories"
+ *               $ref: "#/components/schemas/user"
  *               items:
  *                 type: object
  *                 properties:
  *                   id:
  *                     type: integer
+ *                   googleId:
+ *                     type: string
  *                   name:
  *                     type: string
+ *                   lastname:
+ *                     type: string
+ *                   password:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   image:
+ *                     type: string
+ *                   premium:
+ *                     type: boolean
  *             example:
  *               - id: 1
- *                 name: Food
- *               - id: 2
- *                 name: Entertainment
- *               - id: 3
- *                 name: Health
+ *                 googleId: null
+ *                 name: lionel
+ *                 lastname: messi
+ *                 password: password12
+ *                 email: 'lio@messi.com'
+ *                 image: urlofimage
+ *                 premium: false
  *       '404':
- *         description: No se encontraron las categorias.
+ *         description: No se encuentra al usuario.
  *         content:
  *           application/json:
  *             schema:
@@ -39,8 +53,151 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: Message error.
- *
+ *                   example: user not found.
+ *       '500':
+ *          description: internal server error! Puede ser un error de conexion, Network error
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error
+ */
+/**
+ * DELETE user
+ * @openapi
+ * /api/profile/:id:
+ *    delete:
+ *      tags:
+ *        - profile
+ *      summary: 'delete user'
+ *      description: Este endpoint es para eliminar un usuario
+ *      responses:
+ *        '200':
+ *          description: El usuario se ha eliminado correctamente
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *        '404':
+ *          description: El usuario no existe
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: user not found
+ *        '500':
+ *          description: Internal server error, puede ser un error de conexon, Network error
+ *          content:
+ *           application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                error:
+ *                  type: string
+ *                  example: Message of error
+ */
+/**
+ * POST profile pic
+ * @openapi
+ * /api/profile:
+ *    post:
+ *      tags:
+ *        - profile
+ *      summary: "Post profile picture"
+ *      description: Este endpoint es para agregar una foto de perfil al usuario
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  email:
+ *                  type: string
+ *                required:
+ *                  - email
+ *      responses:
+ *        '200':
+ *          description: Se agrego con exito la foto de perfil, se devuelve la foto de perfil.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  image:
+ *                    type: string
+ *              example:
+ *                 image: urldeimagen 
+ *        '400':
+ *          description: No se ha ingresado una imagen
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Missing file
+ *        '500':
+ *          description: internal server error! Puede ser un error de conexon, Network error
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error
+ */
+/**
+ * Update profile pic
+ * @openapi
+ * /api/profile:
+ *    put:
+ *      tags:
+ *        - profile
+ *      summary: "Update profile pic"
+ *      description: "Endpoint para actualizar la foto de perfil."
+ *      requestBody:
+ *          required: true
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  email:
+ *                  type: string
+ *      responses:
+ *        '200':
+ *          description: "La foto de perfil se actualizo correctamente"
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  image:
+ *                    type: string
+ *              example:
+ *                 image: urldeimagen 
+ *        '500':
+ *          description: "Internal server error, could be a connection error or network error."
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error
  */
 
 
@@ -212,47 +369,6 @@
  *                  example: Message of error
  */
 /**
- * DELETE user
- * @openapi
- * /api/auth/user/:id:
- *    delete:
- *      tags:
- *        - auth
- *      summary: 'delete user'
- *      description: Este endpoint es para eliminar un usuario
- *      responses:
- *        '200':
- *          description: El usuario se ha eliminado correctamente
- *          content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *        '404':
- *          description: El usuario no existe
- *          content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: user not found
- *        '500':
- *          description: Internal server error, puede ser un error de conexon, Network error
- *          content:
- *           application/json:
- *            schema:
- *              type: object
- *              properties:
- *                error:
- *                  type: string
- *                  example: Message of error
- */
-/**
  * GET login google
  * @openapi
  * /api/auth/google:
@@ -261,7 +377,6 @@
  *        - auth
  *      summary: 'login with google'
  *      description: Este endpoint es para logearse con google
-
  */
 //! CATEGORY
 /**
