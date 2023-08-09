@@ -8,6 +8,7 @@ const transporter = nodemailer.createTransport({
     user: process.env.ADMIN_MAILER,
     pass: process.env.MAILER_PASS,
   },
+  tls: { rejectUnauthorized: false }
 });
 
 module.exports = transporter;
