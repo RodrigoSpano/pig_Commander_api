@@ -4,7 +4,7 @@ const { user } = require('../../db');
 async function sendWelcomeMail(name, email) {
   try {
     await transporter.sendMail({
-      from: process.env.ADMIN_MAILER,
+      from: `${process.env.ADMIN_MAILER}`,
       to: email,
       subject: 'Welcome to PigCommander!',
       text: 'Hello world?',
