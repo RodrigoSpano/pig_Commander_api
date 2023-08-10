@@ -43,6 +43,9 @@ const swaggerDefinition = {
           password: {
             type: 'string',
           },
+          image: {
+            type: 'string'
+          }
         },
       },
       user: {

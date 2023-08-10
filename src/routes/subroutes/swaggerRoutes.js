@@ -164,97 +164,6 @@
  *                   type: string
  *                   example: Message of error
  */
-/**
- * Update profile pic
- * @openapi
- * /api/profile:
- *    put:
- *      tags:
- *        - profile
- *      summary: "Update profile pic"
- *      description: "Endpoint para actualizar la foto de perfil."
- *      requestBody:
- *          required: true
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  image:
- *                    type: string
- *      responses:
- *        '200':
- *          description: "La foto de perfil se actualizo correctamente"
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  image:
- *                    type: string
- *              example:
- *                 image: urldeimagen
- *        '500':
- *          description: "Internal server error, could be a connection error or network error."
- *          content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: Message of error
- */
-/**
- * DELETE profile pic
- * @openapi
- * /api/profile:
- *    delete:
- *      tags:
- *        - profile
- *      summary: 'delete profile pic'
- *      description: Este endpoint es para eliminar la foto de perfil del usuario
- *      requestBody:
- *          required: true
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  image:
- *                    type: string
- *      responses:
- *        '200':
- *          description: El usuario se ha eliminado correctamente
- *          content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 deleted:
- *                   type: string
- *                   example: Profile pic deleted
- *        '400':
- *          description: Falta la imagen
- *          content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: No profile image to delete
- *        '500':
- *          description: Internal server error, puede ser un error de conexon, Network error
- *          content:
- *           application/json:
- *            schema:
- *              type: object
- *              properties:
- *                error:
- *                  type: string
- *                  example: Message of error
- */
 
 //! AUTH
 /**
@@ -422,16 +331,7 @@
  *                  type: string
  *                  example: Message of error
  */
-/**
- * GET login google
- * @openapi
- * /api/auth/google:
- *    get:
- *      tags:
- *        - auth
- *      summary: 'login with google'
- *      description: Este endpoint es para logearse con google
- */
+
 //! CATEGORY
 /**
  * Get categories

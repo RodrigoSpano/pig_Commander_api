@@ -7,6 +7,7 @@ const {
   userAlreadyExistsMiddleware,
 } = require('../../utils/middlewares/authMiddleware');
 const { createJwtToken } = require('../../utils/helpers/authHelpers');
+const { sendWelcomeMail } = require('../../utils/helpers/sendMailHelper');
 
 const router = express.Router();
 
@@ -28,6 +29,7 @@ router.get(
     failureRedirect: 'http://localhost:3000/api/auth/login',
   }), (req, res) => {
     const token = createJwtToken(req.user.id, req.user.email);
+    sendWelcomeMail(req.user.name,req.user.email)
     return res.redirect(`http://localhost:3000/google/success/?token=${token}`);
   }
 );
