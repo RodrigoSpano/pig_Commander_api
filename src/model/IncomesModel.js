@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      mount: {
+      amount: {
         type: DataTypes.FLOAT,
       },
       automatized: {

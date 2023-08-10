@@ -6,6 +6,6 @@ const paymentMiddleware = require('../../utils/middlewares/paymentMiddleware');
 
 const router = Router();
 
-router.get('/:mount', isAuth, paymentMiddleware, paymentMercadoPago);
+router.get('/:amount', isAuth, paymentMiddleware, paymentMercadoPago);
 router.post('/webhook', receiveWebhook);
 module.exports = router;

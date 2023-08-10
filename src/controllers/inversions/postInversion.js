@@ -4,7 +4,7 @@ const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 const postInversion = async (req, res) => {
   try {
     // * I receive the property by body
-    const { mount, earning, started_on, finish_at } = req.body;
+    const { amount, earning, started_on, finish_at } = req.body;
 
     // * Id of the user
     const { id: user_id } = getTokenPayload(req.headers['authorization']);
@@ -18,7 +18,7 @@ const postInversion = async (req, res) => {
 
     // * Inversion are created
     const newInversion = await inversion.create({
-      mount,
+      amount,
       earning,
       started_on,
       finish_at,

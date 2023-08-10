@@ -4,7 +4,7 @@ const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 const postSaving = async (req, res) => {
   try {
     // * I receive the property by body
-    const { name, mount, goal } = req.body;
+    const { name, amount, goal } = req.body;
 
     // * Id of the user
     const { id: user_id } = getTokenPayload(req.headers['authorization']);
@@ -19,7 +19,7 @@ const postSaving = async (req, res) => {
     // * Saving are created
     const newSaving = await saving.create({
       name: name.toLowerCase(),
-      mount,
+      amount,
       goal,
       user_id,
     });

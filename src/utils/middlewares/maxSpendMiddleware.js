@@ -2,12 +2,12 @@ const { maxSpend } = require('../../db');
 const { getTokenPayload } = require('../helpers/authHelpers');
 
 const postMaxSpendMiddleware = async (req, res, next) => {
-  const { mount } = req.body;
+  const { amount } = req.body;
   const { id: user_id } = getTokenPayload(req.headers['authorization']);
 
-  if (!mount) return res.status(400).json({ error: 'All fields are required' });
-  if (mount < 1) {
-    return res.status(400).json({ error: 'mount cannot be less than 1' });
+  if (!amount) return res.status(400).json({ error: 'All fields are required' });
+  if (amount < 1) {
+    return res.status(400).json({ error: 'amount cannot be less than 1' });
   }
   const existingMaxSpend = await maxSpend.findOne({
     where: { user_id },
@@ -39,11 +39,11 @@ const deleteMaxSpendMiddleware = async (req, res, next) => {
 };
 
 const updateMaxSpendMiddleware = async (req, res, next) => {
-  const { mount } = req.body;
+  const { amount } = req.body;
   const { id: user_id } = getTokenPayload(req.headers['authorization']);
-  if (!mount) return res.status(400).json({ error: 'Mount field is required' });
-  if (mount < 1)
-    return res.status(400).json({ error: 'mount cannot be less than 1' });
+  if (!amount) return res.status(400).json({ error: 'amount field is required' });
+  if (amount < 1)
+    return res.status(400).json({ error: 'amount cannot be less than 1' });
 
   const existing = await maxSpend.findOne({
     where: { user_id },

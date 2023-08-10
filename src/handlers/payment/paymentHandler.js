@@ -1,6 +1,6 @@
 const mercadopago = require('mercadopago');
 
-const createPayment = async ( mount, idUser) => {
+const createPayment = async (amount, idUser) => {
   mercadopago.configure({
     access_token: `${process.env.ACCESS_TOKEN}`,
   });
@@ -13,7 +13,7 @@ const createPayment = async ( mount, idUser) => {
         picture_url: 'http://www.myapp.com/myimage.jpg',
         category_id: 'pigPremium',
         quantity: 1,
-        unit_price: Number(mount),
+        unit_price: Number(amount),
         id: `${idUser}`,
       },
     ],

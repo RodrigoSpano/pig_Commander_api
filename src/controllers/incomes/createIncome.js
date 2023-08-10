@@ -9,10 +9,10 @@ const {
 const createIncome = async (req, res) => {
   try {
     const { id: user_id } = getTokenPayload(req.headers['authorization']);
-    const { mount, automatized, auto_date, category_id, method_id, name } =
+    const { amount, automatized, auto_date, category_id, method_id, name } =
       req.body;
 
-    if (!mount || mount < 1 || !category_id || !method_id || !name) {
+    if (!amount || amount < 1 || !category_id || !method_id || !name) {
       return res.status(404).json({ error: 'Missing data..' });
     }
 
@@ -20,14 +20,14 @@ const createIncome = async (req, res) => {
     const newIncome = await incomes.create({
       user_id,
       name,
-      mount,
+      amount,
       automatized: automatized && automatized,
       auto_date: automatized ? auto_date : null, // Establecer auto_date si automatized es true, de lo contrario, establecer en null
       category_id,
       method_id,
     });
 
-    sendIncomesNotification(user_id, mount, name);
+    sendIncomesNotification(user_id, amount, name);
     return res.status(200).json(newIncome);
   } catch (error) {
     return res.status(500).json({ error: error.message });
