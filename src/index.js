@@ -1,6 +1,7 @@
 require('dotenv/config');
 const express = require('express');
 const helmet = require('helmet');
+const compression = require('compression');
 const morgan = require('morgan');
 const passport = require('passport');
 const cors = require('cors');
@@ -14,16 +15,19 @@ const GoogleStrategy = require('./services/passport/passportGoogle');
 
 const app = express();
 
-app.use(session({
-  secret: `${process.env.SESSION_SECRET}`,
-  resave: true,
-  saveUninitialized: true,
-}));
+app.use(
+  session({
+    secret: `${process.env.SESSION_SECRET}`,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(helmet());
+app.use(compression());
 
 app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSetup));
 app.use(cors({ origin: 'http://localhost:3000' }));
