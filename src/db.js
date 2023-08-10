@@ -7,6 +7,7 @@ const InversionModel = require('./model/InversionModel');
 const ExpensesModel = require('./model/ExpensesModel');
 const MaxSpendModel = require('./model/MaxspendModel');
 const SavingModel = require('./model/SavingModel');
+const PaymentsModel = require('./model/paymentsModel');
 
 const sequelize = new Sequelize({
   database: 'pigcommander',
@@ -26,6 +27,7 @@ InversionModel(sequelize);
 ExpensesModel(sequelize);
 MaxSpendModel(sequelize);
 SavingModel(sequelize);
+PaymentsModel(sequelize);
 
 const {
   user,
@@ -36,7 +38,12 @@ const {
   inversion,
   expenses,
   saving,
+  payment,
 } = sequelize.models;
+
+// relation user to Payment
+user.hasOne(payment, { foreignKey: 'user_id' });
+payment.belongsTo(user, { foreignKey: 'user_id' });
 
 // relation user to maxSpend
 user.hasOne(maxSpend, { foreignKey: 'user_id' });
