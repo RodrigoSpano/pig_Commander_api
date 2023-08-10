@@ -131,6 +131,8 @@
  *                properties:
  *                  image:
  *                    type: string
+ *                    format: binary
+ *                    example: https://example.com/sample-image.jpg
  *      responses:
  *        '200':
  *          description: Se agrego con exito la foto de perfil, se devuelve la foto de perfil.
@@ -142,7 +144,7 @@
  *                  image:
  *                    type: string
  *              example:
- *                 image: urldeimagen
+ *                 image: https://example.com/sample-image.jpg
  *        '400':
  *          description: No se ha ingresado una imagen
  *          content:
@@ -374,8 +376,8 @@
  *                 error:
  *                   type: string
  *                   example: Message error.
- *
- */
+ *  
+ */ 
 
 /**
  * Post category
@@ -502,6 +504,44 @@
  *      responses:
  *        '200':
  *          description: "Returns the list of expenses for the current month."
+ *          content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/expenses"
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   automatized: 
+ *                     type: boolean
+ *                   auto_date:
+ *                     type: string
+ *                   amount:
+ *                     type: number
+ *                   method_id: 
+ *                     type: number
+ *                   category_id:
+ *                     type: number
+ *                   createdAt:
+ *                     type: string
+ *                   updatedAt:
+ *                     type: string
+ *                   user_id:
+ *                     type: string
+ *             example:
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: food
+ *                 automatized: true
+ *                 auto_date: 2023-07-25T15:30:00.000Z
+ *                 amount: 2500
+ *                 method_id: 1
+ *                 category_id: 2
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c 
  *        '404':
  *          description: "No expenses found for the user in the current month."
  *        '500':
@@ -605,8 +645,64 @@
  *      responses:
  *        '200':
  *          description: "Returns the list of expenses for the user."
+ *          content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/expenses"
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   automatized: 
+ *                     type: boolean
+ *                   auto_date:
+ *                     type: string
+ *                   amount:
+ *                     type: number
+ *                   method_id: 
+ *                     type: number
+ *                   category_id:
+ *                     type: number
+ *                   createdAt:
+ *                     type: string
+ *                   updatedAt:
+ *                     type: string
+ *                   user_id:
+ *                     type: string
+ *             example:
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: food
+ *                 automatized: true
+ *                 auto_date: 2023-07-25T15:30:00.000Z
+ *                 amount: 2500
+ *                 method_id: 1
+ *                 category_id: 2
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c
+ *        '404':
+ *         description: No se encontraron los ingresos.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: expenses is empty
  *        '500':
  *          description: "Internal server error, could be a connection error or network error."
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error!
  */
 //! INCOMES
 /**
@@ -682,7 +778,6 @@
  *                 error:
  *                   type: string
  *                   example: Message of error
-
  *
  */
 /**

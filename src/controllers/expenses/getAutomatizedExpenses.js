@@ -1,7 +1,7 @@
 const { expenses } = require('../../db');
 const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
-const getAutomatizedIncomes = async (req, res) => {
+const getAutomatizedExpenses = async (req, res) => {
   try {
     const { id } = getTokenPayload(req.headers['authorization']);
     // * Buscar Expenses si esta automatizado
@@ -17,4 +17,4 @@ const getAutomatizedIncomes = async (req, res) => {
   }
 };
 
-module.exports = getAutomatizedIncomes;
+module.exports = getAutomatizedExpenses;

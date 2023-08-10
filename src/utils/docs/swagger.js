@@ -207,6 +207,9 @@ const swaggerDefinition = {
           amount: {
             type: 'number',
           },
+          name : {
+            type: 'string'
+          },
           automatized: {
             type: 'boolean',
           },
@@ -214,6 +217,21 @@ const swaggerDefinition = {
             type: 'string',
             format: 'date',
           },
+          user_id: {
+            type: 'string'
+          },
+          createdAt: {
+            type: 'string',
+          },
+          updatedAt: {
+            type: 'string',
+          },
+          method_id: {
+            type: 'number',
+          },
+          category_id: {
+            type: 'number',
+          }
         },
       },
       Postexpenses: {
