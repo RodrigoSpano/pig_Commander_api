@@ -6,12 +6,12 @@ const updateInversion = async (req, res) => {
     const { id } = req.params;
 
     // * I receive the property by body
-    const { mount, earning } = req.body;
+    const { amount, earning } = req.body;
 
     // * I update the inversion with the same id
     await inversion.update(
       {
-        mount,
+        amount,
         earning,
       },
       {

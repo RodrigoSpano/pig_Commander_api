@@ -88,7 +88,7 @@ const swaggerDefinition = {
       },
       savings: {
         type: 'object',
-        required: ['id', 'name', 'mount', 'goal', 'createdAt', 'updatedAt'],
+        required: ['id', 'name', 'amount', 'goal', 'createdAt', 'updatedAt'],
         properties: {
           id: {
             type: 'number',
@@ -96,7 +96,7 @@ const swaggerDefinition = {
           name: {
             type: 'string',
           },
-          mount: {
+          amount: {
             type: 'number',
           },
           goal: {
@@ -112,7 +112,7 @@ const swaggerDefinition = {
       },
       inversions: {
         type: 'object',
-        required: ['id', 'mount', 'earning', 'started_on', 'finish_at'],
+        required: ['id', 'amount', 'earning', 'started_on', 'finish_at'],
         properties: {
           id: {
             type: 'number',
@@ -123,7 +123,7 @@ const swaggerDefinition = {
           finish_at: {
             type: 'string',
           },
-          mount: {
+          amount: {
             type: 'number',
           },
           earning: {
@@ -136,12 +136,12 @@ const swaggerDefinition = {
       },
       savingPost: {
         type: 'object',
-        required: ['name', 'mount', 'goal'],
+        required: ['name', 'amount', 'goal'],
         properties: {
           name: {
             type: 'string',
           },
-          mount: {
+          amount: {
             type: 'number',
           },
           goal: {
@@ -151,9 +151,9 @@ const swaggerDefinition = {
       },
       inversionPost: {
         type: 'object',
-        required: ['mount', 'earning', 'started_on', 'finish_at', 'user_id'],
+        required: ['amount', 'earning', 'started_on', 'finish_at', 'user_id'],
         properties: {
-          mount: {
+          amount: {
             type: 'number',
           },
           earning: {
@@ -172,9 +172,9 @@ const swaggerDefinition = {
       },
       savingPut: {
         type: 'object',
-        required: ['mount', 'goal'],
+        required: ['amount', 'goal'],
         properties: {
-          mount: {
+          amount: {
             type: 'number',
           },
           goal: {
@@ -184,9 +184,9 @@ const swaggerDefinition = {
       },
       inversionPut: {
         type: 'object',
-        required: ['mount', 'earning'],
+        required: ['amount', 'earning'],
         properties: {
-          mount: {
+          amount: {
             type: 'number',
           },
           earning: {
@@ -196,12 +196,12 @@ const swaggerDefinition = {
       },
       expenses: {
         type: 'object',
-        required: ['id', 'mount', 'automatized', 'auto_date'],
+        required: ['id', 'amount', 'automatized', 'auto_date'],
         properties: {
           id: {
             type: 'string',
           },
-          mount: {
+          amount: {
             type: 'number',
           },
           automatized: {
@@ -215,7 +215,7 @@ const swaggerDefinition = {
       },
       Postexpenses: {
         type: 'object',
-        required: ['id', 'mount', 'automatized', 'auto_date'],
+        required: ['id', 'amount', 'automatized', 'auto_date'],
         properties: {
           name: {
             type: 'string',
@@ -226,7 +226,7 @@ const swaggerDefinition = {
           method_id: {
             type: 'number',
           },
-          mount: {
+          amount: {
             type: 'number',
           },
           automatized: {
@@ -242,7 +242,7 @@ const swaggerDefinition = {
         type: 'object',
         required: [
           'id',
-          'mount',
+          'amount',
           'createdAt',
           'updatedAt',
           'method_id',
@@ -252,7 +252,7 @@ const swaggerDefinition = {
           id: {
             type: 'string',
           },
-          mount: {
+          amount: {
             type: 'number',
           },
           automatized: {
@@ -280,13 +280,13 @@ const swaggerDefinition = {
         type: 'object',
         required: [
           'automatized',
-          'mount',
+          'amount',
           'auto_date',
           'category_id',
           'method_id',
         ],
         properties: {
-          mount: {
+          amount: {
             type: 'number',
           },
           automatized: {
@@ -305,9 +305,9 @@ const swaggerDefinition = {
       },
       maxSpend: {
         type: 'object',
-        required: [' mount'],
+        required: [' amount'],
         properties: {
-          mount: {
+          amount: {
             type: 'number',
           },
           automatized: {
@@ -327,9 +327,9 @@ const swaggerDefinition = {
       },
       incomesPut: {
         type: 'object',
-        required: ['mount', 'automatized', 'auto_date'],
+        required: ['amount', 'automatized', 'auto_date'],
         properties: {
-          mount: {
+          amount: {
             type: 'number',
           },
           automatized: {

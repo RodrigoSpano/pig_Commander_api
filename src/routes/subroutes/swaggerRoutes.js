@@ -731,7 +731,7 @@
  *                 properties:
  *                   id:
  *                     type: string
- *                   mount:
+ *                   amount:
  *                     type: float
  *                   automatized:
  *                     type: boolean
@@ -747,7 +747,7 @@
  *                     type: integer
  *             example:
  *               - id: "4e1a381f-10ec-455e-b04f-2c45fccdb94d"
- *                 mount: 250.00
+ *                 amount: 250.00
  *                 automatized: true
  *                 auto_date: "2023-10-25T15:30:00Z"
  *                 createdAt: "2023-08-03T17:54:38.428Z"
@@ -755,7 +755,7 @@
  *                 category_id: 1
  *                 method_id: 2
  *               - id: "4e1a381f-10ec-455e-b04f-2c45fccdb94e"
- *                 mount: 520.00
+ *                 amount: 520.00
  *                 automatized: false
  *                 auto_date: null
  *                 createdAt: "2023-08-03T17:54:38.428Z"
@@ -807,7 +807,7 @@
  *                 properties:
  *                   id:
  *                     type: string
- *                   mount:
+ *                   amount:
  *                     type: float
  *                   automatized:
  *                     type: boolean
@@ -823,7 +823,7 @@
  *                     type: integer
  *             example:
  *               - id: "4e1a381f-10ec-455e-b04f-2c45fccdb94d"
- *                 mount: 250.00
+ *                 amount: 250.00
  *                 automatized: true
  *                 auto_date: "2023-10-25T15:30:00Z"
  *                 createdAt: "2023-08-03T17:54:38.428Z"
@@ -831,7 +831,7 @@
  *                 category_id: 1
  *                 method_id: 2
  *               - id: "4e1a381f-10ec-455e-b04f-2c45fccdb94e"
- *                 mount: 520.00
+ *                 amount: 520.00
  *                 automatized: false
  *                 auto_date: null
  *                 createdAt: "2023-08-03T17:54:38.428Z"
@@ -880,7 +880,7 @@
  *                 properties:
  *                   id:
  *                     type: string
- *                   mount:
+ *                   amount:
  *                     type: float
  *                   automatized:
  *                     type: boolean
@@ -896,7 +896,7 @@
  *                     type: integer
  *             example:
  *                 id: "4e1a381f-10ec-455e-b04f-2c45fccdb94d"
- *                 mount: 250.00
+ *                 amount: 250.00
  *                 automatized: true
  *                 auto_date: "2023-10-25T15:30:00Z"
  *                 createdAt: "2023-08-03T17:54:38.428Z"
@@ -923,7 +923,7 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: mount cannot be less than 1
+ *                   example: amount cannot be less than 1
  *       '500':
  *         description: Errores internos de la base de datos
  *         content:
@@ -974,7 +974,7 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: mount should not be less than $1
+ *                   example: amount should not be less than $1
  *       '404':
  *         description: Si el income no se encuentra
  *         content:
@@ -1007,7 +1007,7 @@
  *      tags:
  *        - Incomes
  *      summary: "Update one income"
- *      description: Endpoint para actualizar propiedades MOUNT, AUTOMATIZED, AUTO_DATE, solo envias Mount,automatized y auto_date.
+ *      description: Endpoint para actualizar propiedades amount, AUTOMATIZED, AUTO_DATE, solo envias amount,automatized y auto_date.
  *      parameters:
  *        - in: path
  *          name: id
@@ -1033,7 +1033,7 @@
  *                 properties:
  *                   id:
  *                     type: string
- *                   mount:
+ *                   amount:
  *                     type: float
  *                   automatized:
  *                     type: boolean
@@ -1049,7 +1049,7 @@
  *                     type: integer
  *             example:
  *                 id: "4e1a381f-10ec-455e-b04f-2c45fccdb94d"
- *                 mount: 250.00
+ *                 amount: 250.00
  *                 automatized: true
  *                 auto_date: "2023-10-25T15:30:00Z"
  *                 createdAt: "2023-08-03T17:54:38.428Z"
@@ -1076,7 +1076,7 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: mount cannot be less than 1
+ *                   example: amount cannot be less than 1
  *
  *       '500':
  *         description: Error de la base de datos
@@ -1119,7 +1119,7 @@
  *                     type: string
  *                   finish_at:
  *                     type: string
- *                   mount:
+ *                   amount:
  *                     type: integer
  *                   earning:
  *                     type: integer
@@ -1129,13 +1129,13 @@
  *               - id: 1
  *                 started_on: 2023-08-04
  *                 finish_at: 2024-08-04
- *                 mount: 1000
+ *                 amount: 1000
  *                 earning: 25
  *                 user_id: 4e26e88c-79b5-4d0c-b609-92555cfc2266
  *               - id: 2
  *                 started_on: 2023-08-04
  *                 finish_at: 2024-08-04
- *                 mount: 10000
+ *                 amount: 10000
  *                 earning: 250
  *                 user_id: 4e26e88c-79b5-4d0c-b609-92555cfc2266
  *
@@ -1193,7 +1193,7 @@
  *                     type: string
  *                   finish_at:
  *                     type: string
- *                   mount:
+ *                   amount:
  *                     type: integer
  *                   earning:
  *                     type: integer
@@ -1203,12 +1203,12 @@
  *                 id: 1
  *                 started_on: 2023-08-04
  *                 finish_at: 2024-08-04
- *                 mount: 1000
+ *                 amount: 1000
  *                 earning: 25
  *                 user_id: 4e26e88c-79b5-4d0c-b609-92555cfc2266
  *
  *       '400':
- *         description: Si no envian el MOUNT-EARNING-FECHAS por body (EL PARAMETRO EN EL ERROR CAMBIA SEGUN EL PARAMETRO QUE FALTA)
+ *         description: Si no envian el amount-EARNING-FECHAS por body (EL PARAMETRO EN EL ERROR CAMBIA SEGUN EL PARAMETRO QUE FALTA)
  *         content:
  *           application/json:
  *             schema:
@@ -1216,7 +1216,7 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: Parameter MOUNT is not defined
+ *                   example: Parameter amount is not defined
  *       '404':
  *         description: Si el usuario no se encuentra logueado
  *         content:
@@ -1302,7 +1302,7 @@
  *      tags:
  *        - Inversions
  *      summary: "Update one inversion"
- *      description: Este endpoint es para updatear las propiedades MOUNT y EARNING de los ahorros, solo envias EARNING y MOUNT.
+ *      description: Este endpoint es para updatear las propiedades amount y EARNING de los ahorros, solo envias EARNING y amount.
  *      parameters:
  *        - in: path
  *          name: id
@@ -1332,7 +1332,7 @@
  *                     type: string
  *                   finish_at:
  *                     type: string
- *                   mount:
+ *                   amount:
  *                     type: integer
  *                   earning:
  *                     type: integer
@@ -1342,7 +1342,7 @@
  *                 id: 1
  *                 started_on: 2023-08-04
  *                 finish_at: 2024-08-04
- *                 mount: 1000
+ *                 amount: 1000
  *                 earning: 25
  *                 user_id: 4e26e88c-79b5-4d0c-b609-92555cfc2266
  *
@@ -1357,7 +1357,7 @@
  *                   type: string
  *                   example: Inversion not found!
  *       '400':
- *         description: Si no recibe los parametros Mount  y Earnings, el parametro del msj cambia segun el que falta
+ *         description: Si no recibe los parametros amount  y Earnings, el parametro del msj cambia segun el que falta
  *         content:
  *           application/json:
  *             schema:
@@ -1365,7 +1365,7 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: 'Parameter MOUNT is not defined'
+ *                   example: 'Parameter amount is not defined'
  *
  *       '500':
  *         description: Error de la base de datos
@@ -1626,7 +1626,7 @@
  *                     type: integer
  *                   name:
  *                     type: string
- *                   mount:
+ *                   amount:
  *                     type: integer
  *                   goal:
  *                     type: integer
@@ -1637,13 +1637,13 @@
  *             example:
  *               - id: 1
  *                 name: Ahorrar para moto
- *                 mount: 200
+ *                 amount: 200
  *                 goal: 1000
  *                 createdAt: "2023-08-03T17:54:38.428Z"
  *                 updatedAt: "2023-08-03T17:54:38.428Z"
  *               - id: 2
  *                 name: Ahorrar para auto
- *                 mount: 2000
+ *                 amount: 2000
  *                 goal: 100000
  *                 createdAt: "2023-08-03T17:54:38.428Z"
  *                 updatedAt: "2023-08-03T17:54:38.428Z"
@@ -1691,7 +1691,7 @@
  *                     type: integer
  *                   name:
  *                     type: string
- *                   mount:
+ *                   amount:
  *                     type: integer
  *                   goal:
  *                     type: integer
@@ -1702,13 +1702,13 @@
  *             example:
  *                 id: 1
  *                 name: Ahorrar para moto
- *                 mount: 200
+ *                 amount: 200
  *                 goal: 1000
  *                 createdAt: "2023-08-03T17:54:38.428Z"
  *                 updatedAt: "2023-08-03T17:54:38.428Z"
  *
  *       '400':
- *         description: Si no envian el NAME-MOUNT-GOAL por body (EL PARAMETRO EN EL ERROR CAMBIA SEGUN EL PARAMETRO QUE FALTA)
+ *         description: Si no envian el NAME-amount-GOAL por body (EL PARAMETRO EN EL ERROR CAMBIA SEGUN EL PARAMETRO QUE FALTA)
  *         content:
  *           application/json:
  *             schema:
@@ -1812,7 +1812,7 @@
  *      tags:
  *        - Savings
  *      summary: "Update one saving"
- *      description: Este endpoint es para updatear las propiedades MOUNT y GOAL de los ahorros, solo envias Mount y Goal.
+ *      description: Este endpoint es para updatear las propiedades amount y GOAL de los ahorros, solo envias amount y Goal.
  *      parameters:
  *        - in: path
  *          name: id
@@ -1840,7 +1840,7 @@
  *                     type: integer
  *                   name:
  *                     type: string
- *                   mount:
+ *                   amount:
  *                     type: integer
  *                   goal:
  *                     type: integer
@@ -1851,7 +1851,7 @@
  *             example:
  *                 id: 1
  *                 name: Ahorrar para moto
- *                 mount: 300
+ *                 amount: 300
  *                 goal: 400
  *                 createdAt: "2023-08-03T17:54:38.428Z"
  *                 updatedAt: "2023-08-03T17:54:38.428Z"
@@ -1867,7 +1867,7 @@
  *                   type: string
  *                   example: Saving not found!
  *       '400':
- *         description: Si no recibe los parametros Mount  y Goals, el parametro del msj cambia segun el que falta
+ *         description: Si no recibe los parametros amount  y Goals, el parametro del msj cambia segun el que falta
  *         content:
  *           application/json:
  *             schema:
@@ -1875,7 +1875,7 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: 'Parameter MOUNT is not defined'
+ *                   example: 'Parameter amount is not defined'
  *
  *       '500':
  *         description: Error de la base de datos

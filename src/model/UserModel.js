@@ -34,6 +34,8 @@ module.exports = (sequelize) => {
       image: {
         type: DataTypes.TEXT,
         allowNull: true,
+        defaultValue:
+          'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
       },
       premium: {
         type: DataTypes.BOOLEAN,

@@ -4,9 +4,9 @@ const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 const postMaxSpend = async (req, res) => {
   try {
     const { id: user_id } = getTokenPayload(req.headers['authorization']);
-    const { mount } = req.body;
+    const { amount } = req.body;
     const newExpense = await maxSpend.create({
-      mount,
+      amount,
       user_id,
     });
     return res.status(201).json(newExpense);

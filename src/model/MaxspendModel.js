@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
         autoIncrement: true,
         allowNull: false,
       },
-      mount: {
+      amount: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },

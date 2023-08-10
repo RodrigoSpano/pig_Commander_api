@@ -1,14 +1,14 @@
 const { saving } = require('../../db');
 
 const savingPostMiddleware = async (req, res, next) => {
-  const { name, mount, goal } = req.body;
+  const { name, amount, goal } = req.body;
 
   if (typeof name === 'undefined') {
     res.status(400).json({ error: 'Parameter NAME is not defined' });
     return;
   }
-  if (typeof mount === 'undefined') {
-    res.status(400).json({ error: 'Parameter MOUNT is not defined' });
+  if (typeof amount === 'undefined') {
+    res.status(400).json({ error: 'Parameter amount is not defined' });
     return;
   }
   if (typeof goal === 'undefined') {
@@ -16,8 +16,8 @@ const savingPostMiddleware = async (req, res, next) => {
     return;
   }
 
-  if(mount <= 0 || goal <= 0){
-    res.status(400).json({ error: 'Mount and Goal must be greater than 0' });
+  if (amount <= 0 || goal <= 0) {
+    res.status(400).json({ error: 'amount and Goal must be greater than 0' });
     return;
   }
   // * I search if it already exists in the database

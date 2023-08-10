@@ -2,7 +2,7 @@ const { incomes } = require('../../db');
 
 async function incomeExist(req, res, next) {
   const { idIncome } = req.params;
-  if (req.body.mount <= 1) return res.status(400).json({ message: 'mount should not be less than $1' });
+  if (req.body.amount <= 1) return res.status(400).json({ message: 'amount should not be less than $1' });
 
   const incomeAlreadyExist = await incomes.findByPk(idIncome);
 

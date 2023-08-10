@@ -4,7 +4,7 @@ const { user } = require('../../db');
 async function sendWelcomeMail(name, email) {
   try {
     await transporter.sendMail({
-      from: process.env.ADMIN_MAILER,
+      from: `${process.env.ADMIN_MAILER}`,
       to: email,
       subject: 'Welcome to PigCommander!',
       text: 'Hello world?',
@@ -22,7 +22,7 @@ async function sendWelcomeMail(name, email) {
     throw Error(error);
   }
 }
-async function sendIncomesNotification(user_id, mount, name) {
+async function sendIncomesNotification(user_id, amount, name) {
   try {
     const { dataValues: userAux } = await user.findByPk(user_id);
 
@@ -33,7 +33,7 @@ async function sendIncomesNotification(user_id, mount, name) {
       html: `
       <p>Hello, ${userAux.name}</p>
       <p>We wanted to inform you that a new income has been registered in your account.</p>
-      <p>Income amount: $${mount}</p>
+      <p>Income aamount: $${amount}</p>
       <p>Income name: ${name}</p>
       <p>Thank you for using our service.</p>
       <p>Regards,</p>
@@ -45,7 +45,7 @@ async function sendIncomesNotification(user_id, mount, name) {
   }
 }
 
-async function sendExpensesNotification(user_id, mount, name) {
+async function sendExpensesNotification(user_id, amount, name) {
   try {
     const { dataValues: userAux } = await user.findByPk(user_id);
 
@@ -56,7 +56,7 @@ async function sendExpensesNotification(user_id, mount, name) {
       html: `
         <p>Hello, ${userAux.name}</p>
         <p>We wanted to inform you that a new expense has been registered in your account.</p>
-        <p>Expense amount: $${mount}</p>
+        <p>Expense aamount: $${amount}</p>
         <p>Expense name: ${name}</p>
         <p>Thank you for using our service.</p>
         <p>Regards,</p>

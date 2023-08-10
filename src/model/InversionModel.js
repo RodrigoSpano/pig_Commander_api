@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    mount: {
+    amount: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },

@@ -4,8 +4,8 @@ const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 const updateMaxSpend = async (req, res) => {
   try {
     const { id: user_id } = getTokenPayload(req.headers['authorization']);
-    const { mount } = req.body;
-    await maxSpend.update({ mount, }, {
+    const { amount } = req.body;
+    await maxSpend.update({ amount, }, {
       where: { user_id },
     }
     );

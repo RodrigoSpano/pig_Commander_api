@@ -2,7 +2,7 @@ const { inversion } = require('../../db');
 
 const inversionUpdateMiddleware = async (req, res, next) => {
   const { id } = req.params;
-  const { mount, earning } = req.body;
+  const { amount, earning } = req.body;
 
   // *  I look for the id in the database
   const findIdInversion = await inversion.findByPk(id);
@@ -13,8 +13,8 @@ const inversionUpdateMiddleware = async (req, res, next) => {
     res.status(404).json({ error: 'Inversion not found!' });
     return;
   }
-  if (typeof mount === 'undefined') {
-    res.status(400).json({ error: 'Parameter MOUNT is not defined' });
+  if (typeof amount === 'undefined') {
+    res.status(400).json({ error: 'Parameter amount is not defined' });
     return;
   }
   if (typeof earning === 'undefined') {
@@ -22,8 +22,8 @@ const inversionUpdateMiddleware = async (req, res, next) => {
     return;
   }
 
-  if (mount <= 0 || earning <= 0) {
-    res.status(400).json({ error: 'Mount and Earning must be greater than 0' });
+  if (amount <= 0 || earning <= 0) {
+    res.status(400).json({ error: 'amount and Earning must be greater than 0' });
     return;
   }
 

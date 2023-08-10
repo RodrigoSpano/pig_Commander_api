@@ -2,12 +2,12 @@
 const { expenses } = require('../../db');
 
 const postExpensesMiddleware = async (req, res, next) => {
-  const { category_id, method_id, mount, name } = req.body;
-  if (!category_id || !method_id || !mount || !name) {
+  const { category_id, method_id, amount, name } = req.body;
+  if (!category_id || !method_id || !amount || !name) {
     return res.status(400).json({ error: 'All fields are required' });
   }
-  if (mount < 1) {
-    return res.status(400).json({ error: 'mount cannot be less than 1' });
+  if (amount < 1) {
+    return res.status(400).json({ error: 'amount cannot be less than 1' });
   }
   return next();
 };
@@ -20,11 +20,11 @@ const deleteExpensesMiddleware = async (req, res, next) => {
 };
 
 const updateExpensesMiddleware = async (req, res, next) => {
-  const { mount } = req.body;
+  const { amount } = req.body;
   const { id } = req.params;
 
-  if (mount <= 1) {
-    return res.status(400).json({ error: 'mount cannot be less than 1' });
+  if (amount <= 1) {
+    return res.status(400).json({ error: 'amount cannot be less than 1' });
   }
   const existingExpense = await expenses.findByPk(id);
   if (!existingExpense) {
