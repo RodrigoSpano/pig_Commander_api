@@ -2,6 +2,7 @@ const passport = require('passport');
 const { Strategy } = require('passport-google-oauth20');
 const { user: UserModel } = require('../../db');
 const { hashPassword } = require('../../utils/helpers/authHelpers');
+const { sendWelcomeMail } = require('../../utils/helpers/sendMailHelper');
 
 module.exports = new Strategy(
   {
@@ -27,6 +28,7 @@ module.exports = new Strategy(
       image: profile['_json'].picture,
       password: hashedPass
     });
+    sendWelcomeMail(user.name,user.email)
     return done(null, user);
   }
 );
