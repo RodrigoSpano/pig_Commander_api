@@ -376,8 +376,8 @@
  *                 error:
  *                   type: string
  *                   example: Message error.
- *  
- */ 
+ *
+ */
 
 /**
  * Post category
@@ -494,13 +494,6 @@
  *        - Expenses
  *      summary: "Get monthly expenses"
  *      description: "Endpoint para devolver todos los gastos del usuario del mes actual."
- *      parameters:
- *        - in: path
- *          name: user_id
- *          schema:
- *            type: string
- *          required: true
- *          description: "ID of the user to get expenses for."
  *      responses:
  *        '200':
  *          description: "Returns the list of expenses for the current month."
@@ -515,13 +508,13 @@
  *                     type: integer
  *                   name:
  *                     type: string
- *                   automatized: 
+ *                   automatized:
  *                     type: boolean
  *                   auto_date:
  *                     type: string
  *                   amount:
  *                     type: number
- *                   method_id: 
+ *                   method_id:
  *                     type: number
  *                   category_id:
  *                     type: number
@@ -541,11 +534,27 @@
  *                 category_id: 2
  *                 createdAt: 2023-08-10T21:54:42.661Z
  *                 updatedAt: 2023-08-10T21:54:42.661Z
- *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c 
- *        '404':
- *          description: "No expenses found for the user in the current month."
+ *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: health
+ *                 automatized: false
+ *                 auto_date: null
+ *                 amount: 5200
+ *                 method_id: 2
+ *                 category_id: 1
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d5657110ca2c-d063b4aa-d9f0-49f2-bc1c
  *        '500':
- *          description: "Internal server error, could be a connection error or network error."
+ *         description: "Internal server error, could be a connection error or network error."
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error!
  */
 
 /**
@@ -573,78 +582,6 @@
  *      responses:
  *        '200':
  *          description: "Expense updated successfully."
- *        '404':
- *          description: "Expense not found."
- *        '500':
- *          description: "Internal server error, could be a connection error or network error."
- */
-
-/**
- * Delete expenses
- * @openapi
- * /api/expenses/:id:
- *    delete:
- *      tags:
- *        - Expenses
- *      summary: "Delete one expense"
- *      description: "Endpoint para borrar un gasto existente."
- *      parameters:
- *        - in: path
- *          name: id
- *          schema:
- *            type: string
- *          required: true
- *          description: "ID of the expense to delete."
- *      responses:
- *        '200':
- *          description: "Expense deleted successfully."
- *        '404':
- *          description: "Expense not found."
- *        '500':
- *          description: "Internal server error, could be a connection error or network error."
- */
-
-/**
- * Post expense
- * @openapi
- * /api/expenses:
- *    post:
- *      tags:
- *        - Expenses
- *      summary: "Post expense"
- *      description: "Endpoint para crear un gasto."
- *      requestBody:
- *        required: true
- *        content:
- *          application/json:
- *            schema:
- *              $ref: "#/components/schemas/Postexpenses"
- *      responses:
- *        '201':
- *          description: "Expense created successfully."
- *        '500':
- *          description: "Internal server error, could be a connection error or network error."
- */
-
-/**
- * Get all expenses
- * @openapi
- * /api/expenses/:id:
- *    get:
- *      tags:
- *        - Expenses
- *      summary: "Get all expenses"
- *      description: "Endpoint para recibir todos los gastos de un usuario."
- *      parameters:
- *        - in: path
- *          name: id
- *          schema:
- *            type: string
- *          required: true
- *          description: "ID of the user to get expenses for."
- *      responses:
- *        '200':
- *          description: "Returns the list of expenses for the user."
  *          content:
  *           application/json:
  *             schema:
@@ -656,13 +593,13 @@
  *                     type: integer
  *                   name:
  *                     type: string
- *                   automatized: 
+ *                   automatized:
  *                     type: boolean
  *                   auto_date:
  *                     type: string
  *                   amount:
  *                     type: number
- *                   method_id: 
+ *                   method_id:
  *                     type: number
  *                   category_id:
  *                     type: number
@@ -683,6 +620,215 @@
  *                 createdAt: 2023-08-10T21:54:42.661Z
  *                 updatedAt: 2023-08-10T21:54:42.661Z
  *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c
+ *        '400':
+ *          description: "Expense not found or amount is less than 1"
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: amount cannot be less than 1 or Expense not found
+ *        '500':
+ *         description: "Internal server error, could be a connection error or network error."
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error!
+ */
+
+/**
+ * Delete expenses
+ * @openapi
+ * /api/expenses/:id:
+ *    delete:
+ *      tags:
+ *        - Expenses
+ *      summary: "Delete one expense"
+ *      description: Endpoint para eliminar un 'expense'
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: "ID of the expense to delete."
+ *      responses:
+ *       '200':
+ *         description: Se ha eliminado correctamente el 'expense'
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 type: object
+ *                 properties:
+ *                   deleted:
+ *                     type: string
+ *                     example: Expense deleted!
+ *       '400':
+ *         description: No se recibio el id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Id not recieved
+ *       '500':
+ *         description: "Internal server error, could be a connection error or network error."
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error!
+ *
+ */
+
+/**
+ * Post expense
+ * @openapi
+ * /api/expenses:
+ *    post:
+ *      tags:
+ *        - Expenses
+ *      summary: "Post expense"
+ *      description: "Endpoint para crear un gasto."
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#/components/schemas/Postexpenses"
+ *      responses:
+ *        '201':
+ *          description: "Expense created successfully."
+ *          content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/expenses"
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   automatized:
+ *                     type: boolean
+ *                   auto_date:
+ *                     type: string
+ *                   amount:
+ *                     type: number
+ *                   method_id:
+ *                     type: number
+ *                   category_id:
+ *                     type: number
+ *                   createdAt:
+ *                     type: string
+ *                   updatedAt:
+ *                     type: string
+ *                   user_id:
+ *                     type: string
+ *             example:
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: food
+ *                 automatized: true
+ *                 auto_date: 2023-07-25T15:30:00.000Z
+ *                 amount: 2500
+ *                 method_id: 1
+ *                 category_id: 2
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c
+ *        '400':
+ *         description: Faltan datos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: All fields are required or amount cannot be less than 1
+ *        '500':
+ *         description: "Internal server error, could be a connection error or network error."
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error!
+ */
+/**
+ * Get all expenses
+ * @openapi
+ * /api/expenses:
+ *    get:
+ *      tags:
+ *        - Expenses
+ *      summary: "Get all expenses"
+ *      description: "Endpoint para recibir todos los gastos de un usuario."
+ *      responses:
+ *        '200':
+ *          description: "Returns the list of expenses for the user."
+ *          content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/expenses"
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   automatized:
+ *                     type: boolean
+ *                   auto_date:
+ *                     type: string
+ *                   amount:
+ *                     type: number
+ *                   method_id:
+ *                     type: number
+ *                   category_id:
+ *                     type: number
+ *                   createdAt:
+ *                     type: string
+ *                   updatedAt:
+ *                     type: string
+ *                   user_id:
+ *                     type: string
+ *             example:
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: food
+ *                 automatized: true
+ *                 auto_date: 2023-07-25T15:30:00.000Z
+ *                 amount: 2500
+ *                 method_id: 1
+ *                 category_id: 2
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: health
+ *                 automatized: false
+ *                 auto_date: null
+ *                 amount: 5200
+ *                 method_id: 2
+ *                 category_id: 1
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d5657110ca2c-d063b4aa-d9f0-49f2-bc1c
  *        '404':
  *         description: No se encontraron los ingresos.
  *         content:
@@ -741,23 +887,31 @@
  *                     type: integer
  *                   method_id:
  *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   user_id:
+ *                     type: string
  *             example:
- *               - id: "4e1a381f-10ec-455e-b04f-2c45fccdb94d"
- *                 amount: 250.00
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: food
  *                 automatized: true
- *                 auto_date: "2023-10-25T15:30:00Z"
- *                 createdAt: "2023-08-03T17:54:38.428Z"
- *                 updatedAt: "2023-08-03T17:54:38.428Z"
- *                 category_id: 1
- *                 method_id: 2
- *               - id: "4e1a381f-10ec-455e-b04f-2c45fccdb94e"
- *                 amount: 520.00
+ *                 auto_date: 2023-07-25T15:30:00.000Z
+ *                 amount: 2500
+ *                 method_id: 1
+ *                 category_id: 2
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: health
  *                 automatized: false
  *                 auto_date: null
- *                 createdAt: "2023-08-03T17:54:38.428Z"
- *                 updatedAt: "2023-08-03T17:54:38.428Z"
- *                 category_id: 2
- *                 method_id: 1
+ *                 amount: 5200
+ *                 method_id: 2
+ *                 category_id: 1
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d5657110ca2c-d063b4aa-d9f0-49f2-bc1c
  *       '400':
  *         description: El usuario no ha iniciado sesion.
  *         content:
@@ -816,23 +970,31 @@
  *                     type: integer
  *                   method_id:
  *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   user_id:
+ *                     type: string
  *             example:
- *               - id: "4e1a381f-10ec-455e-b04f-2c45fccdb94d"
- *                 amount: 250.00
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: food
  *                 automatized: true
- *                 auto_date: "2023-10-25T15:30:00Z"
- *                 createdAt: "2023-08-03T17:54:38.428Z"
- *                 updatedAt: "2023-08-03T17:54:38.428Z"
- *                 category_id: 1
- *                 method_id: 2
- *               - id: "4e1a381f-10ec-455e-b04f-2c45fccdb94e"
- *                 amount: 520.00
+ *                 auto_date: 2023-07-25T15:30:00.000Z
+ *                 amount: 2500
+ *                 method_id: 1
+ *                 category_id: 2
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: health
  *                 automatized: false
  *                 auto_date: null
- *                 createdAt: "2023-08-03T17:54:38.428Z"
- *                 updatedAt: "2023-08-03T17:54:38.428Z"
- *                 category_id: 2
- *                 method_id: 1
+ *                 amount: 5200
+ *                 method_id: 2
+ *                 category_id: 1
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d5657110ca2c-d063b4aa-d9f0-49f2-bc1c
  *
  *       '500':
  *         description: No se encontraron los ingresos del usuario, correspondientes al mes actual.
@@ -889,16 +1051,21 @@
  *                     type: integer
  *                   method_id:
  *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   user_id:
+ *                     type: string
  *             example:
- *                 id: "4e1a381f-10ec-455e-b04f-2c45fccdb94d"
- *                 amount: 250.00
+ *               - id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: food
  *                 automatized: true
- *                 auto_date: "2023-10-25T15:30:00Z"
- *                 createdAt: "2023-08-03T17:54:38.428Z"
- *                 updatedAt: "2023-08-03T17:54:38.428Z"
- *                 category_id: 1
- *                 method_id: 2
- *
+ *                 auto_date: 2023-07-25T15:30:00.000Z
+ *                 amount: 2500
+ *                 method_id: 1
+ *                 category_id: 2
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c
  *       '404':
  *         description: Faltan datos
  *         content:
@@ -935,7 +1102,7 @@
 /**
  * Delete income
  * @openapi
- * /api/incomes/:id:
+ * /api/incomes/:idIncome:
  *    delete:
  *      tags:
  *        - Incomes
@@ -993,7 +1160,6 @@
  *                   example: Message of error!
  *
  */
-
 /**
  * Put income
  * @openapi
@@ -1042,15 +1208,21 @@
  *                     type: integer
  *                   method_id:
  *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   user_id:
+ *                     type: string
  *             example:
- *                 id: "4e1a381f-10ec-455e-b04f-2c45fccdb94d"
- *                 amount: 250.00
+ *                 id: 26726240-0772-4c67-bfa4-c0949519f87f
+ *                 name: food
  *                 automatized: true
- *                 auto_date: "2023-10-25T15:30:00Z"
- *                 createdAt: "2023-08-03T17:54:38.428Z"
- *                 updatedAt: "2023-08-03T17:54:38.428Z"
- *                 category_id: 1
- *                 method_id: 2
+ *                 auto_date: 2023-07-25T15:30:00.000Z
+ *                 amount: 2500
+ *                 method_id: 1
+ *                 category_id: 2
+ *                 createdAt: 2023-08-10T21:54:42.661Z
+ *                 updatedAt: 2023-08-10T21:54:42.661Z
+ *                 user_id: d063b4aa-d9f0-49f2-bc1c-d5657110ca2c
  *
  *       '404':
  *         description: Si el income no se encuentra

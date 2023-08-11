@@ -236,7 +236,7 @@ const swaggerDefinition = {
       },
       Postexpenses: {
         type: 'object',
-        required: ['id', 'amount', 'automatized', 'auto_date'],
+        required: ['category_id','method_id', 'amount', 'automatized', 'auto_date','name'],
         properties: {
           name: {
             type: 'string',
@@ -276,6 +276,9 @@ const swaggerDefinition = {
           amount: {
             type: 'number',
           },
+          name : {
+            type: 'string'
+          },
           automatized: {
             type: 'boolean',
           },
@@ -295,6 +298,9 @@ const swaggerDefinition = {
           category_id: {
             type: 'number',
           },
+          user_id: {
+            type: 'string'
+          }
         },
       },
       incomesPost: {
@@ -307,6 +313,9 @@ const swaggerDefinition = {
           'method_id',
         ],
         properties: {
+          name: {
+            type: 'string'
+          },
           amount: {
             type: 'number',
           },
