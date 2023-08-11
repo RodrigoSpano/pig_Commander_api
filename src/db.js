@@ -9,15 +9,18 @@ const MaxSpendModel = require('./model/MaxspendModel');
 const SavingModel = require('./model/SavingModel');
 const PaymentsModel = require('./model/paymentsModel');
 
-const sequelize = new Sequelize({
-  database: 'pigcommander',
-  username: `${process.env.ADMIN_USER}`,
-  password: `${process.env.ADMIN_PASS}`,
-  dialect: 'postgres',
-  host: `${process.env.DB_HOST}`,
-  logging: false,
-  native: false,
-});
+const sequelize = new Sequelize(`${process.env.DB_HOST}`,
+  {
+    logging: false,
+    native: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
+  }
+);
 
 UserModel(sequelize);
 MethodModel(sequelize);
