@@ -10,6 +10,7 @@ const inversionsRoutes = require('./subroutes/inversionsRoutes');
 const maxSpendRoutes = require('./subroutes/maxSpendRoutes');
 const profileRoutes = require('./subroutes/profileRoutes');
 const subscriptionMercadoPago = require('./subroutes/paymentRoutes');
+const newsRoutes = require('./subroutes/newsRoutes');
 
 const router = express.Router();
 
@@ -22,6 +23,7 @@ router.use('/category', isAuth, categoryRoute);
 router.use('/inversions', isAuth, inversionsRoutes);
 router.use('/maxSpend', isAuth, maxSpendRoutes);
 router.use('/profile', isAuth, profileRoutes);
-router.use('/subscription',  subscriptionMercadoPago);
+router.use('/subscription', subscriptionMercadoPago);
+router.use('/news', isAuth, newsRoutes);
 
 module.exports = router;
