@@ -14,7 +14,7 @@ const sequelize = new Sequelize({
   username: `${process.env.ADMIN_USER}`,
   password: `${process.env.ADMIN_PASS}`,
   dialect: 'postgres',
-  host: 'localhost',
+  host: `${process.env.DB_HOST}`,
   logging: false,
   native: false,
 });
