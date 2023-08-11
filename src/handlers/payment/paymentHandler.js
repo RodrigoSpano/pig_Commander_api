@@ -18,9 +18,9 @@ const createPayment = async (amount, idUser) => {
       },
     ],
     back_urls: {
-      failure: 'http://localhost:3000/home/dashboard',
-      pending: 'http://localhost:3000/home/dashboard',
-      success: 'http://localhost:3000/home/dashboard',
+      failure: `${process.env.CLIENT_URI}/home/dashboard`,
+      pending: `${process.env.CLIENT_URI}/home/dashboard`,
+      success: `${process.env.CLIENT_URI}/home/dashboard`,
     },
     payment_methods: {
       installments: 12,
