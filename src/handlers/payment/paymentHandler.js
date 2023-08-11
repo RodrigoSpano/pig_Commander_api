@@ -26,7 +26,7 @@ const createPayment = async (amount, idUser) => {
       installments: 12,
     },
     notification_url:
-      'https://ee65-186-137-12-227.ngrok-free.app/api/subscription/webhook',
+      `${process.env.CLIENT_URI}/api/subscription/webhook`,
   });
 
   return payment;
