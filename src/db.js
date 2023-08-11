@@ -9,7 +9,7 @@ const MaxSpendModel = require('./model/MaxspendModel');
 const SavingModel = require('./model/SavingModel');
 const PaymentsModel = require('./model/paymentsModel');
 
-const sequelize = new Sequelize(`${process.env.DB_HOST}`,
+const sequelize = new Sequelize(process.env.DB_HOST,
   {
     logging: false,
     native: false,
