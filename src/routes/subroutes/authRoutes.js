@@ -8,6 +8,7 @@ const {
 } = require('../../utils/middlewares/authMiddleware');
 const { createJwtToken } = require('../../utils/helpers/authHelpers');
 
+
 const router = express.Router();
 
 router.post('/login', loginUser);
@@ -15,7 +16,6 @@ router.post('/login', loginUser);
 router.post('/signup', userAlreadyExistsMiddleware, signupUser);
 
 router.delete('/logout', logoutUser);
-
 
 router.get(
   '/google',
@@ -29,6 +29,7 @@ router.get(
     failureRedirect: 'http://localhost:3000/api/auth/login',
   }), (req, res) => {
     const token = createJwtToken(req.user.id, req.user.email);
+    
     return res.redirect(`http://localhost:3000/google/success/?token=${token}`);
   }
 );

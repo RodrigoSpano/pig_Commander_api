@@ -5,7 +5,6 @@ const deleteExpenses = require('../../controllers/expenses/deleteExpenses');
 const updateExpenses = require('../../controllers/expenses/updateExpenses');
 const getMonthlyExpenses = require('../../controllers/expenses/getMonthlyExpenses');
 const getAutomatizedExpenses = require('../../controllers/expenses/getAutomatizedExpenses');
-
 const {
   postExpensesMiddleware,
   deleteExpensesMiddleware,

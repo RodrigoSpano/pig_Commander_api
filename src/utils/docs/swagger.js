@@ -43,6 +43,9 @@ const swaggerDefinition = {
           password: {
             type: 'string',
           },
+          image: {
+            type: 'string'
+          }
         },
       },
       user: {
@@ -51,11 +54,17 @@ const swaggerDefinition = {
           id: {
             type: 'string',
           },
+          googleId: {
+            type: 'string',
+          },
           name: {
             type: 'string',
           },
           lastname: {
             type: 'string',
+          },
+          password : {
+            type: 'string'
           },
           email: {
             type: 'string',
@@ -198,6 +207,9 @@ const swaggerDefinition = {
           amount: {
             type: 'number',
           },
+          name : {
+            type: 'string'
+          },
           automatized: {
             type: 'boolean',
           },
@@ -205,11 +217,26 @@ const swaggerDefinition = {
             type: 'string',
             format: 'date',
           },
+          user_id: {
+            type: 'string'
+          },
+          createdAt: {
+            type: 'string',
+          },
+          updatedAt: {
+            type: 'string',
+          },
+          method_id: {
+            type: 'number',
+          },
+          category_id: {
+            type: 'number',
+          }
         },
       },
       Postexpenses: {
         type: 'object',
-        required: ['id', 'amount', 'automatized', 'auto_date'],
+        required: ['category_id','method_id', 'amount', 'automatized', 'auto_date','name'],
         properties: {
           name: {
             type: 'string',
@@ -249,6 +276,9 @@ const swaggerDefinition = {
           amount: {
             type: 'number',
           },
+          name : {
+            type: 'string'
+          },
           automatized: {
             type: 'boolean',
           },
@@ -268,6 +298,9 @@ const swaggerDefinition = {
           category_id: {
             type: 'number',
           },
+          user_id: {
+            type: 'string'
+          }
         },
       },
       incomesPost: {
@@ -280,6 +313,9 @@ const swaggerDefinition = {
           'method_id',
         ],
         properties: {
+          name: {
+            type: 'string'
+          },
           amount: {
             type: 'number',
           },
