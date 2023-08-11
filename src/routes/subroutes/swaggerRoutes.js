@@ -2056,3 +2056,75 @@
  *                   example: Message of error!
  *
  */
+
+
+//! NEWS
+/**
+ * Get news
+ * @openapi
+ * /api/news:
+ *   get:
+ *     tags:
+ *       - News
+ *     summary: "Get news"
+ *     description: |
+ *       Este endpoint es para traer noticias
+ *     responses:
+ *       '200':
+ *         description: Encuentra todas las noticias.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   date:
+ *                     type: string
+ *                   summary:
+ *                     type: string
+ *                   author:
+ *                     type: string
+ *                   url:
+ *                     type: string
+ *                   image:
+ *                     type: string
+ *                   topics:
+ *                     type: object
+ *             example:
+ *               - date: "20230811T121740"
+ *                 summary: "Dow Jones Futures Dip Ahead Of Key Inflation Data. 6 Best Stocks To Buy And Watch Investor's Business Daily ..."
+ *                 author: "Investor's Business Daily"
+ *                 url: "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-key-inflation-data-stocks-to-buy-and-watch/"
+ *                 image: "https://www.investors.com/wp-content/uploads/2017/10/stock-WallStreet-03-adobe.jpg"
+ *                 topics: [ "Economy - Monetary","Financial Markets"]
+ *       '404':
+ *         description: No se encontraron noticias.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: News not found!
+ *       '401':
+ *         description: Credenciales invalidas.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Invalid token
+ *       '500':
+ *          description: "Internal server error, could be a connection error or network error."
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error!
+ */
