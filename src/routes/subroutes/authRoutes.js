@@ -26,7 +26,7 @@ router.get(
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    failureRedirect: `${process.env.CLIENT_URI}/api/auth/login`,
+    failureRedirect: `${process.env.CLIENT_URI}/login`,
   }), (req, res) => {
     const token = createJwtToken(req.user.id, req.user.email);
 

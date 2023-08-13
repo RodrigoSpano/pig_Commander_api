@@ -28,7 +28,7 @@ module.exports = new Strategy(
       image: profile['_json'].picture,
       password: hashedPass
     });
-    sendWelcomeMail(user.name, user.email);
+    await sendWelcomeMail(user.name, user.email);
     return done(null, user);
   }
 );
