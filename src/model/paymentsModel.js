@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      aamount: {
+      amount: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },

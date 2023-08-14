@@ -28,7 +28,7 @@ const receiveWebhook = async (req, res) => {
           await payment.create({
             date_created: data.body.date_created,
             date_approved: data.body.date_approved,
-            aamount: data.body.transaction_details.total_paid_aamount,
+            amount: data.body.transaction_details.total_paid_amount,
             user_id: idUser,
           });
         }
