@@ -11,7 +11,8 @@ async function sendWelcomeMail(name, email) {
       html: `
             <p>Hello ${name},</p>
           <p>Welcome to PigCommander! We're excited to have you as part of our piggy financial community.</p>
-          <p>PigCommander is your companion on the journey to better expense control. Record your transactions, set budget limits, and watch your finances come to life in an organized and effective manner.</p>
+          <p>PigCommander is your companion on the journey to better expense control. Record your transactions, 
+          set budget limits, and watch your finances come to life in an organized and effective manner.</p>
           <p>Please log in to your account to start taking the reins of your personal finances in a fun and efficient way.</p>
           <p>Thank you for joining PigCommander, and we're thrilled to assist you on your path to improved financial management.</p>
           <p>With piggy responsibility,</p>
