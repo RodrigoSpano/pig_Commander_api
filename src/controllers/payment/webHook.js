@@ -1,5 +1,8 @@
 const mercadopago = require('mercadopago');
 const { payment, user } = require('../../db');
+const {
+  sendSubscribeNotification,
+} = require('../../utils/helpers/sendMailHelper');
 
 const receiveWebhook = async (req, res) => {
   const paymentBody = req.body;
@@ -31,8 +34,8 @@ const receiveWebhook = async (req, res) => {
             amount: data.body.transaction_details.total_paid_amount,
             user_id: idUser,
           });
+          sendSubscribeNotification(idUser);
         }
-
         res.status(200);
       }
     }
