@@ -20,7 +20,7 @@ async function sendWelcomeMail(name, email) {
           `,
     });
   } catch (error) {
-    throw Error(error);
+    console.log('emailError:',error.message);
   }
 }
 async function sendIncomesNotification(user_id, amount, name) {
@@ -42,7 +42,7 @@ async function sendIncomesNotification(user_id, amount, name) {
     `,
     });
   } catch (error) {
-    throw Error(error);
+    console.log('emailError:',error.message);
   }
 }
 
@@ -65,11 +65,36 @@ async function sendExpensesNotification(user_id, amount, name) {
       `,
     });
   } catch (error) {
-    throw Error(error);
+    console.log('emailError:',error.message);
   }
 }
+
+async function sendSubscribeNotification(user_id) {
+  try {
+    const { dataValues: userAux } = await user.findByPk(user_id);
+
+    await transporter.sendMail({
+      from: process.env.ADMIN_MAILER,
+      to: userAux.email,
+      subject: 'Congratulations on Upgrading to Premium!',
+      html: `
+        <p>Hello, ${userAux.name}</p>
+        <p>We're thrilled to let you know that you've successfully upgraded to our Premium plan!</p>
+        <p>As a Premium member, you now have access to exclusive features and benefits.</p>
+        <p>Thank you for choosing our service for managing your finances.</p>
+        <p>If you have any questions or need assistance, feel free to reach out.</p>
+        <p>Best regards,</p>
+        <p>The PigCommander Team</p>
+      `,
+    });
+  } catch (error) {
+    console.log('emailError:',error.message);
+  }
+}
+
 module.exports = {
   sendWelcomeMail,
   sendIncomesNotification,
   sendExpensesNotification,
+  sendSubscribeNotification
 };
