@@ -33,7 +33,7 @@ async function sendIncomesNotification(user_id, amount, name) {
       html: `
       <p>Hello, ${userAux.name}</p>
       <p>We wanted to inform you that a new income has been registered in your account.</p>
-      <p>Income aamount: $${amount}</p>
+      <p>Income amount: $${amount}</p>
       <p>Income name: ${name}</p>
       <p>Thank you for using our service.</p>
       <p>Regards,</p>
@@ -56,7 +56,7 @@ async function sendExpensesNotification(user_id, amount, name) {
       html: `
         <p>Hello, ${userAux.name}</p>
         <p>We wanted to inform you that a new expense has been registered in your account.</p>
-        <p>Expense aamount: $${amount}</p>
+        <p>Expense amount: $${amount}</p>
         <p>Expense name: ${name}</p>
         <p>Thank you for using our service.</p>
         <p>Regards,</p>
