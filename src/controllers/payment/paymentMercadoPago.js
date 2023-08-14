@@ -1,5 +1,6 @@
 const createPayment = require('../../handlers/payment/paymentHandler');
 const { getTokenPayload } = require('../../utils/helpers/authHelpers');
+const { sendSubscribeNotification } = require('../../utils/helpers/sendMailHelper');
 
 const paymentMercadoPago = async (req, res) => {
   const { id } = getTokenPayload(req.headers['authorization']);
@@ -14,6 +15,7 @@ const paymentMercadoPago = async (req, res) => {
       items: subscriptionData.body.items,
       date_created: subscriptionData.body.date_created,
     };
+    sendSubscribeNotification(id);
     res.status(200).json(subscription);
   } catch (error) {
     res.status(500).json({ error: error.message });
