@@ -67,8 +67,55 @@ async function sendExpensesNotification(user_id, amount, name) {
     throw Error(error);
   }
 }
+async function sendIncomesAutoNotification(user_id, amount, date) {
+  try {
+    const { dataValues: userAux } = await user.findByPk(user_id);
+
+    await transporter.sendMail({
+      from: process.env.ADMIN_MAILER,
+      to: userAux.email,
+      subject: 'New automatized Income Registered',
+      html: `
+      <p>Hello, ${userAux.name}</p>
+      <p>We wanted to inform you that a new income has been automatized in your account.</p>
+      <p>Income amount: $${amount}</p>
+      <p>Income date: on the ${date} day of each month</p>
+      <p>Thank you for using our service.</p>
+      <p>Regards,</p>
+      <p>The PigCommander Team</p>
+    `,
+    });
+  } catch (error) {
+    throw Error(error);
+  }
+}
+
+async function sendExpensesAutoNotification(user_id, amount, date,) {
+  try {
+    const { dataValues: userAux } = await user.findByPk(user_id);
+
+    await transporter.sendMail({
+      from: process.env.ADMIN_MAILER,
+      to: userAux.email,
+      subject: 'New automatized expense Registered',
+      html: `
+        <p>Hello, ${userAux.name}</p>
+        <p>We wanted to inform you that a new expense has been automatized in your account.</p>
+        <p>Expense amount: $${amount}</p>
+        <p>Expense date: on the ${date} day of each month</p>
+        <p>Thank you for using our service.</p>
+        <p>Regards,</p>
+        <p>The PigCommander Team</p>
+      `,
+    });
+  } catch (error) {
+    throw Error(error);
+  }
+}
 module.exports = {
   sendWelcomeMail,
   sendIncomesNotification,
   sendExpensesNotification,
+  sendExpensesAutoNotification,
+  sendIncomesAutoNotification
 };
