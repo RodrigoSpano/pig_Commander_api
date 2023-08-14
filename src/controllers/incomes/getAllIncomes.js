@@ -5,9 +5,6 @@ const getAllIncomes = async (req, res) => {
   try {
     const { id: user_id } = getTokenPayload(req.headers['authorization']);
     const allIncomes = await incomes.findAll({ where: { user_id, automatized: false } });
-
-    if (allIncomes.length === 0) throw Error('Incomes not found..');
-
     return res.status(200).json(allIncomes);
   } catch (error) {
     return res.status(500).json({ error: error.message });

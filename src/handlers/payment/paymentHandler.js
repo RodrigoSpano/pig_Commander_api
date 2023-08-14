@@ -18,15 +18,15 @@ const createPayment = async (amount, idUser) => {
       },
     ],
     back_urls: {
-      failure: 'http://localhost:3000/home/dashboard',
-      pending: 'http://localhost:3000/home/dashboard',
-      success: 'http://localhost:3000/home/dashboard',
+      failure: `${process.env.CLIENT_URI}/home/dashboard`,
+      pending: `${process.env.CLIENT_URI}/home/dashboard`,
+      success: `${process.env.CLIENT_URI}/home/dashboard`,
     },
     payment_methods: {
       installments: 12,
     },
     notification_url:
-      'https://ee65-186-137-12-227.ngrok-free.app/api/subscription/webhook',
+      `${process.env.CLIENT_URI}/api/subscription/webhook`,
   });
 
   return payment;

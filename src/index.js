@@ -30,7 +30,7 @@ app.use(helmet());
 app.use(compression());
 
 app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSetup));
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: `${process.env.CLIENT_URI}` }));
 
 app.use(passport.session());
 app.use(passport.initialize());

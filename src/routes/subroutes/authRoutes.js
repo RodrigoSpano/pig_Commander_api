@@ -26,11 +26,11 @@ router.get(
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    failureRedirect: 'http://localhost:3000/api/auth/login',
+    failureRedirect: `${process.env.CLIENT_URI}/login`,
   }), (req, res) => {
     const token = createJwtToken(req.user.id, req.user.email);
-    
-    return res.redirect(`http://localhost:3000/google/success/?token=${token}`);
+
+    return res.redirect(`${process.env.CLIENT_URI}/google/success/?token=${token}`);
   }
 );
 
