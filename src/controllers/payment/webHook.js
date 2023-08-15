@@ -3,6 +3,7 @@ const { payment, user } = require('../../db');
 const {
   sendSubscribeNotification,
 } = require('../../utils/helpers/sendMailHelper');
+const automationRemovePremium = require('../../handlers/payment/cronPayment');
 
 const receiveWebhook = async (req, res) => {
   const paymentBody = req.body;
@@ -13,7 +14,6 @@ const receiveWebhook = async (req, res) => {
       //* Busco la data del Payment en mercadopago
       const data = await mercadopago.payment.findById(paymentBody.data.id);
       const idUser = data.body.additional_info.items[0].id;
-     
 
       if (data.body.status === 'approved' && idUser) {
         //*  Procedo a fijarse si encuentra en la base de datos un payment del mismo usuario
@@ -37,6 +37,7 @@ const receiveWebhook = async (req, res) => {
             user_id: idUser,
           });
           sendSubscribeNotification(idUser);
+          automationRemovePremium(data.body.date_approved, idUser);
         }
         res.status(200);
       }

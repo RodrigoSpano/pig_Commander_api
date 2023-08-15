@@ -4,7 +4,6 @@ const postExpenses = require('../../controllers/expenses/postExpenses');
 const deleteExpenses = require('../../controllers/expenses/deleteExpenses');
 const updateExpenses = require('../../controllers/expenses/updateExpenses');
 const getMonthlyExpenses = require('../../controllers/expenses/getMonthlyExpenses');
-const getAutomatizedExpenses = require('../../controllers/expenses/getAutomatizedExpenses');
 const {
   postExpensesMiddleware,
   deleteExpensesMiddleware,
@@ -12,8 +11,6 @@ const {
 } = require('../../utils/middlewares/expenseMiddleware');
 
 const router = express.Router();
-
-router.get('/automatized', getAutomatizedExpenses);
 
 router.get('/monthly', getMonthlyExpenses);
 

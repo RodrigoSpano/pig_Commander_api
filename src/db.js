@@ -13,7 +13,7 @@ const ReviewsModel = require('./model/ReviewsModel');
 const sequelize = new Sequelize(process.env.DB_HOST, {
   logging: false,
   native: false,
-  /* dialectOptions: {
+/*   dialectOptions: {
     ssl: {
       require: true,
       rejectUnauthorized: false,
