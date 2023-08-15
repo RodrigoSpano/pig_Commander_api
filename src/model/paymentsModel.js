@@ -5,9 +5,8 @@ module.exports = (sequelize) => {
     'payment',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         primaryKey: true,
-        autoIncrement: true,
       },
       date_created: {
         type: DataTypes.DATE,
