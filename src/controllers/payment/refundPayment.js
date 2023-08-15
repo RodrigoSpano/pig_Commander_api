@@ -26,13 +26,13 @@ const refundPayment = async (req, res) => {
           },
         }
       );
-      
+
       // * Si el reembolso es aprobado elimino el pago de la base de datos y desactivo el premium
       if (response.data.status === 'approved') {
         await user.update({ premium: false }, { where: { id, premium: true } });
         await payment.destroy({
           where: {
-            id,
+            user_id: id,
           },
         });
       }
