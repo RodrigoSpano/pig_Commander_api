@@ -8,19 +8,18 @@ const ExpensesModel = require('./model/ExpensesModel');
 const MaxSpendModel = require('./model/MaxspendModel');
 const SavingModel = require('./model/SavingModel');
 const PaymentsModel = require('./model/paymentsModel');
+const ReviewsModel = require('./model/ReviewsModel');
 
-const sequelize = new Sequelize(process.env.DB_HOST,
-  {
-    logging: false,
-    native: false,
-    // dialectOptions: {
-    //   ssl: {
-    //     require: true,
-    //     rejectUnauthorized: false
-    //   }
-    // }
-  }
-);
+const sequelize = new Sequelize(process.env.DB_HOST, {
+  logging: false,
+  native: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+});
 
 UserModel(sequelize);
 MethodModel(sequelize);
@@ -31,6 +30,7 @@ ExpensesModel(sequelize);
 MaxSpendModel(sequelize);
 SavingModel(sequelize);
 PaymentsModel(sequelize);
+ReviewsModel(sequelize);
 
 const {
   user,
@@ -42,7 +42,12 @@ const {
   expenses,
   saving,
   payment,
+  review,
 } = sequelize.models;
+
+// relation user to review
+user.hasOne(review, { foreignKey: 'user_id' });
+review.belongsTo(user, { foreignKey: 'user_id' });
 
 // relation user to Payment
 user.hasOne(payment, { foreignKey: 'user_id' });
