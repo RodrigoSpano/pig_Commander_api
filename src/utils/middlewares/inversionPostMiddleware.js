@@ -1,12 +1,16 @@
 const inversionPostMiddleware = async (req, res, next) => {
-  const { amount, earning, started_on, finish_at } = req.body;
+  const { amount, earning, started_on, finish_at, name } = req.body;
 
+  if (typeof name === 'undefined') {
+    res.status(400).json({ error: 'Parameter NAME is not defined' });
+    return;
+  }
   if (typeof earning === 'undefined') {
     res.status(400).json({ error: 'Parameter EARNINGS is not defined' });
     return;
   }
   if (typeof amount === 'undefined') {
-    res.status(400).json({ error: 'Parameter amount is not defined' });
+    res.status(400).json({ error: 'Parameter AMOUNT is not defined' });
     return;
   }
   if (typeof started_on === 'undefined') {
