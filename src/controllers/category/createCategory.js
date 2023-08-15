@@ -17,8 +17,4 @@ const createCategory = async (req, res) => {
   }
 };
 
-/* 
-9- [newCategory] : Here, I am staying with the first element of the array that
-returns .findOrCreate() , and I assign it to the variable 'newCategory'.
-*/
 module.exports = createCategory;

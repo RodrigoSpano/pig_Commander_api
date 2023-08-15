@@ -5,12 +5,10 @@ const {
   sendIncomesNotification,
 } = require('../../utils/helpers/sendMailHelper');
 
-// esto crea un ingreso
 const createIncome = async (req, res) => {
   try {
     const { id: user_id } = getTokenPayload(req.headers['authorization']);
-    const { amount, automatized, auto_date, category_id, method_id, name } =
-      req.body;
+    const { amount, category_id, method_id, name } = req.body;
 
     if (!amount || amount < 1 || !category_id || !method_id || !name) {
       return res.status(404).json({ error: 'Missing data..' });
@@ -21,8 +19,6 @@ const createIncome = async (req, res) => {
       user_id,
       name,
       amount,
-      automatized: automatized && automatized,
-      auto_date: automatized ? auto_date : null, // Establecer auto_date si automatized es true, de lo contrario, establecer en null
       category_id,
       method_id,
     });
@@ -35,10 +31,3 @@ const createIncome = async (req, res) => {
 };
 
 module.exports = createIncome;
-
-/* 
-    En esta ruta, se reciben los valores necesarios para crear un 'income'.
-    En especial, los valores 'method_id' y 'category_id' serviran para que se cree la relacion
-     en la base de datos.
-     Los valores user_id,category_id,method_id estan comentados porque necesitamos de las demas tablas
-*/

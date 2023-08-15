@@ -2056,3 +2056,205 @@
  *                   example: Message of error!
  *
  */
+
+//! NEWS
+/**
+ * Get news
+ * @openapi
+ * /api/news:
+ *   get:
+ *     tags:
+ *       - News
+ *     summary: "Get news"
+ *     description: |
+ *       Este endpoint es para traer noticias
+ *     responses:
+ *       '200':
+ *         description: Encuentra todas las noticias.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   date:
+ *                     type: string
+ *                   summary:
+ *                     type: string
+ *                   author:
+ *                     type: string
+ *                   url:
+ *                     type: string
+ *                   image:
+ *                     type: string
+ *                   topics:
+ *                     type: object
+ *             example:
+ *               - date: "20230811T121740"
+ *                 summary: "Dow Jones Futures Dip Ahead Of Key Inflation Data. 6 Best Stocks To Buy And Watch Investor's Business Daily ..."
+ *                 author: "Investor's Business Daily"
+ *                 url: "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-key-inflation-data-stocks-to-buy-and-watch/"
+ *                 image: "https://www.investors.com/wp-content/uploads/2017/10/stock-WallStreet-03-adobe.jpg"
+ *                 topics: [ "Economy - Monetary","Financial Markets"]
+ *       '404':
+ *         description: No se encontraron noticias.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: News not found!
+ *       '401':
+ *         description: Credenciales invalidas.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Invalid token
+ *       '500':
+ *          description: "Internal server error, could be a connection error or network error."
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error!
+ */
+
+//! subscription
+/**
+ * Get subscription
+ * @openapi
+ * /api/subscription/:amount: 
+ *   get:
+ *     tags:
+ *       - Subscription
+ *     summary: "Get subscription"
+ *     description: |
+ *       Este endpoint es para obtener un suscripcion
+ *     responses:
+ *       '200':
+ *         description: El usuario se ha suscripto correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                   user_id:
+ *                     type: string
+ *                   items:
+ *                     type: object
+ *                   data_created:
+ *                     type: string
+ *             example:
+ *               - id: "72646d2a-cc87-4b42-a32e-ae75949fcc04"
+ *                 user_id: "ae75949fcc04-cc87-4b42-a32e-ae7594ghh"
+ *                 items: [{
+ *                           id:12345d2a-cc87-4b42-a32e-ae75949fcc04,
+ *                           category_id: pigPremium,
+ *                           currenty_id: ARS,
+ *                           description: Premium,
+ *                           picture_url: "https://example.com/sample-image.jpg",
+ *                           title: Pig Commander,
+ *                           quantity: 1,
+ *                           unit_price: 10000
+ *                       }]
+ *                 data_created: "2023-08-11 13:22:45.781+00"
+ *       '401':
+ *         description: Credenciales invalidas.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Invalid token
+ *       '500':
+ *          description: Errors
+ *          content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: The amount must be 10000 or 5000 or The user is premium now or error message
+ */
+
+/**
+ * Post webhook
+ * @openapi
+ * /api/subscription/webhook:
+ *    post:
+ *      tags:
+ *        - Subscription
+ *      summary: "Receive payment"
+ *      description: Este endpoint recibe un pago por body y es procesado
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                 type: number
+ *                live_mode:
+ *                 type: boolean
+ *                type: 
+ *                 type: string
+ *                date_created:
+ *                 type: string
+ *                application_id:
+ *                 type: number
+ *                user_id:
+ *                 type: number
+ *                version:
+ *                 type: number
+ *                api_version:
+ *                 type: string
+ *                action:
+ *                 type: string
+ *                data:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                    type: string
+ *              example:
+ *                  id: 12345
+ *                  live_mode: true
+ *                  type: "payment"
+ *                  date_created: "2015-03-25T10:04:58.396-04:00"
+ *                  user_id: 44444
+ *                  api_version: "v1"
+ *                  action: "payment.created"
+ *                  data: {
+ *                      id: "999999999"
+ *                  }
+ *         
+ *      responses:
+ *       '200':
+ *         description: El pago se registro en la base de datos
+ *       '500':
+ *         description: Errores internos de la base de datos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Message of error
+ *
+ */
