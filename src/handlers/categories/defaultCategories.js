@@ -1,6 +1,12 @@
 const { categories } = require('../../db');
 
-const defaultsCat = [{ name: 'entertainment' }, { name: 'health' }, { name: 'education' }, { name: 'transport' }, { name: 'food' }];
+const defaultsCat = [
+  { name: 'entertainment' },
+  { name: 'health' },
+  { name: 'education' },
+  { name: 'transport' },
+  { name: 'food' },
+];
 
 const getCategoriesHandler = async () => {
   const getAll = await categories.findAll();
@@ -8,7 +14,6 @@ const getCategoriesHandler = async () => {
   if (!getAll.length) {
     await categories.bulkCreate(defaultsCat);
   }
-
   const allCategoriesUpdated = await categories.findAll();
   return allCategoriesUpdated;
 };
