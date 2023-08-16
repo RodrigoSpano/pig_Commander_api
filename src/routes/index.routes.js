@@ -11,8 +11,10 @@ const maxSpendRoutes = require('./subroutes/maxSpendRoutes');
 const profileRoutes = require('./subroutes/profileRoutes');
 const subscriptionMercadoPago = require('./subroutes/paymentRoutes');
 const newsRoutes = require('./subroutes/newsRoutes');
+const automatizeRoutes = require('./subroutes/automatizeRoute');
 const reviewsRoutes = require('./subroutes/reviewsRoutes');
 const adminRoutes = require('./subroutes/adminRoutes');
+const filtersRoutes = require('./subroutes/filtersRoutes');
 
 const router = express.Router();
 
@@ -27,7 +29,9 @@ router.use('/maxSpend', isAuth, maxSpendRoutes);
 router.use('/profile', isAuth, profileRoutes);
 router.use('/subscription', subscriptionMercadoPago);
 router.use('/news', isAuth, newsRoutes);
+router.use('/auto', isAuth, automatizeRoutes);
 router.use('/reviews', isAuth, reviewsRoutes);
 router.use('/admin', isAuth, adminRoutes);
+router.use('/filters', isAuth, filtersRoutes);
 
 module.exports = router;
