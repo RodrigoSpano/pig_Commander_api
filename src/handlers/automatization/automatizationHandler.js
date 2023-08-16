@@ -2,7 +2,7 @@
 const cron = require('node-cron');
 const { expenses, incomes } = require('../../db');
 const {
-  sendExpensesAutoNotification, sendIncomesAutoNotification, sendExpensesNotification, sendIncomesNotification
+  sendExpenseAutoNotification, sendIncomesAutoNotification, sendExpensesNotification, sendIncomesNotification
 } = require('../../utils/helpers/sendMailHelper');
 
 const createExpenseAutomatization = async (data, user_id) => {
@@ -18,7 +18,7 @@ const createExpenseAutomatization = async (data, user_id) => {
     await expenses.create(expenseObj);
     sendExpensesNotification(user_id, data.amount, data.name);
   }, { jobName: data.name, user_id });
-  await sendExpensesAutoNotification(user_id, data.amount, data.auto_date);
+  await sendExpenseAutoNotification(user_id, data.amount, data.auto_date);
   return { automatized: true };
 
 };
