@@ -18,7 +18,7 @@ const sequelize = new Sequelize(process.env.DB_HOST, {
       require: true,
       rejectUnauthorized: false,
     },
-  },
+  }, 
 });
 
 UserModel(sequelize);
