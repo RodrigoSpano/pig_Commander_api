@@ -1,14 +1,18 @@
+/* eslint-disable consistent-return */
 const { Op } = require('sequelize');
 const { incomes, expenses } = require('../../db');
+const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 async function combinedFilters(req, res) {
   try {
+    const { id } = getTokenPayload(req.headers['authorization']);
     const { method, category, transaction } = req.query;
 
     const expensesFiltered = await expenses.findAll({
       where: {
         method_id: method ? { [Op.eq]: method } : { [Op.ne]: null },
         category_id: category ? { [Op.eq]: category } : { [Op.ne]: null },
+        user_id: id        
       },
     });
 
@@ -16,6 +20,7 @@ async function combinedFilters(req, res) {
       where: {
         method_id: method ? { [Op.eq]: method } : { [Op.ne]: null },
         category_id: category ? { [Op.eq]: category } : { [Op.ne]: null },
+        user_id: id
       },
     });
 
