@@ -12,6 +12,7 @@ const profileRoutes = require('./subroutes/profileRoutes');
 const subscriptionMercadoPago = require('./subroutes/paymentRoutes');
 const newsRoutes = require('./subroutes/newsRoutes');
 const reviewsRoutes = require('./subroutes/reviewsRoutes');
+const adminRoutes = require('./subroutes/adminRoutes');
 
 const router = express.Router();
 
@@ -27,5 +28,6 @@ router.use('/profile', isAuth, profileRoutes);
 router.use('/subscription', subscriptionMercadoPago);
 router.use('/news', isAuth, newsRoutes);
 router.use('/reviews', isAuth, reviewsRoutes);
+router.use('/admin', isAuth, adminRoutes);
 
 module.exports = router;
