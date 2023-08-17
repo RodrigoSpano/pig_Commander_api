@@ -6,6 +6,7 @@ const getproUsers = async (req, res) => {
       where: {
         premium: true,
       },
+      force: true,
     });
     return res.status(200).json(allCount);
   } catch (error) {

@@ -4,6 +4,7 @@ const getbasicUsers = async (req, res) => {
   try {
     const allCount = await user.count({
       where: { premium: false },
+      paranoid: false,
     });
     return res.status(200).json(allCount);
   } catch (error) {

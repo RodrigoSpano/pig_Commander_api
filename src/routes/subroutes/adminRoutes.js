@@ -6,6 +6,7 @@ const getAllUsers = require('../../controllers/dashboard/getAllUsers');
 const getbasicUsers = require('../../controllers/dashboard/getbasicUsers');
 const getproUsers = require('../../controllers/dashboard/getproUsers');
 const isAdmin = require('../../utils/middlewares/adminMiddleware');
+const getTableUsers = require('../../controllers/dashboard/getTableUsers');
 
 const router = express.Router();
 
@@ -26,5 +27,8 @@ router.get('/prousers', isAdmin, getproUsers);
 
 // numero de usuarios baneados
 router.get('/bannedusers', isAdmin, getBannedUsers);
+
+// get de la table
+router.get('/tableusers', isAdmin, getTableUsers);
 
 module.exports = router;
