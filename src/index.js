@@ -4,7 +4,6 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 const passport = require('passport');
-const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const session = require('express-session');
 
@@ -28,9 +27,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(compression());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', `${process.env.CLIENT_URI}`);
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  return next();
+});
 
 app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSetup));
-app.use(cors({ origin: `${process.env.CLIENT_URI}` }));
 
 app.use(passport.session());
 app.use(passport.initialize());
