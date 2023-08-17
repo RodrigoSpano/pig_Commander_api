@@ -7,13 +7,14 @@ const {
   userAlreadyExistsMiddleware,
 } = require('../../utils/middlewares/authMiddleware');
 const { createJwtToken } = require('../../utils/helpers/authHelpers');
+const { isBannedMiddleware } = require('../../utils/middlewares/userMiddleware');
 
 
 const router = express.Router();
 
-router.post('/login', loginUser);
+router.post('/login', isBannedMiddleware, loginUser);
 
-router.post('/signup', userAlreadyExistsMiddleware, signupUser);
+router.post('/signup', isBannedMiddleware, userAlreadyExistsMiddleware, signupUser);
 
 router.delete('/logout', logoutUser);
 
