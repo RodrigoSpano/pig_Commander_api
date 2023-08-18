@@ -31,8 +31,18 @@ router.get(
   }), (req, res) => {
     const token = createJwtToken(req.user.id, req.user.email);
 
-    return res.redirect(`${process.env.CLIENT_URI}/google/success/?token=${token}`);
+    return res.redirect(`${process.env.CLIENT_URI}/services/success/?token=${token}`);
   }
 );
+
+// github
+router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
+router.get('/github/callback', passport.authenticate('github', {
+  failureRedirect: `${process.env.CLIENT_URI}/login`
+}),
+  (req, res) => {
+    const token = createJwtToken(req.user.id, req.user.email);
+    return res.redirect(`${process.env.CLIENT_URI}/services/success/?token=${token}`);
+  });
 
 module.exports = router;

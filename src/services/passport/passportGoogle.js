@@ -11,25 +11,33 @@ module.exports = new Strategy(
     callbackURL: `${process.env.GOOGLE_CALLBACK}`,
     scope: ['email', 'profile'],
   }, async (accessToken, refreshToken, profile, done) => {
-    const findUser = await UserModel.findOne({ where: { email: profile['_json'].email } });
-    if (findUser) {
-      if (!findUser.googleId) {
-        await findUser.update({ googleId: profile.id });
-        return done(null, findUser);
+
+    const findUser = await UserModel.findOne({ where: { serviceId: profile.id } });
+
+    if (!findUser) {
+      const findByEmail = await UserModel.findOne({ where: { email: profile['_json'].email } });
+
+      // verificamos si esta logeado con otro servicio
+      if (findByEmail && findByEmail.serviceId !== null) return done('email is already in use by another service');
+
+      if (!findByEmail) {
+        const fullname = profile['_json'].name.split(' ');
+        const hashedPass = hashPassword(profile.id);
+        const user = await UserModel.create({
+          serviceId: profile.id,
+          name: fullname[0],
+          lastname: fullname[1],
+          image: profile['_json'].avatar_url,
+          email: profile['_json'].email,
+          password: hashedPass
+        });
+        await sendWelcomeMail(user.name, user.email);
+        return done(null, user);
       }
-      return done(null, findUser);
+      const updateUser = await findByEmail.update({ serviceId: profile.id }, { returning: true });
+      return done(null, updateUser.dataValues);
     }
-    const hashedPass = hashPassword(profile.id);
-    const user = await UserModel.create({
-      googleId: profile.id,
-      name: profile['_json'].given_name,
-      lastname: profile['_json'].family_name,
-      email: profile['_json'].email,
-      image: profile['_json'].picture,
-      password: hashedPass
-    });
-    await sendWelcomeMail(user.name, user.email);
-    return done(null, user);
+    return done(null, findUser);
   }
 );
 
