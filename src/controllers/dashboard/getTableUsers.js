@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { user, expenses, incomes } = require('../../db');
 
 const getTableUsers = async (req, res) => {
@@ -22,6 +23,11 @@ const getTableUsers = async (req, res) => {
           attributes: ['amount'],
         },
       ],
+      where: {
+        email: {
+          [Op.ne]: 'pigcommandersp@gmail.com',
+        },
+      },
       paranoid: false,
     });
     const userWithTotals = allUsers.map((User) => {
