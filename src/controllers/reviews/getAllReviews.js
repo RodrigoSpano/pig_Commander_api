@@ -1,13 +1,15 @@
-const { review } = require('../../db');
-const { getTokenPayload } = require('../../utils/helpers/authHelpers');
+const { review, user } = require('../../db');
 
 const getAllReviews = async (req, res) => {
   try {
-    const { id: user_id } = getTokenPayload(req.headers['authorization']);
     const allReviews = await review.findAll({
-      where: {
-        user_id,
-      },
+      include: [
+        {
+          model: user,
+          attributes: ['image', 'name', 'lastname'],
+        },
+      ],
+      paranoid: false,
     });
     if (allReviews.length === 0) {
       return res.status(404).json({ error: 'Reviews not found' });
