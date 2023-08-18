@@ -12,6 +12,7 @@ const swaggerSetup = require('./utils/docs/swagger');
 const indexRouter = require('./routes/index.routes');
 const JWTstrategy = require('./services/passport/passportJwt');
 const GoogleStrategy = require('./services/passport/passportGoogle');
+const GithubStrategy = require('./services/passport/passportGithub');
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(passport.session());
 app.use(passport.initialize());
 passport.use(JWTstrategy);
 passport.use(GoogleStrategy);
+passport.use(GithubStrategy);
 
 app.use('/api', indexRouter);
 module.exports = app;

@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      googleId: {
+      serviceId: {
         type: DataTypes.STRING,
         allowNull: true,
       },
