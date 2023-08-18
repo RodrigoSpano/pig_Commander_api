@@ -6,8 +6,8 @@ const { sendWelcomeMail } = require('../../utils/helpers/sendMailHelper');
 
 module.exports = new Strategy(
   {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    clientID: `${process.env.GOOGLE_CLIENT_ID}`,
+    clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
     callbackURL: `${process.env.GOOGLE_CALLBACK}`,
     scope: ['email', 'profile'],
   }, async (accessToken, refreshToken, profile, done) => {
