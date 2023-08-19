@@ -1,9 +1,15 @@
+const { Op } = require('sequelize');
 const { user } = require('../../db');
 
 const getbasicUsers = async (req, res) => {
   try {
     const allCount = await user.count({
-      where: { premium: false },
+      where: {
+        premium: false,
+        email: {
+          [Op.ne]: 'pigcommandersp@gmail.com',
+        },
+      },
       paranoid: false,
     });
     return res.status(200).json(allCount);

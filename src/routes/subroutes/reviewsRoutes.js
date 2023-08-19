@@ -7,7 +7,7 @@ const router = Router();
 
 router.get('/', getAllReviews);
 
-router.delete('/:id', deleteReview);
+router.delete('/', deleteReview);
 
 router.post('/', postReview);
 

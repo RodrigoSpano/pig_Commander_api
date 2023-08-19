@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
         defaultValue:
-          'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
+          'https://res.cloudinary.com/dcxaangkl/image/upload/v1692371023/profile_pics/dyfzdf21fnalvtgsp3gi.webp',
       },
       premium: {
         type: DataTypes.BOOLEAN,
