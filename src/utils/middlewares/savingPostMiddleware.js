@@ -1,7 +1,10 @@
 const { saving } = require('../../db');
+const { getTokenPayload } = require('../helpers/authHelpers');
 
 const savingPostMiddleware = async (req, res, next) => {
   const { name, amount, goal } = req.body;
+
+  const { id } = getTokenPayload(req.headers['authorization']);
 
   if (typeof name === 'undefined') {
     res.status(400).json({ error: 'Parameter NAME is not defined' });
@@ -22,7 +25,7 @@ const savingPostMiddleware = async (req, res, next) => {
   }
   // * I search if it already exists in the database
   const existingSaving = await saving.findOne({
-    where: { name: name.toLowerCase() },
+    where: { name: name.toLowerCase(), user_id: id },
   });
 
   //* if it already exists, I send the error and if it does not exist, it is created

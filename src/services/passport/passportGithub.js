@@ -31,7 +31,7 @@ module.exports = new GithubStrategy({
       await sendWelcomeMail(user.name, user.email);
       return done(null, user);
     }
-    const updateUser = await findByEmail.update({ serviceId: profile.id }, { returning: true });
+    const updateUser = await findByEmail.update({ serviceId: profile.id, image: profile['_json'].avatar_url }, { returning: true });
     return done(null, updateUser.dataValues);
   }
   return done(null, findUser);

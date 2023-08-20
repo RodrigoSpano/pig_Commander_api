@@ -13,7 +13,6 @@ module.exports = new Strategy(
   }, async (accessToken, refreshToken, profile, done) => {
 
     const findUser = await UserModel.findOne({ where: { serviceId: profile.id } });
-
     if (!findUser) {
       const findByEmail = await UserModel.findOne({ where: { email: profile['_json'].email } });
 
@@ -21,20 +20,19 @@ module.exports = new Strategy(
       if (findByEmail && findByEmail.serviceId !== null) return done('email is already in use by another service');
 
       if (!findByEmail) {
-        const fullname = profile['_json'].name.split(' ');
         const hashedPass = hashPassword(profile.id);
         const user = await UserModel.create({
           serviceId: profile.id,
-          name: fullname[0],
-          lastname: fullname[1],
-          image: profile['_json'].avatar_url,
+          name: profile['_json'].given_name,
+          lastname: profile['_json'].family_name,
+          image: profile['_json'].picture,
           email: profile['_json'].email,
           password: hashedPass
         });
         await sendWelcomeMail(user.name, user.email);
         return done(null, user);
       }
-      const updateUser = await findByEmail.update({ serviceId: profile.id }, { returning: true });
+      const updateUser = await findByEmail.update({ serviceId: profile.id, image: profile['_json'].picture }, { returning: true });
       return done(null, updateUser.dataValues);
     }
     return done(null, findUser);
