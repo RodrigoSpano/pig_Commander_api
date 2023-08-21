@@ -12,6 +12,7 @@ module.exports = new GithubStrategy({
   const findUser = await UserModel.findOne({ where: { serviceId: profile.id } });
 
   if (!findUser) {
+    if (!profile['_json'].email) return done('email is not public');
     const findByEmail = await UserModel.findOne({ where: { email: profile['_json'].email } });
 
     // verificamos si esta logeado con otro servicio
