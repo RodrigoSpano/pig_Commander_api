@@ -45,6 +45,10 @@ const {
   review,
 } = sequelize.models;
 
+// relation categorie to user
+user.hasMany(categories, { foreignKey: 'user_id' });
+categories.belongsTo(user, { foreignKey: 'user_id' });
+
 // relation user to review
 user.hasOne(review, { foreignKey: 'user_id' });
 review.belongsTo(user, { foreignKey: 'user_id' });

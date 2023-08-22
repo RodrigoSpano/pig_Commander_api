@@ -8,13 +8,14 @@ const defaultsCat = [
   { name: 'food' },
 ];
 
-const getCategoriesHandler = async () => {
-  const getAll = await categories.findAll();
+const getCategoriesHandler = async (user_id) => {
+  const getAll = await categories.findAll({ where: { user_id } });
 
   if (!getAll.length) {
-    await categories.bulkCreate(defaultsCat);
+    const userDefaultCategories = defaultsCat.map(el => ({ ...el, user_id }));
+    await categories.bulkCreate(userDefaultCategories);
   }
-  const allCategoriesUpdated = await categories.findAll();
+  const allCategoriesUpdated = await categories.findAll({ where: { user_id } });
   return allCategoriesUpdated;
 };
 
