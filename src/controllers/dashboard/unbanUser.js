@@ -16,7 +16,7 @@ const banUser = async (req, res) => {
     await user.restore({
       where: { id },
     });
-    return res.status(200).send(1);
+    return res.status(200).json(id);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
