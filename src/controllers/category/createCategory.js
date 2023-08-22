@@ -1,13 +1,15 @@
 const { categories } = require('../../db');
+const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const createCategory = async (req, res) => {
   try {
     const { name } = req.body;
+    const { id: user_id } = getTokenPayload(req.headers['authorization']);
 
-    if (!name) return res.status(404).json({error:'Missing data..'});
     const [newCategory] = await categories.findOrCreate({
       where: {
         name,
+        user_id
       },
     });
 
