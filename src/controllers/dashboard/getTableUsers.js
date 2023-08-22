@@ -12,15 +12,16 @@ const getTableUsers = async (req, res) => {
         'image',
         'premium',
         'deletedAt',
+        'createdAt',
       ],
       include: [
         {
           model: expenses,
-          attributes: ['amount'],
+          attributes: ['amount', 'name', 'category_id', 'method_id'],
         },
         {
           model: incomes,
-          attributes: ['amount'],
+          attributes: ['amount', 'name', 'category_id', 'method_id'],
         },
       ],
       where: {
