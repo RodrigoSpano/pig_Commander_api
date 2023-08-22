@@ -1,5 +1,6 @@
 const { review } = require('../../db');
 const { getTokenPayload } = require('../../utils/helpers/authHelpers');
+const { sendReviewNotification } = require('../../utils/helpers/sendMailHelper');
 
 const postReview = async (req, res) => {
   try {
@@ -20,6 +21,7 @@ const postReview = async (req, res) => {
       rating,
       user_id,
     });
+    sendReviewNotification(user_id, content);
     return res.status(201).json(newReview);
   } catch (error) {
     return res.status(500).json({ error: error.message });

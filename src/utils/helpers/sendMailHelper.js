@@ -138,11 +138,35 @@ async function sendSubscribeNotification(user_id) {
   }
 }
 
+async function sendReviewNotification(user_id, reviewText) {
+  try {
+    const { dataValues: userAux } = await user.findByPk(user_id);
+
+    await transporter.sendMail({
+      from: process.env.ADMIN_MAILER,
+      to: userAux.email,
+      subject: 'New Review Posted',
+      html: `
+        <p>Hello, ${userAux.name}</p>
+        <p>Thank you for leaving a review on our website:</p>
+        <p>${reviewText}</p>
+        <p>We value your feedback and appreciate your time in sharing your thoughts.</p>
+        <p>If you have any further comments or questions, please don't hesitate to reach out.</p>
+        <p>Best regards,</p>
+        <p>The PigCommander Team </p>
+      `
+    });
+  } catch (error) {
+    console.log('emailError:', error.message);
+  }
+}
+
 module.exports = {
   sendWelcomeMail,
   sendIncomesNotification,
   sendExpensesNotification,
   sendSubscribeNotification,
   sendIncomesAutoNotification,
-  sendExpenseAutoNotification
+  sendExpenseAutoNotification,
+  sendReviewNotification
 };
