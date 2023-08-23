@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const jwt = require('jsonwebtoken');
 const { user } = require('../../db');
+const { getTokenPayload } = require('../helpers/authHelpers');
 
 const isAuth = (req, res, next) => {
   const token = req.headers['authorization'];
@@ -17,7 +18,8 @@ const isAuth = (req, res, next) => {
 };
 
 const userExistsDeleteMiddleware = async (req, res, next) => {
-  const findUser = await user.findByPk(req.params.id);
+  const { id } = getTokenPayload(req.headers['authorization']);
+  const findUser = await user.findByPk(id);
   if (!findUser) return res.status(404).json({ error: 'user not found' });
   return next();
 };
@@ -28,4 +30,8 @@ const userAlreadyExistsMiddleware = async (req, res, next) => {
   return next();
 };
 
-module.exports = { isAuth, userExistsDeleteMiddleware, userAlreadyExistsMiddleware };
+module.exports = {
+  isAuth,
+  userExistsDeleteMiddleware,
+  userAlreadyExistsMiddleware,
+};

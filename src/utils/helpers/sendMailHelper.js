@@ -9,7 +9,8 @@ async function sendWelcomeMail(name, email) {
       from: `${process.env.ADMIN_MAILER}`,
       to: email,
       subject: 'Welcome to PigCommander!',
-      html: ` <head>
+      html: ` 
+      <head>
       ${generateStyles()}
       </head>
 <body>
@@ -183,9 +184,9 @@ async function sendExpenseAutoNotification(user_id, amount, date) {
           <p class="title">Expense automatized notification</p>
           <div class="income-details">
             <p class="detail"><strong>Hello, ${userAux.name}</strong></p>
-            <p>We wanted to inform you that a new expense has been automatized in your account.</p>
-            <p>Amount: $${amount}</p>
-            <p>Expense date: on the ${date} day of each month</p>
+            <p class="detail">We wanted to inform you that a new expense has been automatized in your account.</p>
+            <p class="detail">Amount: $${amount}</p>
+            <p class="detail">Expense date: on the ${date} day of each month</p>
             <p class="detail">Thank you for using our service.</p>
           </div>
           <p class="signature">Regards,<br>The PigCommander Team</p>
@@ -257,11 +258,11 @@ async function sendReviewNotification(user_id, reviewText) {
         <div class="income-details">
           <p class="detail"><strong>Hello, ${userAux.name}</strong></p>
           ${ reviewText !== undefined 
-            ? `<p>Thank you for leaving a review on our website:</p>
-               <p>${reviewText}</p>`
+            ? `<p class="detail">Thank you for leaving a review on our website:</p>
+               <p class="detail">${reviewText}</p>`
             : '' }
-          <p>We value your feedback and appreciate your time in sharing your thoughts.</p>
-          <p>If you have any further comments or questions, please don't hesitate to reach out.</p>
+          <p class="detail">We value your feedback and appreciate your time in sharing your thoughts.</p>
+          <p class="detail">If you have any further comments or questions, please don't hesitate to reach out.</p>
           <p class="detail">Thank you for using our service.</p>
         </div>
         <p class="signature">Regards,<br>The PigCommander Team</p>
@@ -281,7 +282,7 @@ async function sendForgotPasswordNotification(userInf) {
     await transporter.sendMail({
       from: process.env.ADMIN_MAILER,
       to: userInf.email,
-      subject: 'password change requested!',
+      subject: 'Password change requested!',
       html: 
       `
       <head>
@@ -296,7 +297,7 @@ async function sendForgotPasswordNotification(userInf) {
                 <p class="detail"><strong>Hello, ${userInf.name}</strong></p>
                 <p class="detail">You have requested a password change</p>
                 <p class="detail">to change the password click this link:</p>
-                <a href='${process.env.CLIENT_URI}/recovery/${userInf.id}' target='_blank'>create new password</a>
+                <a href='${process.env.CLIENT_URI}/recovery/?id=${userInf.id}' target='_blank'>create new password</a>
                 <p class="detail">If you have any further comments or questions, please don't hesitate to reach out.</p>
                 <p class="detail">Thank you for using our service.</p>
               </div>
@@ -306,14 +307,11 @@ async function sendForgotPasswordNotification(userInf) {
         </div>
       </div>
       </body>`
-        
-      
     });
   } catch (error) {
     console.log('emailError', error.message);
   }
 }
-
 
 module.exports = {
   sendWelcomeMail,
