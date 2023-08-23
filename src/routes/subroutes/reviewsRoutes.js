@@ -1,13 +1,11 @@
 const { Router } = require('express');
-const getAllReviews = require('../../controllers/reviews/getAllReviews');
 const deleteReview = require('../../controllers/reviews/deleteReview');
 const postReview = require('../../controllers/reviews/postReview');
+const isAdmin = require('../../utils/middlewares/adminMiddleware');
 
 const router = Router();
 
-router.get('/', getAllReviews);
-
-router.delete('/', deleteReview);
+router.delete('/', isAdmin, deleteReview);
 
 router.post('/', postReview);
 
