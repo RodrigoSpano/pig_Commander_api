@@ -161,6 +161,27 @@ async function sendReviewNotification(user_id, reviewText) {
   }
 }
 
+async function sendForgotPasswodNotification(userInf) {
+  try {
+    await transporter.sendMail({
+      from: process.env.ADMIN_MAILER,
+      to: userInf.email,
+      subject: 'password change requested!',
+      html: `
+        <p>Hello, ${userInf.name}</p>
+        <p> you have requested a password change:</p>
+        <p>to change the password click this link</p>
+        <a href='${process.env.CLIENT_URI}/recovery/${user.id}' target='_blank'>create new password</a>
+        <p>If you have any further comments or questions, please don't hesitate to reach out.</p>
+        <p>Best regards,</p>
+        <p>The PigCommander Team </p>
+      `
+    });
+  } catch (error) {
+    console.log('emailError', error.message);
+  }
+}
+
 module.exports = {
   sendWelcomeMail,
   sendIncomesNotification,
@@ -168,5 +189,6 @@ module.exports = {
   sendSubscribeNotification,
   sendIncomesAutoNotification,
   sendExpenseAutoNotification,
-  sendReviewNotification
+  sendReviewNotification,
+  sendForgotPasswodNotification
 };
