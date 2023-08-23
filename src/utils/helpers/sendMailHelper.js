@@ -1,5 +1,7 @@
 const transporter = require('../../services/nodemailer/nodemailerConfig');
 const { user, categories,method } = require('../../db');
+const { generateStyles } = require('./generateStyles');
+
 
 async function sendWelcomeMail(name, email) {
   try {
@@ -7,74 +9,8 @@ async function sendWelcomeMail(name, email) {
       from: `${process.env.ADMIN_MAILER}`,
       to: email,
       subject: 'Welcome to PigCommander!',
-      text: 'Hello world?',
       html: ` <head>
-      <style>
-        /* Estilos para el cuerpo del correo electrónico */
-        body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 0;
-          background-color: #f4f4f4;
-        }
-      
-        /* Estilos para el contenedor principal */
-        .center-container {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-        }
-      
-        /* Estilos para el rectángulo exterior */
-        .outer-rectangle {
-          display: flex;
-          width: 100%;
-          background-color: #ED4998;
-          padding: 20px;
-          border-radius: 10px;
-        }
-      
-        /* Estilos para el rectángulo interior */
-        .inner-rectangle {
-          background-color: #ffffff;
-          padding: 20px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          margin-right: auto;
-          margin-left: auto;
-        }
-      
-        /* Estilos para el mensaje */
-        .message {
-          text-align: center;
-        }
-      
-        /* Estilos para el título */
-        .title {
-          font-size: 24px;
-          font-weight: bold;
-          margin-bottom: 10px;
-        }
-      
-        /* Estilos para los detalles del ingreso */
-        .income-details {
-          font-size: 16px;
-          margin-top: 20px;
-        }
-      
-        /* Estilos para los detalles individuales */
-        .detail {
-          margin-bottom: 10px;
-        }
-      
-        /* Estilos para la firma */
-        .signature {
-          margin-top: 20px;
-          font-style: italic;
-          text-align: center;
-        }
-      </style>
+      ${generateStyles()}
       </head>
 <body>
   <div class="center-container">
@@ -116,72 +52,7 @@ async function sendIncomesNotification(user_id, amount, name,category_id,method_
       subject: 'New Income Registered',
       html: `
       <head>
-<style>
-  /* Estilos para el cuerpo del correo electrónico */
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
-
-  /* Estilos para el contenedor principal */
-  .center-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  /* Estilos para el rectángulo exterior */
-  .outer-rectangle {
-    display: flex;
-    width: 100%;
-    background-color: #ED4998;
-    padding: 20px;
-    border-radius: 10px;
-  }
-
-  /* Estilos para el rectángulo interior */
-  .inner-rectangle {
-    background-color: #ffffff;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  /* Estilos para el mensaje */
-  .message {
-    text-align: center;
-  }
-
-  /* Estilos para el título */
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-
-  /* Estilos para los detalles del ingreso */
-  .income-details {
-    font-size: 16px;
-    margin-top: 20px;
-  }
-
-  /* Estilos para los detalles individuales */
-  .detail {
-    margin-bottom: 10px;
-  }
-
-  /* Estilos para la firma */
-  .signature {
-    margin-top: 20px;
-    font-style: italic;
-    text-align: center;
-  }
-</style>
+      ${generateStyles()}
 </head>
 <body>
   <div class="center-container">
@@ -224,72 +95,7 @@ async function sendExpensesNotification(user_id, amount, name, category_id, meth
       subject: 'New expense Registered',
       html:  `
       <head>
-      <style>
-      /* Estilos para el cuerpo del correo electrónico */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-    
-      /* Estilos para el contenedor principal */
-      .center-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-      }
-    
-      /* Estilos para el rectángulo exterior */
-      .outer-rectangle {
-        display: flex;
-        width: 100%;
-        background-color: #ED4998;
-        padding: 20px;
-        border-radius: 10px;
-      }
-    
-      /* Estilos para el rectángulo interior */
-      .inner-rectangle {
-        background-color: #ffffff;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-right: auto;
-        margin-left: auto;
-      }
-    
-      /* Estilos para el mensaje */
-      .message {
-        text-align: center;
-      }
-    
-      /* Estilos para el título */
-      .title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 10px;
-      }
-    
-      /* Estilos para los detalles del ingreso */
-      .income-details {
-        font-size: 16px;
-        margin-top: 20px;
-      }
-    
-      /* Estilos para los detalles individuales */
-      .detail {
-        margin-bottom: 10px;
-      }
-    
-      /* Estilos para la firma */
-      .signature {
-        margin-top: 20px;
-        font-style: italic;
-        text-align: center;
-      }
-    </style>
+      ${generateStyles()}
 </head>
 <body>
   <div class="center-container">
@@ -329,72 +135,7 @@ async function sendIncomesAutoNotification(user_id, amount, date) {
       subject: 'New automatized Income Registered',
       html: `
       <head>
-      <style>
-      /* Estilos para el cuerpo del correo electrónico */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-    
-      /* Estilos para el contenedor principal */
-      .center-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-      }
-    
-      /* Estilos para el rectángulo exterior */
-      .outer-rectangle {
-        display: flex;
-        width: 100%;
-        background-color: #ED4998;
-        padding: 20px;
-        border-radius: 10px;
-      }
-    
-      /* Estilos para el rectángulo interior */
-      .inner-rectangle {
-        background-color: #ffffff;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-right: auto;
-        margin-left: auto;
-      }
-    
-      /* Estilos para el mensaje */
-      .message {
-        text-align: center;
-      }
-    
-      /* Estilos para el título */
-      .title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 10px;
-      }
-    
-      /* Estilos para los detalles del ingreso */
-      .income-details {
-        font-size: 16px;
-        margin-top: 20px;
-      }
-    
-      /* Estilos para los detalles individuales */
-      .detail {
-        margin-bottom: 10px;
-      }
-    
-      /* Estilos para la firma */
-      .signature {
-        margin-top: 20px;
-        font-style: italic;
-        text-align: center;
-      }
-    </style>
+      ${generateStyles()}
 </head>
       <body>
   <div class="center-container">
@@ -432,72 +173,7 @@ async function sendExpenseAutoNotification(user_id, amount, date) {
       subject: 'New automatized Expense Registered',
       html: `
       <head>
-      <style>
-      /* Estilos para el cuerpo del correo electrónico */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-    
-      /* Estilos para el contenedor principal */
-      .center-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-      }
-    
-      /* Estilos para el rectángulo exterior */
-      .outer-rectangle {
-        display: flex;
-        width: 100%;
-        background-color: #ED4998;
-        padding: 20px;
-        border-radius: 10px;
-      }
-    
-      /* Estilos para el rectángulo interior */
-      .inner-rectangle {
-        background-color: #ffffff;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-right: auto;
-        margin-left: auto;
-      }
-    
-      /* Estilos para el mensaje */
-      .message {
-        text-align: center;
-      }
-    
-      /* Estilos para el título */
-      .title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 10px;
-      }
-    
-      /* Estilos para los detalles del ingreso */
-      .income-details {
-        font-size: 16px;
-        margin-top: 20px;
-      }
-    
-      /* Estilos para los detalles individuales */
-      .detail {
-        margin-bottom: 10px;
-      }
-    
-      /* Estilos para la firma */
-      .signature {
-        margin-top: 20px;
-        font-style: italic;
-        text-align: center;
-      }
-    </style>
+      ${generateStyles()}
 </head>
       <body>
   <div class="center-container">
@@ -535,72 +211,7 @@ async function sendSubscribeNotification(user_id) {
       subject: 'Congratulations on Upgrading to Premium!',
       html: `
       <head>
-      <style>
-      /* Estilos para el cuerpo del correo electrónico */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-    
-      /* Estilos para el contenedor principal */
-      .center-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-      }
-    
-      /* Estilos para el rectángulo exterior */
-      .outer-rectangle {
-        display: flex;
-        width: 100%;
-        background-color: #ED4998;
-        padding: 20px;
-        border-radius: 10px;
-      }
-    
-      /* Estilos para el rectángulo interior */
-      .inner-rectangle {
-        background-color: #ffffff;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-right: auto;
-        margin-left: auto;
-      }
-    
-      /* Estilos para el mensaje */
-      .message {
-        text-align: center;
-      }
-    
-      /* Estilos para el título */
-      .title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 10px;
-      }
-    
-      /* Estilos para los detalles del ingreso */
-      .income-details {
-        font-size: 16px;
-        margin-top: 20px;
-      }
-    
-      /* Estilos para los detalles individuales */
-      .detail {
-        margin-bottom: 10px;
-      }
-    
-      /* Estilos para la firma */
-      .signature {
-        margin-top: 20px;
-        font-style: italic;
-        text-align: center;
-      }
-    </style>
+      ${generateStyles()}
 </head>
 <body>
 <div class="center-container">
@@ -636,72 +247,7 @@ async function sendReviewNotification(user_id, reviewText) {
       subject: 'New Review Posted',
       html: `
       <head>
-      <style>
-      /* Estilos para el cuerpo del correo electrónico */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-    
-      /* Estilos para el contenedor principal */
-      .center-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-      }
-    
-      /* Estilos para el rectángulo exterior */
-      .outer-rectangle {
-        display: flex;
-        width: 100%;
-        background-color: #ED4998;
-        padding: 20px;
-        border-radius: 10px;
-      }
-    
-      /* Estilos para el rectángulo interior */
-      .inner-rectangle {
-        background-color: #ffffff;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-right: auto;
-        margin-left: auto;
-      }
-    
-      /* Estilos para el mensaje */
-      .message {
-        text-align: center;
-      }
-    
-      /* Estilos para el título */
-      .title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 10px;
-      }
-    
-      /* Estilos para los detalles del ingreso */
-      .income-details {
-        font-size: 16px;
-        margin-top: 20px;
-      }
-    
-      /* Estilos para los detalles individuales */
-      .detail {
-        margin-bottom: 10px;
-      }
-    
-      /* Estilos para la firma */
-      .signature {
-        margin-top: 20px;
-        font-style: italic;
-        text-align: center;
-      }
-    </style>
+      ${generateStyles()}
 </head>
 <body>
 <div class="center-container">
@@ -730,6 +276,43 @@ async function sendReviewNotification(user_id, reviewText) {
   }
 }
 
+async function sendForgotPasswordNotification(userInf) {
+  try {
+    await transporter.sendMail({
+      from: process.env.ADMIN_MAILER,
+      to: userInf.email,
+      subject: 'password change requested!',
+      html: 
+      `
+      <head>
+      ${generateStyles()}
+      </head>
+      <body>
+      <div class="center-container">
+        <div class="outer-rectangle">
+          <div class="inner-rectangle">
+            <div class="message">
+              <div class="income-details">
+                <p class="detail"><strong>Hello, ${userInf.name}</strong></p>
+                <p class="detail">You have requested a password change</p>
+                <p class="detail">to change the password click this link:</p>
+                <a href='${process.env.CLIENT_URI}/recovery/${userInf.id}' target='_blank'>create new password</a>
+                <p class="detail">If you have any further comments or questions, please don't hesitate to reach out.</p>
+                <p class="detail">Thank you for using our service.</p>
+              </div>
+              <p class="signature">Regards,<br>The PigCommander Team</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </body>`
+        
+      
+    });
+  } catch (error) {
+    console.log('emailError', error.message);
+  }
+}
 
 
 module.exports = {
@@ -739,5 +322,6 @@ module.exports = {
   sendSubscribeNotification,
   sendIncomesAutoNotification,
   sendExpenseAutoNotification,
-  sendReviewNotification
+  sendReviewNotification,
+  sendForgotPasswordNotification
 };
