@@ -23,7 +23,7 @@ const createIncome = async (req, res) => {
       method_id,
     });
 
-    sendIncomesNotification(user_id, amount, name);
+    sendIncomesNotification(user_id, amount, name, method_id, category_id);
     return res.status(200).json(newIncome);
   } catch (error) {
     return res.status(500).json({ error: error.message });
