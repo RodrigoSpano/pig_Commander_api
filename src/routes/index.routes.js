@@ -16,6 +16,7 @@ const reviewsRoutes = require('./subroutes/reviewsRoutes');
 const adminRoutes = require('./subroutes/adminRoutes');
 const filtersRoutes = require('./subroutes/filtersRoutes');
 const getAllReviews = require('../controllers/reviews/getAllReviews');
+const recoveryRoutes = require('./subroutes/recoveryRoutes');
 
 const router = express.Router();
 
@@ -35,5 +36,6 @@ router.use('/reviews', isAuth, reviewsRoutes);
 router.use('/admin', isAuth, adminRoutes);
 router.use('/filters', isAuth, filtersRoutes);
 router.use('/getReview', getAllReviews);
+router.use('/recovery', recoveryRoutes);
 
 module.exports = router;

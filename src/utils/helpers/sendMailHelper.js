@@ -171,7 +171,7 @@ async function sendForgotPasswodNotification(userInf) {
         <p>Hello, ${userInf.name}</p>
         <p> you have requested a password change:</p>
         <p>to change the password click this link</p>
-        <a href='${process.env.CLIENT_URI}/recovery/${user.id}' target='_blank'>create new password</a>
+        <a href='${process.env.CLIENT_URI}/recovery/?id=${userInf.id}' target='_blank'>create new password</a>
         <p>If you have any further comments or questions, please don't hesitate to reach out.</p>
         <p>Best regards,</p>
         <p>The PigCommander Team </p>
