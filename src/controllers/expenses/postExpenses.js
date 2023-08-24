@@ -15,7 +15,7 @@ const postExpenses = async (req, res) => {
       category_id,
       user_id,
     });
-    sendExpensesNotification(user_id, amount, name);
+    sendExpensesNotification(user_id, amount, name,category_id,method_id);
     return res.status(201).json(newExpense);
   } catch (error) {
     return res.status(500).json({ error: error.message });
