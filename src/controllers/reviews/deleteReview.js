@@ -1,12 +1,11 @@
 const { review } = require('../../db');
-const { getTokenPayload } = require('../../utils/helpers/authHelpers');
 
 const deleteReview = async (req, res) => {
   try {
-    const { id } = getTokenPayload(req.headers['authorization']);
+    const { id } = req.params;
     await review.destroy({
       where: {
-        user_id: id,
+        id,
       },
     });
     return res.status(200).json(id);
