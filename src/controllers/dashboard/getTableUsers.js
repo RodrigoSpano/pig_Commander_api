@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { user, expenses, incomes } = require('../../db');
+const { user, expenses, incomes, review } = require('../../db');
 
 const getTableUsers = async (req, res) => {
   try {
@@ -22,6 +22,10 @@ const getTableUsers = async (req, res) => {
         {
           model: incomes,
           attributes: ['amount', 'name', 'category_id', 'method_id'],
+        },
+        {
+          model: review,
+          attributes: ['id', 'content', 'rating'],
         },
       ],
       where: {

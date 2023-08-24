@@ -5,7 +5,7 @@ const isAdmin = require('../../utils/middlewares/adminMiddleware');
 
 const router = Router();
 
-router.delete('/', isAdmin, deleteReview);
+router.delete('/:id', isAdmin, deleteReview);
 
 router.post('/', postReview);
 
