@@ -26,7 +26,7 @@ const createPayment = async (amount, idUser) => {
       installments: 12,
     },
     notification_url:
-      `${process.env.BACK_URI}/api/subscription/webhook`,
+      `${process.env.BACK_URI}/subscription/webhook`,
   });
 
   return payment;
